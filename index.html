@@ -31,7 +31,6 @@ img{display:block}
 .hbtn{border:none;border-radius:20px;padding:8px 12px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;text-decoration:none;transition:transform .15s;white-space:nowrap}
 .hbtn:active{transform:scale(.93)}
 .hbtn-call{background:#fff;color:var(--red)}
-.hbtn-wa{background:#25D366;color:#fff}
 /* HERO */
 .hero{background:linear-gradient(150deg,var(--blue) 0%,#0d47a1 40%,#b50009 100%);padding:20px 15px 28px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='3' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");pointer-events:none}
@@ -49,7 +48,6 @@ img{display:block}
 .hero-actions{display:flex;gap:9px;flex-wrap:wrap}
 .ha{display:flex;align-items:center;gap:7px;padding:11px 18px;border-radius:30px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;cursor:pointer;border:none;transition:transform .15s;text-decoration:none}
 .ha:active{transform:scale(.94)}
-.ha-wa{background:#25D366;color:#fff;box-shadow:0 4px 14px rgba(37,211,102,.4)}
 .ha-call{background:#fff;color:var(--blue);box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .ha-menu{background:var(--yellow);color:#1a1a1a;box-shadow:0 4px 14px rgba(255,193,7,.4)}
 /* INFO STRIP */
@@ -138,13 +136,11 @@ img{display:block}
 .ib-red{background:#fff0f0;color:var(--red);border:1.5px solid rgba(232,19,27,.18)}
 /* CART BAR */
 .cart-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:#fff;border-top:2px solid var(--border);box-shadow:0 -4px 18px rgba(0,0,0,.1)}
-.cart-bar-inner{max-width:580px;margin:0 auto;padding:9px 13px;display:flex;align-items:center;gap:9px}
+.cart-bar-inner{max-width:580px;margin:0 auto;padding:9px 13px;display:flex;align-items:center}
 .cart-btn{flex:1;background:var(--blue);color:#fff;border:none;border-radius:12px;padding:12px 13px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:7px;transition:background .15s}
 .cart-btn:active{background:var(--blueh);transform:scale(.98)}
 .cart-btn-left{display:flex;align-items:center;gap:7px}
 .cart-badge{background:#fff;color:var(--blue);border-radius:7px;padding:2px 8px;font-size:12px;font-weight:800}
-.wa-fab{background:#25D366;color:#fff;border:none;border-radius:12px;padding:12px 13px;cursor:pointer;font-size:19px;flex-shrink:0}
-.wa-fab:active{background:#1aad54;transform:scale(.94)}
 /* OVERLAYS */
 .overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.72);display:flex;align-items:flex-end;justify-content:center}
 .overlay.hidden{display:none}
@@ -228,6 +224,20 @@ img{display:block}
 .toast.red{background:var(--red)}
 /* COMING SOON */
 .coming-soon{text-align:center;padding:22px;background:var(--bluelight);border-radius:12px;font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:800;color:var(--sub)}
+/* ── DELIVERY FEE ── */
+.del-box{background:var(--bluelight);border:2px solid var(--border);border-radius:13px;padding:13px 14px;margin-bottom:13px}
+.del-box-title{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;color:var(--blue);margin-bottom:10px}
+.detect-btn{width:100%;background:var(--blue);color:#fff;border:none;border-radius:11px;padding:12px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s,transform .15s;margin-bottom:9px}
+.detect-btn:active{background:var(--blueh);transform:scale(.98)}
+.detect-btn:disabled{background:#aaa;cursor:not-allowed}
+.del-result{background:#fff;border:2px solid var(--border);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;color:var(--txt);display:none;margin-bottom:9px;line-height:1.6}
+.del-result.free{border-color:var(--green)}
+.del-result.paid{border-color:var(--red)}
+.del-manual{display:none}
+.del-manual-label{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:7px}
+.del-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dtog{background:var(--bluelight);border:2.5px solid var(--border);border-radius:11px;padding:10px 8px;text-align:center;cursor:pointer;transition:all .18s;font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;color:var(--sub)}
+.dtog.on{background:var(--blue);border-color:var(--blue);color:#fff}
 /* FOOTER */
 .footer{background:linear-gradient(135deg,#0a1940,#1a1a1a);color:#fff;padding:20px 15px;text-align:center;margin-top:20px}
 .footer-logo{font-size:34px;margin-bottom:5px}
@@ -263,9 +273,7 @@ img{display:block}
       <div class="logo-tag">Near Zabi Ullah Sahi Filter, Jesarwala</div>
       <div class="logo-slogan">Taste jo Dil Jeet le ✨</div>
     </div>
-    <div class="hdr-btns">
-      <a href="https://wa.me/923054266621?text=Assalam%20o%20Alaikum!%20Order%20karna%20chahta%20hun" target="_blank" class="hbtn hbtn-wa">💬 WhatsApp</a>
-    </div>
+
   </div>
 </header>
 
@@ -334,7 +342,6 @@ img{display:block}
   <div class="footer-nums">
     <span class="footer-num">📞 052-6300085</span>
     <span class="footer-num">📱 0305-4266621</span>
-    <a href="https://wa.me/923054266621" target="_blank" class="footer-num">💬 WhatsApp Order</a>
   </div>
 </footer>
 
@@ -349,7 +356,6 @@ img{display:block}
       </div>
       <span id="cartTotalDisplay" style="font-size:13px;font-weight:700;opacity:.9">Rs.0</span>
     </button>
-    <button class="wa-fab" onclick="quickWhatsApp()" title="WhatsApp">💬</button>
   </div>
 </div>
 
@@ -394,6 +400,142 @@ function getDiscountEnd(){
 }
 function isDiscountLive(){ return DISCOUNT_ACTIVE && new Date()<getDiscountEnd(); }
 function discountedTotal(sub){ return isDiscountLive()?Math.round(sub*(1-DISCOUNT_PCT/100)):sub; }
+
+// ══════════════════════════════════════════
+// DELIVERY FEE — Haversine Distance Logic
+// Store: Sahi Pizza Cabin Point, Jesarwala
+// ══════════════════════════════════════════
+const STORE_LAT = 32.3460619;
+const STORE_LNG = 74.3879914;
+const FREE_THRESHOLD = 1500;   // PKR - min order for free delivery
+const FREE_RADIUS_KM = 3;      // km - max distance for free delivery
+const DELIVERY_FEE = 150;      // PKR - fee when applicable
+
+// Haversine formula — straight-line distance between two GPS coords
+function haversine(lat1, lng1, lat2, lng2) {
+  var R = 6371; // Earth radius in km
+  var dLat = (lat2 - lat1) * Math.PI / 180;
+  var dLng = (lng2 - lng1) * Math.PI / 180;
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2)
+        + Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180)
+        * Math.sin(dLng/2) * Math.sin(dLng/2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+// Delivery fee given subtotal and distance km (or null if unknown)
+function calcDeliveryFee(sub, distKm) {
+  if (distKm === null) return DELIVERY_FEE; // unknown = charge fee
+  if (sub >= FREE_THRESHOLD && distKm <= FREE_RADIUS_KM) return 0;
+  return DELIVERY_FEE;
+}
+
+// State
+var detectedDistKm = null;   // null = not detected yet
+var manualZone = null;       // 'inside' | 'outside' | null
+
+function getEffectiveDistKm() {
+  if (detectedDistKm !== null) return detectedDistKm;
+  if (manualZone === 'inside') return 1;    // treat as 1km (within 3km)
+  if (manualZone === 'outside') return 10;  // treat as 10km (outside 3km)
+  return null;
+}
+
+function detectLocation() {
+  var btn = document.getElementById('detectBtn');
+  if (!btn) return;
+  btn.disabled = true;
+  btn.textContent = '📡 Detecting...';
+  if (!navigator.geolocation) {
+    showManualFallback('GPS not supported on this device.');
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      var userLat = pos.coords.latitude;
+      var userLng = pos.coords.longitude;
+      detectedDistKm = haversine(STORE_LAT, STORE_LNG, userLat, userLng);
+      manualZone = null;
+      var sub = cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+      var fee = calcDeliveryFee(sub, detectedDistKm);
+      var distStr = detectedDistKm.toFixed(1);
+      showDelResult(distStr, fee, false);
+      refreshDeliveryUI();
+    },
+    function(err) {
+      var msg = err.code === 1 ? 'Location permission denied.' : 'Could not get location.';
+      showManualFallback(msg);
+    },
+    { timeout: 10000, maximumAge: 60000 }
+  );
+}
+
+function showDelResult(distStr, fee, isManual) {
+  var btn = document.getElementById('detectBtn');
+  var result = document.getElementById('delResult');
+  var manual = document.getElementById('delManual');
+  if (!result) return;
+  var sub = cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+  var isFree = fee === 0;
+  result.style.display = 'block';
+  result.className = 'del-result ' + (isFree ? 'free' : 'paid');
+  if (isManual) {
+    result.innerHTML = (manualZone === 'inside'
+      ? '📍 <b>Inside 3km zone</b><br>'
+      : '📍 <b>Outside 3km zone</b><br>')
+      + (isFree
+        ? '🎉 <b style="color:var(--green)">Delivery FREE!</b> (Order ≥ Rs.1500 + within 3km)'
+        : '🚚 Delivery Fee: <b style="color:var(--red)">Rs.' + fee + '</b>'
+          + (sub < FREE_THRESHOLD ? '<br><small>Add Rs.'+(FREE_THRESHOLD-sub)+' more for free delivery (if within 3km)</small>' : ''));
+  } else {
+    result.innerHTML = '📍 Distance from store: <b>' + distStr + ' km</b><br>'
+      + (isFree
+        ? '🎉 <b style="color:var(--green)">Delivery FREE!</b>'
+        : '🚚 Delivery Fee: <b style="color:var(--red)">Rs.' + fee + '</b>'
+          + (sub < FREE_THRESHOLD ? '<br><small>Spend Rs.'+(FREE_THRESHOLD-sub)+' more OR be within 3km for free delivery</small>' : '<br><small>You are >3km from store</small>'));
+  }
+  if (btn) { btn.disabled = false; btn.innerHTML = '📡 Re-Detect Location'; }
+  if (manual) {
+    // Keep manual visible if it was already shown (GPS denied scenario)
+    // Only auto-hide if it was never shown (clean GPS success)
+    if (manual.style.display !== 'block') manual.style.display = 'none';
+  }
+}
+
+function showManualFallback(msg) {
+  var btn = document.getElementById('detectBtn');
+  var manual = document.getElementById('delManual');
+  if (btn) { btn.disabled = false; btn.innerHTML = '📡 Try Again'; }
+  if (manual) {
+    manual.style.display = 'block';
+    var errEl = document.getElementById('delErr');
+    if (errEl) errEl.textContent = msg + ' Please select your zone manually:';
+  }
+}
+
+function selectManualZone(zone) {
+  manualZone = zone;
+  detectedDistKm = null; // clear GPS so getEffectiveDistKm uses manual zone
+  document.querySelectorAll('.dtog').forEach(function(el){ el.classList.toggle('on', el.dataset.zone===zone); });
+  var sub = cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+  var discounted = discountedTotal(sub); // apply discount before fee
+  var distKm = getEffectiveDistKm();    // now returns 1 or 10 (manualZone set above)
+  var fee = calcDeliveryFee(discounted, distKm);
+  showDelResult(null, fee, true);
+  refreshDeliveryUI();
+}
+
+function refreshDeliveryUI() {
+  // Update cart total display and any rendered cart/checkout
+  var sub = cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+  var disc = discountedTotal(sub);
+  var distKm = getEffectiveDistKm();
+  var fee = calcDeliveryFee(disc, distKm);
+  var n = cart.reduce(function(s,i){return s+i.quantity;},0);
+  if (n > 0) {
+    document.getElementById('cartTotalDisplay').textContent = 'Rs.'+(disc+fee)+(isDiscountLive()?' (-10%)':'');
+  }
+}
 
 const IMG={
   // ── Pizzas (your uploaded photos) ──
@@ -707,9 +849,11 @@ function refreshCartBar(){
   var n=cart.reduce(function(s,i){return s+i.quantity;},0);
   var total=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
   var dTotal=discountedTotal(total);
+  var distKm=getEffectiveDistKm();
+  var fee=n>0?calcDeliveryFee(dTotal,distKm):0;
   document.getElementById('cartBar').style.display=n>0?'block':'none';
   document.getElementById('cartBadge').textContent=n;
-  document.getElementById('cartTotalDisplay').textContent='Rs.'+dTotal+(isDiscountLive()?' (-10%)':'');
+  document.getElementById('cartTotalDisplay').textContent='Rs.'+(dTotal+fee)+(isDiscountLive()?' (-10%)':'');
 }
 function openCart(){renderCartSheet();document.getElementById('cartOverlay').classList.remove('hidden');document.body.style.overflow='hidden';}
 function closeCart(){document.getElementById('cartOverlay').classList.add('hidden');document.body.style.overflow='auto';}
@@ -722,8 +866,11 @@ function renderCartSheet(){
   }
   var sub=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
   var disc=isDiscountLive();
-  var finalTotal=discountedTotal(sub);
-  var discSaving=sub-finalTotal;
+  var discounted=discountedTotal(sub);
+  var discSaving=sub-discounted;
+  var distKm=getEffectiveDistKm();
+  var fee=calcDeliveryFee(discounted,distKm);
+  var grandTotal=discounted+fee;
   var rows='';
   cart.forEach(function(i){
     rows+='<div class="ci"><div class="ci-emo">'+(i.e||'🍕')+'</div><div class="ci-body">'
@@ -737,13 +884,17 @@ function renderCartSheet(){
       +'</div></div></div>';
   });
   var discRow=disc?'<div class="tr" style="color:var(--green)"><span>🎉 Ramzan 10% OFF</span><span style="font-weight:800">− Rs.'+discSaving+'</span></div>':'';
+  var feeColor=fee===0?'var(--green)':'var(--red)';
+  var feeLabel=fee===0?'FREE 🎉':'Rs.'+fee;
+  var distKm=getEffectiveDistKm();
+  var feeNote=distKm===null?' <small style="color:var(--sub);font-weight:600">(detect location at checkout)</small>':'';
   var discBanner=disc?'<div style="background:linear-gradient(90deg,#16a34a,#15803d);border-radius:10px;padding:9px 12px;text-align:center;font-family:\'Baloo 2\',sans-serif;font-weight:800;font-size:13px;color:#fff;margin-bottom:10px">🌙 Ramzan Special — آپ کی بچت: Rs.'+discSaving+'</div>':'';
   el.innerHTML='<div>'+rows
     +'<div class="tbox">'
     +'<div class="tr"><span>Subtotal</span><span style="color:var(--txt);font-weight:800">Rs.'+sub+'</span></div>'
     +discRow
-    +'<div class="tr"><span>Delivery</span><span style="color:var(--green);font-weight:800">FREE 🎉</span></div>'
-    +'<div class="tr total"><span>Total</span><span>Rs.'+finalTotal+'</span></div>'
+    +'<div class="tr"><span>🚚 Delivery Fee</span><span style="color:'+feeColor+';font-weight:800">'+feeLabel+feeNote+'</span></div>'
+    +'<div class="tr total"><span>Total</span><span>Rs.'+grandTotal+'</span></div>'
     +'</div>'
     +discBanner
     +'<button class="co-btn" onclick="openCheckout()">✅ Order دیں — Checkout</button>'
@@ -757,9 +908,28 @@ function openCheckout(){
   orderType='pickup';
   var disc=isDiscountLive();
   var sub=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
-  var finalTotal=discountedTotal(sub);
-  var discSaving=sub-finalTotal;
+  var discounted=discountedTotal(sub);
+  var discSaving=sub-discounted;
+  var distKm=getEffectiveDistKm();
+  var fee=calcDeliveryFee(discounted,distKm);
+  var grandTotal=discounted+fee;
   var discBanner=disc?'<div style="background:linear-gradient(90deg,#16a34a,#15803d);border-radius:10px;padding:9px 12px;margin-bottom:12px;font-family:\'Baloo 2\',sans-serif;font-weight:800;font-size:13px;color:#fff;text-align:center">🌙 Ramzan 10% OFF Applied! آپ بچا رہے ہیں Rs.'+discSaving+'</div>':'';
+
+  // Build delivery detector block for when delivery is selected
+  var delDetectBlock = ''
+    +'<div class="del-box" id="deliveryFeeBox" style="display:none">'
+    +'<div class="del-box-title">📍 Delivery Fee Calculator — ڈلیوری فیس</div>'
+    +'<button class="detect-btn" id="detectBtn" onclick="detectLocation()">📡 Detect My Location خودکار پتہ لگائیں</button>'
+    +'<div class="del-result" id="delResult"></div>'
+    +'<div class="del-manual" id="delManual">'
+    +'<div class="del-manual-label" id="delErr">Location denied. Select zone manually:</div>'
+    +'<div class="del-toggle">'
+    +'<div class="dtog" data-zone="inside" onclick="selectManualZone(\'inside\')">📍 Inside 3km<br><small>اندر ۳ کلومیٹر</small></div>'
+    +'<div class="dtog" data-zone="outside" onclick="selectManualZone(\'outside\')">🗺️ Outside 3km<br><small>باہر ۳ کلومیٹر</small></div>'
+    +'</div>'
+    +'</div>'
+    +'</div>';
+
   document.getElementById('cartBody').innerHTML='<div>'
     +'<div style="font-family:\'Baloo 2\',sans-serif;font-size:16px;font-weight:800;margin-bottom:13px">📋 Order Details — آرڈر کی تفصیل</div>'
     +discBanner
@@ -771,6 +941,7 @@ function openCheckout(){
     +'</div>'
     +'<div id="dineSection" style="display:none"><label class="fl">🪑 Table Number — میز نمبر *</label><input id="tableNo" class="fi" type="number" placeholder="میز نمبر لکھیں..."></div>'
     +'<div id="deliverySection" style="display:none"><label class="fl">📍 Delivery Address — پتہ *</label><textarea id="custAddr" class="fi" rows="2" placeholder="گھر / محلے کا پتہ لکھیں..."></textarea></div>'
+    +delDetectBlock
     +'<label class="fl">👤 آپ کا نام — Your Name *</label>'
     +'<input id="custName" class="fi" type="text" placeholder="اپنا نام لکھیں...">'
     +'<label class="fl">📱 موبائل نمبر — Phone *</label>'
@@ -785,9 +956,15 @@ function openCheckout(){
     +'</div>'
     +'<div style="font-size:11px;color:var(--sub);font-weight:600;margin-top:6px">⬆️ اوپر Special Instructions میں ساس یا چیز لکھیں</div>'
     +'</div>'
-    +'<div style="background:var(--bluelight);border-radius:10px;padding:10px 12px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">'
+    +'<div style="background:var(--bluelight);border-radius:10px;padding:10px 12px;margin-bottom:14px">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'
+    +'<span style="font-family:\'Baloo 2\',sans-serif;font-size:13px;font-weight:800;color:var(--blue)">🚚 Delivery Fee</span>'
+    +'<span style="font-family:\'Baloo 2\',sans-serif;font-size:14px;font-weight:800;color:'+(fee===0?'var(--green)':'var(--red)')+'">'+( orderType==='delivery' ? (fee===0?'FREE 🎉':'Rs.'+fee) : 'N/A' )+'</span>'
+    +'</div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:center">'
     +'<span style="font-family:\'Baloo 2\',sans-serif;font-size:14px;font-weight:800;color:var(--blue)">💵 Total to Pay</span>'
-    +'<span style="font-family:\'Baloo 2\',sans-serif;font-size:18px;font-weight:800;color:var(--red)">Rs.'+finalTotal+(disc?' <span style="font-size:11px;background:var(--green);color:#fff;border-radius:5px;padding:2px 6px">-10%</span>':'')+'</span>'
+    +'<span style="font-family:\'Baloo 2\',sans-serif;font-size:18px;font-weight:800;color:var(--red)">Rs.'+grandTotal+(disc?' <span style=\"font-size:11px;background:var(--green);color:#fff;border-radius:5px;padding:2px 6px\">-10%</span>':'')+'</span>'
+    +'</div>'
     +'</div>'
     +'<button class="swa" onclick="sendOrder()"><span style="font-size:19px">💬</span> WhatsApp پر آرڈر بھیجیں</button>'
     +'<button class="sback" onclick="renderCartSheet()">← واپس جائیں</button>'
@@ -797,9 +974,25 @@ function openCheckout(){
 function selOT(v){
   orderType=v;
   document.querySelectorAll('.ot-opt').forEach(function(el){el.classList.toggle('on',el.dataset.v===v);});
-  var ds=document.getElementById('dineSection'), dl=document.getElementById('deliverySection');
+  var ds=document.getElementById('dineSection');
+  var dl=document.getElementById('deliverySection');
+  var dfb=document.getElementById('deliveryFeeBox');
+  // Show/hide section fields
   if(ds)ds.style.display=v==='dine'?'block':'none';
   if(dl)dl.style.display=v==='delivery'?'block':'none';
+  // FIXED: always toggle fee box — only show for delivery
+  if(dfb)dfb.style.display=v==='delivery'?'block':'none';
+  // If switching away from delivery, no need to refresh
+  if(v!=='delivery') return;
+  // If location already detected or manual zone set, refresh result
+  if(detectedDistKm!==null || manualZone!==null){
+    var sub=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+    var discounted=discountedTotal(sub);
+    var distKm=getEffectiveDistKm();
+    var fee=calcDeliveryFee(discounted,distKm);
+    if(detectedDistKm!==null) showDelResult(detectedDistKm.toFixed(1),fee,false);
+    else showDelResult(null,fee,true);
+  }
 }
 
 function sendOrder(){
@@ -812,9 +1005,12 @@ function sendOrder(){
   if(orderType==='delivery'&&!addr){toast('پتہ لکھنا ضروری ہے!','red');return;}
   if(orderType==='dine'&&!table){toast('میز نمبر لکھیں!','red');return;}
   var sub=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
-  var finalTotal=discountedTotal(sub);
-  var discSaving=sub-finalTotal;
+  var discounted=discountedTotal(sub);
+  var discSaving=sub-discounted;
   var disc=isDiscountLive();
+  var distKm=getEffectiveDistKm();
+  var fee=orderType==='delivery'?calcDeliveryFee(discounted,distKm):0;
+  var finalTotal=discounted+fee;
   var typeLabel=orderType==='delivery'?'🏠 Delivery':orderType==='dine'?'🍽️ Dine In':'🚶 Pickup';
   var msg='🍕 *NEW ORDER — SAHI PIZZA CABIN POINT*\n\n';
   msg+='👤 *Name:* '+name+'\n📱 *Phone:* '+phone+'\n📦 *Type:* '+typeLabel+'\n';
@@ -822,9 +1018,12 @@ function sendOrder(){
   if(orderType==='delivery'&&addr)msg+='📍 *Address:* '+addr+'\n';
   msg+='\n🛒 *ORDER ITEMS:*\n━━━━━━━━━━━━━━\n';
   cart.forEach(function(i){msg+='\n'+i.quantity+'x *'+i.name+'*'+(i.selectedSize?' ('+i.selectedSize+')':'')+'\n   Rs.'+i.price+' × '+i.quantity+' = Rs.'+(i.price*i.quantity)+'\n';});
-  msg+='\n━━━━━━━━━━━━━━\n💰 Subtotal: Rs.'+sub;
-  if(disc)msg+='\n🎉 Ramzan 10% OFF: - Rs.'+discSaving;
-  msg+='\n💵 *TOTAL: Rs.'+finalTotal+'*\n🚚 Delivery: FREE';
+  msg+='\n━━━━━━━━━━━━━━\n';
+  var feeMsg=orderType==='delivery'?(fee===0?'FREE 🎉':'Rs.'+fee+' ('+((detectedDistKm!==null)?detectedDistKm.toFixed(1)+'km away':(manualZone==='outside'?'Outside 3km':'Inside 3km'))+')'):'N/A (Pickup/Dine-in)';
+  msg+='\n💰 Subtotal: Rs.'+sub;
+  if(disc)msg+='\n🎉 10% OFF: - Rs.'+discSaving;
+  if(orderType==='delivery')msg+='\n🚚 Delivery Fee: '+feeMsg;
+  msg+='\n💵 *TOTAL: Rs.'+finalTotal+'*';
   if(note)msg+='\n\n📝 *Note:* '+note;
   msg+='\n\n📍 Near Zabi Ullah Sahi Filter Jesarwala\n📞 052-6300085 / 0305-4266621';
   window.open('https://wa.me/923054266621?text='+encodeURIComponent(msg),'_blank');
@@ -832,12 +1031,9 @@ function sendOrder(){
   cart=[];saveCart();refreshCartBar();closeCart();
 }
 
-function quickWhatsApp(){
-  if(!cart.length){window.open('https://wa.me/923054266621?text=Assalam%20o%20Alaikum!%20Order%20karna%20chahta%20hun','_blank');return;}
-  openCart();
-}
 
 function toast(msg,type){var el=document.createElement('div');el.className='toast '+(type||'');el.textContent=msg;document.body.appendChild(el);setTimeout(function(){el.remove();},2600);}
 </script>
 </body>
 </html>
+
