@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sahi Pizza Cabin Point</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#E8131B;--redh:#ff2a32;
+  --blue:#1565C0;--blueh:#1976D2;--bluelight:#E3F0FF;
+  --yellow:#FFC107;--green:#16a34a;
+  --bg:#F5F8FF;--card:#fff;--border:#D6E4FF;
+  --txt:#1a1a1a;--sub:#777;--light:#EBF3FF;
+  --radius:18px;--shadow:0 4px 20px rgba(21,101,192,.10);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;padding-bottom:82px}
+img{display:block}
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#c0000a 0%,#1a1a1a 50%,var(--blue) 100%);position:sticky;top:0;z-index:100;box-shadow:0 3px 18px rgba(0,0,0,.32)}
+.hdr-inner{max-width:580px;margin:0 auto;padding:10px 13px;display:flex;align-items:center;gap:10px}
+.logo-svg{flex-shrink:0;width:50px;height:50px}
+.logo-text{flex:1;color:#fff;min-width:0}
+.logo-name{font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:800;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo-tag{font-size:9.5px;font-weight:600;opacity:.8;line-height:1.3}
+.logo-slogan{font-size:11px;font-weight:700;color:var(--yellow);font-style:italic}
+.hdr-btns{display:flex;gap:7px;flex-shrink:0}
+.hbtn{border:none;border-radius:20px;padding:8px 12px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;text-decoration:none;transition:transform .15s;white-space:nowrap}
+.hbtn:active{transform:scale(.93)}
+.hbtn-call{background:#fff;color:var(--red)}
+/* HERO */
+.hero{background:linear-gradient(150deg,var(--blue) 0%,#0d47a1 40%,#b50009 100%);padding:20px 15px 28px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='3' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");pointer-events:none}
+.hero-bg{position:absolute;right:-15px;bottom:-25px;font-size:130px;opacity:.07;transform:rotate(-15deg);pointer-events:none;line-height:1}
+.hero-inner{max-width:580px;margin:0 auto;position:relative;z-index:1}
+.hero-live{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:5px 12px;margin-bottom:9px}
+.hero-dot{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:blink 1.8s infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero-live span{color:#fff;font-size:11px;font-weight:700;letter-spacing:.04em}
+.hero-urdu{color:rgba(255,255,255,.78);font-size:13px;font-weight:700;direction:rtl;text-align:right;margin-bottom:5px}
+.hero-title{font-family:'Baloo 2',sans-serif;color:#fff;font-size:clamp(1.65rem,7vw,2.5rem);font-weight:800;line-height:1.05;margin-bottom:8px}
+.hero-title .yl{color:var(--yellow)}
+.hero-modes{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.hero-modes span{color:rgba(255,255,255,.75);font-size:13px;font-weight:700;display:flex;align-items:center;gap:4px}
+.hero-actions{display:flex;gap:9px;flex-wrap:wrap}
+.ha{display:flex;align-items:center;gap:7px;padding:11px 18px;border-radius:30px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;cursor:pointer;border:none;transition:transform .15s;text-decoration:none}
+.ha:active{transform:scale(.94)}
+.ha-call{background:#fff;color:var(--blue);box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.ha-menu{background:var(--yellow);color:#1a1a1a;box-shadow:0 4px 14px rgba(255,193,7,.4)}
+/* INFO STRIP */
+.info-strip{background:var(--blue);padding:9px 15px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.is-item{color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;gap:5px;opacity:.9}
+/* SAUCES */
+.sauces{background:var(--card);border:2px solid var(--border);border-radius:13px;padding:11px 13px;margin:11px 13px 0;max-width:554px;margin-left:auto;margin-right:auto}
+.sauces-ttl{font-family:'Baloo 2',sans-serif;font-size:12.5px;font-weight:800;color:var(--blue);margin-bottom:7px}
+.sauces-row{display:flex;gap:6px;flex-wrap:wrap}
+.sc{background:var(--bluelight);border:1.5px solid var(--border);border-radius:18px;padding:4px 9px;font-size:11px;font-weight:700;color:var(--blue)}
+.sc b{color:var(--red)}
+/* MENU SECTION */
+.wrap{max-width:580px;margin:0 auto;padding:0 13px}
+.sec-head{display:flex;align-items:center;gap:9px;margin:18px 0 11px}
+.sec-icon{font-size:23px}
+.sec-ttl{font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:800;color:var(--txt)}
+.sec-urdu{font-size:12px;color:var(--sub);font-weight:700;margin-left:auto;direction:rtl}
+/* CATEGORY PILLS */
+.cat-pills{display:flex;gap:7px;overflow-x:auto;padding-bottom:5px;padding-right:14px;margin-bottom:13px;-ms-overflow-style:none;scrollbar-width:none;position:relative}
+.cat-pills::-webkit-scrollbar{display:none}
+.cp{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:30px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12.5px;border:2px solid var(--border);background:var(--card);color:var(--sub);white-space:nowrap;cursor:pointer;transition:all .18s;flex-shrink:0}
+.cp.on{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 4px 11px rgba(21,101,192,.3)}
+.cp:hover:not(.on){border-color:var(--blue);color:var(--blue)}
+/* MENU GRID */
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:9px}
+@media(min-width:450px){.menu-grid{grid-template-columns:repeat(3,1fr)}}
+/* MENU CARD */
+.mc{background:var(--card);border-radius:16px;overflow:hidden;border:2px solid var(--border);box-shadow:var(--shadow);cursor:pointer;transition:transform .2s,box-shadow .2s;-webkit-tap-highlight-color:transparent;position:relative}
+.mc:active{transform:scale(.97)}
+.mc:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(21,101,192,.18);border-color:rgba(21,101,192,.35)}
+.mc-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--bluelight);position:relative}
+.mc-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.mc:hover .mc-img img{transform:scale(1.06)}
+.mc-ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:50px;background:var(--bluelight)}
+.mc-body{padding:9px 10px 11px}
+.mc-name{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;line-height:1.25;margin-bottom:1px;color:var(--txt)}
+.mc-urdu{font-size:10px;color:var(--sub);direction:rtl;margin-bottom:5px}
+.mc-row{display:flex;align-items:center;justify-content:space-between;gap:4px}
+.mc-price{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;color:var(--red)}
+.mc-add{width:29px;height:29px;border-radius:50%;background:var(--blue);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:19px;font-weight:700;line-height:1;transition:background .15s,transform .15s;flex-shrink:0}
+.mc-add:active{transform:scale(.82);background:var(--blueh)}
+.mc-sizetag{font-size:9px;font-weight:800;color:var(--blue);background:var(--bluelight);border-radius:4px;padding:2px 5px;margin-top:2px;display:inline-block}
+.mc-sp-badge{position:absolute;top:6px;right:6px;background:var(--yellow);color:#1a1a1a;font-family:'Baloo 2',sans-serif;font-size:8.5px;font-weight:800;padding:3px 6px;border-radius:5px;z-index:2;box-shadow:0 2px 5px rgba(0,0,0,.18)}
+/* DEAL CARDS */
+.deals-grid{display:grid;grid-template-columns:1fr;gap:11px;margin-bottom:9px}
+.dc{background:var(--card);border-radius:16px;overflow:hidden;border:2px solid var(--border);box-shadow:var(--shadow);cursor:pointer;transition:transform .2s,box-shadow .2s;display:flex;-webkit-tap-highlight-color:transparent}
+.dc:active{transform:scale(.97)}
+.dc:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(21,101,192,.18);border-color:rgba(21,101,192,.3)}
+.dc-img{width:118px;flex-shrink:0;background:var(--bluelight);overflow:hidden;position:relative}
+.dc-img img{width:100%;height:100%;object-fit:cover}
+.dc-ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:44px;background:var(--bluelight)}
+.dc-ribbon{position:absolute;top:0;left:0;background:var(--red);color:#fff;font-family:'Baloo 2',sans-serif;font-size:10px;font-weight:800;padding:4px 8px;border-bottom-right-radius:9px;z-index:2}
+.dc-body{padding:11px 13px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.dc-name{font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:800;color:var(--txt);line-height:1.2;margin-bottom:3px}
+.dc-items{font-size:11px;color:var(--sub);font-weight:700;line-height:1.6;margin-bottom:7px}
+.dc-row{display:flex;align-items:center;justify-content:space-between;gap:7px}
+.dc-price{font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:800;color:var(--red)}
+.dc-add{background:var(--blue);color:#fff;border:none;border-radius:9px;padding:8px 13px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;cursor:pointer;flex-shrink:0}
+.dc-add:active{background:var(--blueh);transform:scale(.93)}
+/* LIST CARDS */
+.list-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:9px}
+.lc{background:var(--card);border-radius:13px;padding:10px 12px;display:flex;align-items:center;gap:10px;border:2px solid var(--border);box-shadow:var(--shadow);cursor:pointer;transition:transform .15s,border-color .15s;-webkit-tap-highlight-color:transparent}
+.lc:active{transform:scale(.98)}
+.lc:hover{border-color:rgba(21,101,192,.28)}
+.lc-img{width:58px;height:58px;border-radius:10px;overflow:hidden;background:var(--bluelight);position:relative;flex-shrink:0}
+.lc-img img{width:100%;height:100%;object-fit:cover}
+.lc-ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:26px;background:var(--bluelight)}
+.lc-body{flex:1;min-width:0}
+.lc-name{font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:800;color:var(--txt);line-height:1.2}
+.lc-urdu{font-size:10px;color:var(--sub);direction:rtl;margin-top:1px}
+.lc-row{display:flex;align-items:center;justify-content:space-between;margin-top:5px;gap:7px}
+.lc-price{font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:800;color:var(--red)}
+.lc-add{width:33px;height:33px;border-radius:50%;background:var(--blue);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:700;line-height:1;transition:background .15s,transform .15s;flex-shrink:0}
+.lc-add:active{transform:scale(.82)}
+/* INFO BANNERS */
+.info-banner{border-radius:11px;padding:9px 12px;margin-bottom:11px;font-family:'Baloo 2',sans-serif;font-size:12.5px;font-weight:800;line-height:1.65}
+.ib-blue{background:var(--bluelight);color:var(--blue);border:1.5px solid var(--border)}
+.ib-red{background:#fff0f0;color:var(--red);border:1.5px solid rgba(232,19,27,.18)}
+/* CART BAR */
+.cart-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:#fff;border-top:2px solid var(--border);box-shadow:0 -4px 18px rgba(0,0,0,.1)}
+.cart-bar-inner{max-width:580px;margin:0 auto;padding:9px 13px;display:flex;align-items:center}
+.cart-btn{flex:1;background:var(--blue);color:#fff;border:none;border-radius:12px;padding:12px 13px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:7px;transition:background .15s}
+.cart-btn:active{background:var(--blueh);transform:scale(.98)}
+.cart-btn-left{display:flex;align-items:center;gap:7px}
+.cart-badge{background:#fff;color:var(--blue);border-radius:7px;padding:2px 8px;font-size:12px;font-weight:800}
+/* OVERLAYS */
+.overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.72);display:flex;align-items:flex-end;justify-content:center}
+.overlay.hidden{display:none}
+.sheet{background:#fff;border-radius:22px 22px 0 0;width:100%;max-width:580px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
+.sheet-handle{width:38px;height:4px;background:#ddd;border-radius:4px;margin:11px auto 0;flex-shrink:0}
+.sheet-hdr{padding:12px 16px;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.sheet-ttl{font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;color:var(--txt)}
+.sheet-sub{font-size:11px;color:var(--sub);margin-top:2px;direction:rtl}
+.x-btn{width:32px;height:32px;border-radius:50%;background:var(--light);border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--txt)}
+.x-btn:active{background:#c5d8f5}
+.sheet-body{overflow-y:auto;flex:1;padding:14px 16px 26px}
+/* DETAIL */
+.detail-img{width:100%;height:195px;object-fit:cover;border-radius:13px;margin-bottom:13px;background:var(--bluelight)}
+.detail-name{font-family:'Baloo 2',sans-serif;font-size:21px;font-weight:800;margin-bottom:3px}
+.detail-urdu{color:var(--sub);font-size:13px;direction:rtl;margin-bottom:10px}
+.detail-price{font-family:'Baloo 2',sans-serif;font-size:23px;font-weight:800;color:var(--red);margin-bottom:13px}
+.sz-label{font-family:'Baloo 2',sans-serif;font-size:13.5px;font-weight:800;margin-bottom:8px}
+.sz-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.dsz{background:var(--bluelight);border:2.5px solid var(--border);border-radius:12px;padding:10px;text-align:center;cursor:pointer;transition:all .18s}
+.dsz.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.dsz-name{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800}
+.dsz-price{font-size:12px;font-weight:700;margin-top:2px;opacity:.82}
+.qty-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px;background:var(--bluelight);border-radius:12px;padding:10px 12px}
+.qty-lbl{font-family:'Baloo 2',sans-serif;font-size:13.5px;font-weight:800}
+.qty-ctrl{display:flex;align-items:center;gap:13px}
+.qty-num{font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:800;min-width:26px;text-align:center}
+.qty-m,.qty-p{width:33px;height:33px;border-radius:9px;border:none;cursor:pointer;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1;transition:transform .12s}
+.qty-m{background:#fff;color:var(--blue);border:2px solid var(--border)}
+.qty-p{background:var(--blue);color:#fff}
+.qty-m:active,.qty-p:active{transform:scale(.83)}
+.atc-btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:12px;padding:14px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:15px;cursor:pointer}
+.atc-btn:active{background:var(--redh);transform:scale(.99)}
+/* CART ITEMS */
+.ci{display:flex;gap:10px;padding:12px 0;border-bottom:1.5px solid var(--border);align-items:flex-start}
+.ci-emo{width:62px;height:62px;background:var(--bluelight);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0}
+.ci-body{flex:1}
+.ci-name{font-family:'Baloo 2',sans-serif;font-size:13.5px;font-weight:800;line-height:1.3;margin-bottom:2px}
+.ci-sz{font-size:10.5px;color:var(--sub);font-weight:600;margin-bottom:3px}
+.ci-price{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;color:var(--red);margin-bottom:5px}
+.ci-ctrl{display:flex;align-items:center;gap:8px}
+.ci-m,.ci-p{width:28px;height:28px;border-radius:7px;border:none;cursor:pointer;font-size:17px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+.ci-m{background:var(--bluelight);color:var(--blue);border:2px solid var(--border)}
+.ci-p{background:var(--blue);color:#fff}
+.ci-m:active,.ci-p:active{transform:scale(.83)}
+.ci-qty{font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:800;min-width:20px;text-align:center}
+.ci-del{margin-left:auto;background:none;border:none;cursor:pointer;color:#ef4444;font-size:18px;padding:3px}
+.tbox{background:var(--bluelight);border-radius:12px;padding:12px;margin:12px 0}
+.tr{display:flex;justify-content:space-between;margin-bottom:5px;font-size:12.5px;font-weight:700;color:var(--sub)}
+.tr.total{border-top:2px solid var(--border);padding-top:8px;margin-top:4px}
+.tr.total span:first-child{font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:800;color:var(--txt)}
+.tr.total span:last-child{font-family:'Baloo 2',sans-serif;font-size:17px;font-weight:800;color:var(--red)}
+.co-btn{width:100%;background:var(--blue);color:#fff;border:none;border-radius:12px;padding:14px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:8px}
+.co-btn:active{background:var(--blueh)}
+.cl-btn{width:100%;background:var(--bluelight);color:var(--sub);border:none;border-radius:12px;padding:11px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:12.5px;cursor:pointer}
+/* CHECKOUT */
+.ot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.ot-opt{background:var(--bluelight);border:2.5px solid var(--border);border-radius:12px;padding:10px 6px;text-align:center;cursor:pointer;transition:all .18s}
+.ot-opt.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.ot-emo{font-size:22px;margin-bottom:3px}
+.ot-lbl{font-family:'Baloo 2',sans-serif;font-size:12px;font-weight:800}
+.ot-urdu{font-size:9px;font-weight:700;opacity:.7;margin-top:1px}
+.fl{font-family:'Baloo 2',sans-serif;font-size:13.5px;font-weight:800;color:var(--txt);margin-bottom:5px;display:block}
+.fi{width:100%;border:2.5px solid var(--border);border-radius:10px;padding:11px 12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;outline:none;background:#fff;color:var(--txt);transition:border-color .18s;margin-bottom:11px}
+.fi:focus{border-color:var(--blue)}
+.fi::placeholder{color:#bbb}
+.swa{width:100%;background:#25D366;color:#fff;border:none;border-radius:12px;padding:14px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:8px}
+.swa:active{background:#1aad54;transform:scale(.99)}
+.scall{width:100%;background:var(--red);color:#fff;border:none;border-radius:12px;padding:13px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:8px}
+.scall:active{background:var(--redh)}
+.sback{width:100%;background:var(--bluelight);color:var(--txt);border:none;border-radius:12px;padding:11px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:13px;cursor:pointer}
+/* EMPTY CART */
+.empty-cart{text-align:center;padding:42px 14px}
+.ec-icon{font-size:66px;margin-bottom:10px}
+.ec-ttl{font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:800;color:var(--sub);margin-bottom:4px}
+.ec-sub{font-size:12.5px;color:var(--sub);font-weight:600;margin-bottom:16px}
+.ec-btn{background:var(--blue);color:#fff;border:none;border-radius:28px;padding:11px 24px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:13.5px;cursor:pointer}
+/* TOAST */
+.toast{position:fixed;top:74px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:9px 19px;border-radius:28px;font-family:'Baloo 2',sans-serif;font-size:13.5px;font-weight:700;z-index:9999;white-space:nowrap;pointer-events:none;animation:tin .3s ease}
+@keyframes tin{from{opacity:0;transform:translateX(-50%) translateY(-8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.toast.green{background:var(--green)}
+.toast.red{background:var(--red)}
+/* CLOSED / LATE NIGHT OVERLAY */
+.closed-overlay{display:none} /* disabled — no full screen block */
+.closed-box{display:none}
+/* CLOSED NOTICE BANNER — slim, non-blocking */
+.closed-banner{background:linear-gradient(135deg,#1a1a2e,#16213e);border-bottom:3px solid #ef4444;padding:12px 15px;text-align:center;position:relative;z-index:99}
+.cb-inner{max-width:580px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:5px}
+.cb-title{font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:800;color:#fca5a5}
+.cb-time{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;color:var(--yellow);background:rgba(255,193,7,.12);border:1.5px solid rgba(255,193,7,.3);border-radius:8px;padding:4px 12px;display:inline-block}
+.cb-urdu{font-size:11px;color:rgba(255,255,255,.5);font-weight:700;direction:rtl}
+.cb-browse{font-size:11px;color:#86efac;font-weight:700;margin-top:2px}
+/* LATE NIGHT BANNER */
+.latenight-banner{background:linear-gradient(135deg,#7c2d12,#92400e);border:2px solid #f97316;border-radius:13px;padding:13px 14px;margin:11px 13px;max-width:554px;margin-left:auto;margin-right:auto;animation:lnpulse 2.5s infinite}
+@keyframes lnpulse{0%,100%{box-shadow:0 0 0 0 rgba(249,115,22,.35)}50%{box-shadow:0 0 0 8px rgba(249,115,22,0)}}
+.lnb-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.lnb-icon{font-size:26px;flex-shrink:0}
+.lnb-title{font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:800;color:#fed7aa;line-height:1.3}
+.lnb-sub{font-size:11.5px;color:#fdba74;font-weight:700;line-height:1.55}
+.lnb-charge{background:rgba(249,115,22,.25);border:1.5px solid #f97316;border-radius:8px;padding:6px 11px;font-family:'Baloo 2',sans-serif;font-size:12.5px;font-weight:800;color:#fed7aa;display:inline-block;margin-top:6px}
+.lnb-disclaimer{background:rgba(0,0,0,.3);border-radius:8px;padding:7px 10px;margin-top:8px;font-size:11px;font-weight:700;color:#fbbf24;line-height:1.5}
+/* COMING SOON */
+.coming-soon{text-align:center;padding:22px;background:var(--bluelight);border-radius:12px;font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:800;color:var(--sub)}
+/* ── DELIVERY FEE ── */
+.del-box{background:var(--bluelight);border:2px solid var(--border);border-radius:13px;padding:13px 14px;margin-bottom:13px}
+.del-box-title{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;color:var(--blue);margin-bottom:10px}
+.detect-btn{width:100%;background:var(--blue);color:#fff;border:none;border-radius:11px;padding:12px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s,transform .15s;margin-bottom:9px}
+.detect-btn:active{background:var(--blueh);transform:scale(.98)}
+.detect-btn:disabled{background:#aaa;cursor:not-allowed}
+.del-result{background:#fff;border:2px solid var(--border);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;color:var(--txt);display:none;margin-bottom:9px;line-height:1.6}
+.del-result.free{border-color:var(--green)}
+.del-result.paid{border-color:var(--red)}
+.del-manual{display:none}
+.del-manual-label{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:7px}
+.del-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dtog{background:var(--bluelight);border:2.5px solid var(--border);border-radius:11px;padding:10px 8px;text-align:center;cursor:pointer;transition:all .18s;font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;color:var(--sub)}
+.dtog.on{background:var(--blue);border-color:var(--blue);color:#fff}
+/* FOOTER */
+.footer{background:linear-gradient(135deg,#0a1940,#1a1a1a);color:#fff;padding:20px 15px;text-align:center;margin-top:20px}
+.footer-logo{font-size:34px;margin-bottom:5px}
+.footer-name{font-family:'Baloo 2',sans-serif;font-size:17px;font-weight:800;color:var(--yellow);margin-bottom:2px}
+.footer-slogan{font-size:11.5px;color:rgba(255,255,255,.55);font-style:italic;margin-bottom:3px}
+.footer-addr{font-size:11.5px;color:rgba(255,255,255,.6);font-weight:600;margin-bottom:13px}
+.footer-nums{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}
+.footer-num{color:#fff;text-decoration:none;font-weight:800;font-size:12px;background:rgba(255,255,255,.11);padding:7px 14px;border-radius:28px;border:1.5px solid rgba(255,255,255,.16)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <svg class="logo-svg" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="25" cy="25" r="24" fill="#FFC107" stroke="#fff" stroke-width="1.5"/>
+      <circle cx="25" cy="25" r="18" fill="#E8131B"/>
+      <path d="M25 7 A18 18 0 0 1 43 25 L25 25 Z" fill="#c9a220"/>
+      <circle cx="25" cy="25" r="12" fill="#fff9e0"/>
+      <circle cx="21" cy="20" r="2.2" fill="#E8131B"/>
+      <circle cx="30" cy="22" r="1.8" fill="#E8131B"/>
+      <circle cx="23" cy="29" r="1.9" fill="#E8131B"/>
+      <circle cx="31" cy="30" r="2.1" fill="#E8131B"/>
+      <line x1="25" y1="25" x2="25" y2="7" stroke="#c9a220" stroke-width="1.1"/>
+      <line x1="25" y1="25" x2="43" y2="25" stroke="#c9a220" stroke-width="1.1"/>
+      <line x1="25" y1="25" x2="12" y2="38" stroke="#c9a220" stroke-width="1.1"/>
+      <rect x="10" y="41" width="30" height="8" rx="4" fill="#1565C0"/>
+      <text x="25" y="47.5" text-anchor="middle" font-family="Arial Black" font-size="5.8" font-weight="900" fill="#fff" letter-spacing="1.2">SAHI</text>
+    </svg>
+    <div class="logo-text">
+      <div class="logo-name">Sahi Pizza Cabin Point</div>
+      <div class="logo-tag">Near Zabi Ullah Sahi Filter, Jesarwala</div>
+      <div class="logo-slogan">Taste jo Dil Jeet le ✨</div>
+    </div>
+
+  </div>
+</header>
+
+<!-- CLOSED NOTICE BANNER (shown when store is closed — non-blocking) -->
+<div id="closedOverlay" class="closed-banner" style="display:none">
+  <div class="cb-inner">
+    <div class="cb-title">🔴 Orders Currently Closed — ابھی آرڈر بند ہیں</div>
+    <div class="cb-time" id="closedNextOpen">Opens soon</div>
+    <div class="cb-time" id="closedHoursLine" style="font-size:11px;margin-top:3px">🕐 Mon–Fri: 12:00 PM – 2:00 AM</div>
+    <div class="cb-browse">👀 Menu browse کریں — آرڈر opening time پر دیں</div>
+    <div class="cb-urdu">رات ۲:۳۰ کے بعد آرڈر قبول نہیں — مینو دیکھتے رہیں!</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">🍕</div>
+  <div class="hero-inner">
+    <div class="hero-live" id="heroBadge"><div class="hero-dot"></div><span id="heroBadgeText">OPEN NOW · Free Delivery</span></div>
+    <div class="hero-urdu">تازہ اور گرم کھانا — آپ کے دروازے تک</div>
+    <div class="hero-title"><span class="yl">Sahi Pizza</span><br>Cabin Point 🍕</div>
+    <div class="hero-modes">
+      <span>🍽️ Dine In</span><span>🏠 Home Delivery</span>
+    </div>
+    <div class="hero-actions">
+      <button class="ha ha-menu" onclick="scrollToMenu()">🍕 Menu دیکھیں — Browse Menu</button>
+    </div>
+  </div>
+</section>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="is-item">📍 Near Zabi Ullah Sahi Filter, Jesarwala</div>
+  <div class="is-item">📞 052-6300085 · 0305-4266621</div>
+  <div class="is-item" id="hoursStrip">🕐 Mon–Fri: 12 PM – 2:00 AM</div>
+  <div class="is-item">🚚 Free Home Delivery</div>
+</div>
+
+
+
+<!-- LATE NIGHT BANNER (shown 2:00–2:30 AM) -->
+<div id="latenightBanner" style="display:none">
+  <div class="latenight-banner">
+    <div class="lnb-row">
+      <div class="lnb-icon">🌙</div>
+      <div>
+        <div class="lnb-title">Late Night Window — 2:00 AM to 2:30 AM</div>
+        <div class="lnb-sub">App orders only · Closes at 2:30 AM sharp</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:7px">
+      <div class="lnb-charge">⚡ +Rs.100 Late Night Fee</div>
+      <div class="lnb-charge" style="background:rgba(239,68,68,.2);border-color:#ef4444;color:#fca5a5">🚫 No Home Delivery — Takeaway Only</div>
+    </div>
+    <div class="lnb-disclaimer">
+      🚫 <strong>PTCL / Phone Call orders NOT accepted</strong> during this window.<br>
+      رات ۲ بجے سے ۲:۳۰ بجے تک: صرف App آرڈر · صرف ٹیک اوے · اضافی Rs.100 چارج لاگو ہے
+    </div>
+  </div>
+</div>
+
+<!-- EID DISCOUNT BANNER (shown 23–25 Mar when open) -->
+<div id="eidBanner" style="display:none;max-width:554px;margin:10px auto;padding:0 13px">
+  <div style="background:linear-gradient(135deg,#14532d,#166534);border:2px solid #4ade80;border-radius:13px;padding:13px 14px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:7px">
+      <div style="font-size:26px">🌙</div>
+      <div>
+        <div style="font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:800;color:#bbf7d0">عید مبارک — Eid Mubarak!</div>
+        <div style="font-size:11.5px;color:#86efac;font-weight:700">Special Eid offer active until 25 March 2026</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:7px">
+      <div style="background:rgba(74,222,128,.2);border:1.5px solid #4ade80;border-radius:8px;padding:5px 11px;font-family:'Baloo 2',sans-serif;font-size:12.5px;font-weight:800;color:#bbf7d0">🎉 5% Discount on All Orders</div>
+      <div style="background:rgba(74,222,128,.2);border:1.5px solid #4ade80;border-radius:8px;padding:5px 11px;font-family:'Baloo 2',sans-serif;font-size:12.5px;font-weight:800;color:#bbf7d0">🕐 Opens 11:00 AM Today</div>
+    </div>
+    <div style="background:rgba(0,0,0,.25);border-radius:8px;padding:7px 10px;font-size:11px;font-weight:700;color:#86efac;line-height:1.5">
+      عید کے موقع پر پورے مینو پر ۵٪ خصوصی چھوٹ — 25 مارچ تک لاگو<br>
+      Discount auto-expires on 26 March · Normal hours resume
+    </div>
+  </div>
+</div>
+
+<!-- MENU SECTION -->
+<div class="wrap" id="menuSection">
+  <div class="sec-head">
+    <div class="sec-icon">🍽️</div>
+    <div class="sec-ttl">Our Menu</div>
+    <div class="sec-urdu">ہمارا مینو</div>
+  </div>
+  <div class="cat-pills" id="catPills">
+    <button class="cp on"  data-cat="deals"   onclick="switchCat('deals')">🔥 Deals</button>
+    <button class="cp"     data-cat="pizzas"  onclick="switchCat('pizzas')">🍕 Pizza</button>
+    <button class="cp"     data-cat="burgers" onclick="switchCat('burgers')">🍔 Burgers</button>
+    <button class="cp"     data-cat="shawarma"onclick="switchCat('shawarma')">🌯 Shawarma</button>
+    <button class="cp"     data-cat="wraps"   onclick="switchCat('wraps')">🫓 Wraps</button>
+    <button class="cp"     data-cat="starters"onclick="switchCat('starters')">🍟 Starters</button>
+    <button class="cp"     data-cat="biryani" onclick="switchCat('biryani')">🍛 Biryani</button>
+    <button class="cp"     data-cat="sahi"    onclick="switchCat('sahi')">⭐ Sahi Special</button>
+    <button class="cp"     data-cat="salads"  onclick="switchCat('salads')">🥗 Pasta &amp; Salads</button>
+    <button class="cp"     data-cat="shakes"  onclick="switchCat('shakes')">🥤 Shakes</button>
+    <button class="cp"     data-cat="icecream"onclick="switchCat('icecream')">🍦 Ice Cream</button>
+  </div>
+  <div id="menuContent"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">🍕</div>
+  <div class="footer-name">Sahi Pizza Cabin Point</div>
+  <div class="footer-slogan">Taste jo Dil Jeet le</div>
+  <div class="footer-addr">Near Zabi Ullah Sahi Filter Jesarwala · Free Home Delivery</div>
+  <div style="font-size:11px;color:rgba(255,255,255,.55);font-weight:700;margin-bottom:4px" id="footerHours1">🕐 Mon–Fri: 12:00 PM – 2:00 AM</div>
+  <div style="font-size:11px;color:rgba(255,255,255,.55);font-weight:700;margin-bottom:13px" id="footerHours2">🕐 Sat–Sun: 11:00 AM – 2:00 AM</div>
+  <div class="footer-nums">
+    <span class="footer-num">📞 052-6300085</span>
+    <span class="footer-num">📱 0305-4266621</span>
+  </div>
+</footer>
+
+<!-- CART BAR -->
+<div class="cart-bar" id="cartBar" style="display:none">
+  <div class="cart-bar-inner">
+    <button class="cart-btn" onclick="openCart()">
+      <div class="cart-btn-left">
+        <span>🛒</span>
+        <span class="cart-badge" id="cartBadge">0</span>
+        <span>Cart دیکھیں</span>
+      </div>
+      <span id="cartTotalDisplay" style="font-size:13px;font-weight:700;opacity:.9">Rs.0</span>
+    </button>
+  </div>
+</div>
+
+<!-- CART OVERLAY -->
+<div class="overlay hidden" id="cartOverlay">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-hdr">
+      <div><div class="sheet-ttl">🛒 Your Cart</div><div class="sheet-sub">آپ کا آرڈر</div></div>
+      <button class="x-btn" onclick="closeCart()">✕</button>
+    </div>
+    <div class="sheet-body" id="cartBody"></div>
+  </div>
+</div>
+
+<!-- DETAIL OVERLAY -->
+<div class="overlay hidden" id="itemOverlay">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-hdr">
+      <div><div class="sheet-ttl" id="detailTitle">Item</div></div>
+      <button class="x-btn" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="sheet-body" id="detailBody"></div>
+  </div>
+</div>
+
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// EID HOLIDAY MODE  —  23 Mar 2026 → 25 Mar 2026  (auto-expires 26 Mar)
+// ──────────────────────────────────────────────────────────────────
+//  EID ACTIVE (23–25 Mar):
+//    • All days open at 11:00 AM  (instead of normal schedule)
+//    • 5% app discount applied to entire menu
+//    • Late night window + hard close: same as always
+//
+//  NORMAL (26 Mar onwards):
+//    • Mon–Fri  12:00 PM,  Sat–Sun  11:00 AM
+//    • No automatic discount (DISCOUNT_ACTIVE = false)
+//
+//  ALWAYS (both modes):
+//    • Late Night  2:00 AM – 2:30 AM  → +Rs.100 surcharge, Takeaway only, App only
+//    • Hard Close  2:30 AM → opening time
+// ══════════════════════════════════════════════════════════════════
+
+// ── Eid window: midnight start of 23 Mar  →  midnight start of 26 Mar ──
+const EID_START = new Date('2026-03-23T00:00:00');
+const EID_END   = new Date('2026-03-26T00:00:00');  // exclusive — 26 Mar = normal
+
+function isEidMode() {
+  var now = new Date();
+  return now >= EID_START && now < EID_END;
+}
+
+// ── Opening minutes per day — NORMAL schedule ──
+// 0=Sun, 1=Mon … 6=Sat
+const OPEN_MIN_NORMAL = {
+  0: 11 * 60,   // Sun  11:00 AM
+  1: 12 * 60,   // Mon  12:00 PM
+  2: 12 * 60,   // Tue
+  3: 12 * 60,   // Wed
+  4: 12 * 60,   // Thu
+  5: 12 * 60,   // Fri
+  6: 11 * 60    // Sat  11:00 AM
+};
+const OPEN_MIN_EID = 11 * 60;   // Eid: all days 11:00 AM
+
+const LATE_NIGHT_SURCHARGE = 100; // PKR — always
+const CLOSE_AT   = 2 * 60;        // 2:00 AM
+const HARD_CLOSE = 2 * 60 + 30;   // 2:30 AM
+
+/** Get today's opening minute based on current mode */
+function getTodayOpenMin() {
+  if (isEidMode()) return OPEN_MIN_EID;
+  return OPEN_MIN_NORMAL[new Date().getDay()];
+}
+
+/**
+ * Store status:
+ *   'open'       – normal trading hours
+ *   'late_night' – 2:00 AM → 2:30 AM
+ *   'closed'     – outside all hours
+ */
+function getStoreStatus() {
+  var now  = new Date();
+  var dow  = now.getDay();
+  var mins = now.getHours() * 60 + now.getMinutes();
+
+  // Past-midnight zone: 00:00–02:30 belongs to yesterday's session
+  if (mins < HARD_CLOSE) {
+    if (mins >= CLOSE_AT) return 'late_night';
+    return 'open';  // 00:00–02:00 still open
+  }
+
+  // Daytime: before today's opening = closed
+  var openToday = isEidMode() ? OPEN_MIN_EID : OPEN_MIN_NORMAL[dow];
+  if (mins < openToday) return 'closed';
+  return 'open';
+}
+
+function isLateNight() { return getStoreStatus() === 'late_night'; }
+function isClosed()    { return getStoreStatus() === 'closed'; }
+
+/** Next opening time as readable string */
+function getNextOpenText() {
+  var now  = new Date();
+  var dow  = now.getDay();
+  var mins = now.getHours() * 60 + now.getMinutes();
+  var targetDow = (mins < HARD_CLOSE) ? dow : (dow + 1) % 7;
+  var openM;
+  if (isEidMode()) {
+    openM = OPEN_MIN_EID;
+  } else {
+    // Check if tomorrow is still within Eid (edge case: last Eid night)
+    var tomorrow = new Date(now); tomorrow.setDate(tomorrow.getDate() + 1); tomorrow.setHours(0,0,0,0);
+    openM = (tomorrow >= EID_START && tomorrow < EID_END) ? OPEN_MIN_EID : OPEN_MIN_NORMAL[targetDow];
+  }
+  var h = Math.floor(openM / 60);
+  var suffix = h >= 12 ? 'PM' : 'AM';
+  var h12 = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+  var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  return h12 + ':00 ' + suffix + ' — ' + dayNames[targetDow];
+}
+
+/** Returns the human-readable hours string for current mode */
+function getHoursLabel() {
+  if (isEidMode()) return '🌙 Eid Hours: 11:00 AM – 2:00 AM';
+  var dow = new Date().getDay();
+  return (dow === 0 || dow === 6)
+    ? '🕐 Weekend: 11:00 AM – 2:00 AM'
+    : '🕐 Mon–Fri: 12:00 PM – 2:00 AM';
+}
+
+/** Update closed overlay text */
+function updateClosedOverlay() {
+  var el = document.getElementById('closedNextOpen');
+  if (el) el.textContent = '🕐 Opens at ' + getNextOpenText();
+  var hoursEl = document.getElementById('closedHoursLine');
+  if (hoursEl) hoursEl.textContent = getHoursLabel();
+}
+
+/** Main time gate — runs on load + every 60 s */
+function applyTimeGate() {
+  var status    = getStoreStatus();
+  var eid       = isEidMode();
+  var overlay   = document.getElementById('closedOverlay');
+  var lnBanner  = document.getElementById('latenightBanner');
+  var eidBanner = document.getElementById('eidBanner');
+  var badge     = document.getElementById('heroBadge');
+  var badgeText = document.getElementById('heroBadgeText');
+  var dot       = badge ? badge.querySelector('.hero-dot') : null;
+
+  // Update info strip hours
+  var hoursStrip = document.getElementById('hoursStrip');
+  if (hoursStrip) hoursStrip.textContent = getHoursLabel();
+
+  // Update footer hours
+  var f1 = document.getElementById('footerHours1');
+  var f2 = document.getElementById('footerHours2');
+  if (eid) {
+    if (f1) { f1.textContent = '🌙 Eid Special: 11:00 AM – 2:00 AM (All Days)'; f1.style.color = '#86efac'; }
+    if (f2) { f2.textContent = '🎉 5% Discount on all orders · Expires 25 Mar'; f2.style.color = '#86efac'; }
+  } else {
+    if (f1) { f1.textContent = '🕐 Mon–Fri: 12:00 PM – 2:00 AM'; f1.style.color = 'rgba(255,255,255,.55)'; }
+    if (f2) { f2.textContent = '🕐 Sat–Sun: 11:00 AM – 2:00 AM'; f2.style.color = 'rgba(255,255,255,.55)'; }
+  }
+
+  // Show/hide Eid banner (only when open & in Eid mode)
+  if (eidBanner) eidBanner.style.display = (eid && status === 'open') ? 'block' : 'none';
+
+  if (status === 'closed') {
+    overlay.style.display = 'block';   // slim banner, not full-screen
+    lnBanner.style.display = 'none';
+    updateClosedOverlay();
+    if (badge)     { badge.style.background = 'rgba(239,68,68,.22)'; badge.style.borderColor = 'rgba(239,68,68,.38)'; }
+    if (badgeText)   badgeText.textContent = 'CLOSED · Orders Open ' + getNextOpenText();
+    if (dot)         dot.style.background = '#ef4444';
+  } else if (status === 'late_night') {
+    overlay.style.display = 'none';
+    lnBanner.style.display = 'block';
+    if (badge)     { badge.style.background = 'rgba(249,115,22,.22)'; badge.style.borderColor = 'rgba(249,115,22,.38)'; }
+    if (badgeText)   badgeText.textContent = '🌙 LATE NIGHT · Takeaway Only · Closes 2:30 AM';
+    if (dot)         dot.style.background = '#f97316';
+  } else {
+    overlay.style.display = 'none';
+    lnBanner.style.display = 'none';
+    if (badge)     { badge.style.background = 'rgba(255,255,255,.14)'; badge.style.borderColor = 'rgba(255,255,255,.22)'; }
+    if (badgeText)   badgeText.textContent = eid ? '🌙 Eid Mubarak · Open Now · 5% App Discount' : 'OPEN NOW · Free Delivery';
+    if (dot)         dot.style.background = '#4ade80';
+  }
+}
+
+/** Gate for cart/checkout — blocks if closed */
+function checkTimeGate() {
+  if (isClosed()) {
+    toast('🌙 We are closed. Opens at ' + getNextOpenText(), 'red');
+    return false;
+  }
+  return true;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// DISCOUNT CONFIG
+// ── Eid Mode (23–25 Mar 2026): 5% app discount, auto-active ──────
+// ── Normal Mode (26 Mar+)    : no discount                   ──────
+// ══════════════════════════════════════════════════════════════════
+const DISCOUNT_PCT = 5;
+
+function isDiscountLive() { return isEidMode(); }
+function discountedTotal(sub) {
+  return isDiscountLive() ? Math.round(sub * (1 - DISCOUNT_PCT / 100)) : sub;
+}
+
+// ══════════════════════════════════════════
+// DELIVERY FEE — Haversine Distance Logic
+// Store: Sahi Pizza Cabin Point, Jesarwala
+// ══════════════════════════════════════════
+const STORE_LAT = 32.3460619;
+const STORE_LNG = 74.3879914;
+const FREE_THRESHOLD = 1500;   // PKR - min order for free delivery
+const FREE_RADIUS_KM = 3;      // km - max distance for free delivery
+const DELIVERY_FEE = 150;      // PKR - fee when applicable
+
+// Haversine formula — straight-line distance between two GPS coords
+function haversine(lat1, lng1, lat2, lng2) {
+  var R = 6371; // Earth radius in km
+  var dLat = (lat2 - lat1) * Math.PI / 180;
+  var dLng = (lng2 - lng1) * Math.PI / 180;
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2)
+        + Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180)
+        * Math.sin(dLng/2) * Math.sin(dLng/2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+// Delivery fee given subtotal and distance km (or null if unknown)
+function calcDeliveryFee(sub, distKm) {
+  if (distKm === null) return DELIVERY_FEE; // unknown = charge fee
+  if (sub >= FREE_THRESHOLD && distKm <= FREE_RADIUS_KM) return 0;
+  return DELIVERY_FEE;
+}
+
+// State
+var detectedDistKm = null;   // null = not detected yet
+var manualZone = null;       // 'inside' | 'outside' | null
+
+function getEffectiveDistKm() {
+  if (detectedDistKm !== null) return detectedDistKm;
+  if (manualZone === 'inside') return 1;    // treat as 1km (within 3km)
+  if (manualZone === 'outside') return 10;  // treat as 10km (outside 3km)
+  return null;
+}
+
+function detectLocation() {
+  var btn = document.getElementById('detectBtn');
+  if (!btn) return;
+  btn.disabled = true;
+  btn.textContent = '📡 Detecting...';
+  if (!navigator.geolocation) {
+    showManualFallback('GPS not supported on this device.');
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      var userLat = pos.coords.latitude;
+      var userLng = pos.coords.longitude;
+      detectedDistKm = haversine(STORE_LAT, STORE_LNG, userLat, userLng);
+      manualZone = null;
+      var sub = cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+      var fee = calcDeliveryFee(sub, detectedDistKm);
+      var distStr = detectedDistKm.toFixed(1);
+      showDelResult(distStr, fee, false);
+      refreshDeliveryUI();
+    },
+    function(err) {
+      var msg = err.code === 1 ? 'Location permission denied.' : 'Could not get location.';
+      showManualFallback(msg);
+    },
+    { timeout: 10000, maximumAge: 60000 }
+  );
+}
+
+function showDelResult(distStr, fee, isManual) {
+  var btn = document.getElementById('detectBtn');
+  var result = document.getElementById('delResult');
+  var manual = document.getElementById('delManual');
+  if (!result) return;
+  var sub = cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+  var isFree = fee === 0;
+  result.style.display = 'block';
+  result.className = 'del-result ' + (isFree ? 'free' : 'paid');
+  if (isManual) {
+    result.innerHTML = (manualZone === 'inside'
+      ? '📍 <b>Inside 3km zone</b><br>'
+      : '📍 <b>Outside 3km zone</b><br>')
+      + (isFree
+        ? '🎉 <b style="color:var(--green)">Delivery FREE!</b> (Order ≥ Rs.1500 + within 3km)'
+        : '🚚 Delivery Fee: <b style="color:var(--red)">Rs.' + fee + '</b>'
+          + (sub < FREE_THRESHOLD ? '<br><small>Add Rs.'+(FREE_THRESHOLD-sub)+' more for free delivery (if within 3km)</small>' : ''));
+  } else {
+    result.innerHTML = '📍 Distance from store: <b>' + distStr + ' km</b><br>'
+      + (isFree
+        ? '🎉 <b style="color:var(--green)">Delivery FREE!</b>'
+        : '🚚 Delivery Fee: <b style="color:var(--red)">Rs.' + fee + '</b>'
+          + (sub < FREE_THRESHOLD ? '<br><small>Spend Rs.'+(FREE_THRESHOLD-sub)+' more OR be within 3km for free delivery</small>' : '<br><small>You are >3km from store</small>'));
+  }
+  if (btn) { btn.disabled = false; btn.innerHTML = '📡 Re-Detect Location'; }
+  if (manual) {
+    // Keep manual visible if it was already shown (GPS denied scenario)
+    // Only auto-hide if it was never shown (clean GPS success)
+    if (manual.style.display !== 'block') manual.style.display = 'none';
+  }
+}
+
+function showManualFallback(msg) {
+  var btn = document.getElementById('detectBtn');
+  var manual = document.getElementById('delManual');
+  if (btn) { btn.disabled = false; btn.innerHTML = '📡 Try Again'; }
+  if (manual) {
+    manual.style.display = 'block';
+    var errEl = document.getElementById('delErr');
+    if (errEl) errEl.textContent = msg + ' Please select your zone manually:';
+  }
+}
+
+function selectManualZone(zone) {
+  manualZone = zone;
+  detectedDistKm = null; // clear GPS so getEffectiveDistKm uses manual zone
+  document.querySelectorAll('.dtog').forEach(function(el){ el.classList.toggle('on', el.dataset.zone===zone); });
+  var sub = cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+  var discounted = discountedTotal(sub); // apply discount before fee
+  var distKm = getEffectiveDistKm();    // now returns 1 or 10 (manualZone set above)
+  var fee = calcDeliveryFee(discounted, distKm);
+  showDelResult(null, fee, true);
+  refreshDeliveryUI();
+}
+
+function refreshDeliveryUI() {
+  // Update cart total display and any rendered cart/checkout
+  var sub = cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+  var disc = discountedTotal(sub);
+  var distKm = getEffectiveDistKm();
+  var fee = calcDeliveryFee(disc, distKm);
+  var n = cart.reduce(function(s,i){return s+i.quantity;},0);
+  if (n > 0) {
+    document.getElementById('cartTotalDisplay').textContent = 'Rs.'+(disc+fee)+(isDiscountLive()?' (-5% Eid)':'');
+  }
+}
+
+const IMG={
+  // ── Pizzas (your uploaded photos) ──
+  tikka:'imgs/tikka.jpg',
+  fajita:'imgs/fajita.jpg',
+  supreme:'imgs/supreme.jpg',
+  veggie:'imgs/veggie.jpg',
+  malaiboti:'imgs/malaiboti.jpg',
+  crown:'imgs/crown.jpg',
+  kebab:'imgs/kebab.jpg',
+  cheesecrust:'imgs/cheesecrust.jpg',
+  cheeslvr:'imgs/cheeslvr.jpg',
+  sahispecial:'imgs/sahispecial.jpg',
+  bbq:'imgs/bbq.jpg',
+  // ── Burgers (your uploaded photos) ──
+  chkpet:'imgs/chkpet.jpg',
+  zinger:'imgs/zinger.jpg',
+  zingerc:'imgs/zingerc.jpg',
+  extrachs:'imgs/extrachs.jpg',
+  // ── Wraps batch 3 ──
+  spwrap:'imgs/spwrap.jpg',
+  grillwrap:'imgs/grillwrap.jpg',
+  // ── Deals (real photos) ──
+  deal1:'imgs/deal1.jpg',
+  deal2:'imgs/deal2.jpg',
+  deal3:'imgs/deal3.jpg',
+  deal4:'imgs/deal4.jpg',
+  deal5:'imgs/deal5.jpg',
+  deal6:'imgs/deal6.jpg',
+  deal7:'imgs/deal7.jpg',
+  // ── Extra toppings ──
+  extratop:'imgs/extratop.jpg',
+  raita:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&q=70',
+  samosa:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=70',
+  shami:'imgs/shami.jpg',
+  eggch:'imgs/eggch.jpg',
+  // ── Shawarma (your uploaded photos) ──
+  shawarma:'imgs/shawarma.jpg',
+  openchkn:'imgs/openchkn.jpg',
+  // ── Fallbacks (Unsplash) for items with no uploaded photo ──
+  p_achari:'https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400&q=70',
+  p_pepper:'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&q=70',
+  p_hotspicy:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=70',
+  p_mex:'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=70',
+  p_behari:'https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?w=400&q=70',
+  p_donner:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=70',
+  b_ddecker:'https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&q=70',
+  b_pizzabgr:'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&q=70',
+  b_chicken:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=70',
+  sw_plat:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&q=70',
+  fr:'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&q=70',
+  wg:'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=400&q=70',
+  ng:'https://images.unsplash.com/photo-1562802378-063ec186a863?w=400&q=70',
+  br:'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&q=70',
+  pa:'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=400&q=70',
+  sl:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=70',
+  sh:'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&q=70',
+  wp:'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&q=70',
+  ch:'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&q=70',
+  ck:'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&q=70',
+  dl:'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=70',
+  // ── Batch 2 uploads ──
+  zwrap:'imgs/zwrap.jpg',
+  turkwrap:'imgs/turkwrap.jpg',
+  cheeseroll:'imgs/cheeseroll.jpg',
+  garlicmayo:'imgs/garlicmayo.jpg',
+  dynamite:'imgs/dynamite.jpg',
+  cocktail:'imgs/cocktail.jpg',
+  fries:'imgs/fries.jpg',
+  mayofries:'imgs/mayofries.jpg',
+  perifries:'imgs/perifries.jpg',
+  chatfries:'imgs/chatfries.jpg',
+  crispyloaded:'imgs/crispyloaded.jpg',
+  bbqloaded:'imgs/bbqloaded.jpg',
+  cheesyloaded:'imgs/cheesyloaded.jpg',
+  matkaloaded:'imgs/matkaloaded.jpg',
+  wings:'imgs/wings.jpg',
+  hotshots:'imgs/hotshots.jpg',
+  nuggets:'imgs/nuggets.jpg',
+  pizzaparatha:'imgs/pizzaparatha.jpg',
+  cheesestick:'imgs/cheesestick.jpg',
+  chkparatha:'imgs/chkparatha.jpg',
+};
+
+const MENU={
+  deals:[
+    {id:'d1',name:'Deal 1',urdu:'ڈیل ۱',items:'1 Zinger Burger\n+ 1 Reg. Fries\n+ 1 Reg. Drink',price:500,img:IMG.deal1,e:'🍔'},
+    {id:'d2',name:'Deal 2',urdu:'ڈیل ۲',items:'2 Small Pizza\n+ Russian Salad\n+ 1 Ltr Drink',price:1200,img:IMG.deal2,e:'🍕'},
+    {id:'d3',name:'Deal 3',urdu:'ڈیل ۳',items:'2 Medium Pizza\n+ Alfredo Pasta\n+ 1.5 Ltr Drink',price:2200,img:IMG.deal3,e:'🍕'},
+    {id:'d4',name:'Deal 4',urdu:'ڈیل ۴',items:'2 Large Pizza\n+ 1.5 Ltr Drink',price:2600,img:IMG.deal4,e:'🍕'},
+    {id:'d5',name:'Deal 5',urdu:'ڈیل ۵',items:'4 Zinger Burger\n+ 1 Reg. Fries\n+ 1.5 Ltr Drink',price:1500,img:IMG.deal5,e:'🍔'},
+    {id:'d6',name:'Deal 6',urdu:'ڈیل ۶',items:'2 Chicken Shawarma\n+ 2 Egg Shami Burger\n+ 1 Loaded Fries\n+ 5 Pcs Hot Wings\n+ 1.5 Ltr Drink',price:1600,img:IMG.deal6,e:'🌯'},
+    {id:'d7',name:'Deal 7',urdu:'ڈیل ۷',items:'1 Large Pizza\n+ 1 Special Wrap\n+ 8 Own Bake Wings\n+ Montan Lawa\n+ 1.5 Ltr Drink',price:3000,img:IMG.deal7,e:'🎉'},
+  ],
+  pizzas:[
+    {id:'p-tikka',    name:'Tikka Pizza',           urdu:'تکہ پیزا',         sizes:[{s:'Small',p:500},{s:'Medium',p:899},{s:'Large',p:1299},{s:'X-Large',p:1650}],img:IMG.tikka,e:'🍕'},
+    {id:'p-fajita',   name:'Fajita Pizza',           urdu:'فجیتا پیزا',       sizes:[{s:'Small',p:500},{s:'Medium',p:899},{s:'Large',p:1299},{s:'X-Large',p:1650}],img:IMG.fajita,e:'🍕'},
+    {id:'p-supreme',  name:'Supreme Pizza',          urdu:'سپریم پیزا',       sizes:[{s:'Small',p:500},{s:'Medium',p:899},{s:'Large',p:1299},{s:'X-Large',p:1650}],img:IMG.supreme,e:'🍕'},
+    {id:'p-achari',   name:'Achari Pizza',           urdu:'اچاری پیزا',       sizes:[{s:'Small',p:500},{s:'Medium',p:899},{s:'Large',p:1299},{s:'X-Large',p:1650}],img:IMG.p_achari,e:'🍕'},
+    {id:'p-bbq',      name:'BBQ Pizza',              urdu:'بی بی کیو پیزا',   sizes:[{s:'Small',p:500},{s:'Medium',p:899},{s:'Large',p:1299},{s:'X-Large',p:1650}],img:IMG.bbq,e:'🍕'},
+    {id:'p-pepperoni',name:'Pepperoni Pizza',         urdu:'پیپرونی پیزا',     sizes:[{s:'Small',p:500},{s:'Medium',p:899},{s:'Large',p:1299},{s:'X-Large',p:1650}],img:IMG.p_pepper,e:'🍕'},
+    {id:'p-hotspicy', name:'Hot & Spicy Pizza',       urdu:'ہاٹ اینڈ سپائسی',  sizes:[{s:'Small',p:500},{s:'Medium',p:899},{s:'Large',p:1299},{s:'X-Large',p:1650}],img:IMG.p_hotspicy,e:'🌶️'},
+    {id:'p-mex',      name:'Chicken Mexican Pizza',   urdu:'چکن میکسیکن پیزا', sizes:[{s:'Small',p:500},{s:'Medium',p:899},{s:'Large',p:1299},{s:'X-Large',p:1650}],img:IMG.p_mex,e:'🍕'},
+    {id:'p-cheeslvr', name:'Cheese Lover Pizza',      urdu:'چیز لور پیزا',     sizes:[{s:'Small',p:500},{s:'Medium',p:899},{s:'Large',p:1299},{s:'X-Large',p:1650}],img:IMG.cheeslvr,e:'🧀'},
+    {id:'p-veggie',   name:'Vegetable Pizza',         urdu:'سبزی پیزا',        sizes:[{s:'Small',p:500},{s:'Medium',p:899},{s:'Large',p:1299},{s:'X-Large',p:1650}],img:IMG.veggie,e:'🥦'},
+    {id:'sp-malaiboti',name:'Malai Boti Pizza',       urdu:'ملائی بوٹی پیزا',  sizes:[{s:'Small',p:800},{s:'Medium',p:1100},{s:'Large',p:1500},{s:'X-Large',p:1800}],img:IMG.malaiboti,e:'🍕',sp:true},
+    {id:'sp-kebab',   name:'Kebab Pizza',             urdu:'کباب پیزا',         sizes:[{s:'Small',p:800},{s:'Medium',p:1100},{s:'Large',p:1500},{s:'X-Large',p:1800}],img:IMG.kebab,e:'🍢',sp:true},
+    {id:'sp-crown',   name:'Crown Crust Pizza',       urdu:'کراؤن کرسٹ پیزا',  sizes:[{s:'Small',p:800},{s:'Medium',p:1100},{s:'Large',p:1500},{s:'X-Large',p:1800}],img:IMG.crown,e:'👑',sp:true},
+    {id:'sp-behari',  name:'Behari Kebab Pizza',      urdu:'بہاری کباب پیزا',  sizes:[{s:'Small',p:800},{s:'Medium',p:1100},{s:'Large',p:1500},{s:'X-Large',p:1800}],img:IMG.p_behari,e:'🍕',sp:true},
+    {id:'sp-chcrust', name:'Cheese Crust Pizza',      urdu:'چیز کرسٹ پیزا',   sizes:[{s:'Small',p:800},{s:'Medium',p:1100},{s:'Large',p:1500},{s:'X-Large',p:1800}],img:IMG.cheesecrust,e:'🧀',sp:true},
+    {id:'sp-donner',  name:'Special Donner Pizza',    urdu:'سپیشل ڈونر پیزا',  sizes:[{s:'Medium',p:1300},{s:'Large',p:1700},{s:'X-Large',p:2000}],img:IMG.p_donner,e:'🍕',sp:true},
+    {id:'sp-sahi',    name:'Sahi Special Pizza',      urdu:'ساحی سپیشل پیزا',  sizes:[{s:'Medium',p:1150},{s:'Large',p:1600},{s:'X-Large',p:1900}],img:IMG.sahispecial,e:'⭐',sp:true},
+  ],
+  burgers:[
+    {id:'b-zinger',   name:'Zinger Burger',               urdu:'زنجر برگر',           price:300,img:IMG.zinger,e:'🍔'},
+    {id:'b-zingerc',  name:'Zinger Cheese Burger',         urdu:'زنجر چیز برگر',       price:400,img:IMG.zingerc,e:'🧀'},
+    {id:'b-chkpet',   name:'Chicken Petty Burger',         urdu:'چکن پیٹی برگر',       price:300,img:IMG.chkpet,e:'🍔'},
+    {id:'b-chkpetc',  name:'Chicken Petty Cheese Burger',  urdu:'چکن پیٹی چیز برگر',   price:350,img:IMG.extrachs,e:'🧀'},
+    {id:'b-ddecker',  name:'Double Decker Burger',         urdu:'ڈبل ڈیکر برگر',       price:550,img:IMG.b_ddecker,e:'🍔'},
+    {id:'b-pizzabgr', name:'Pizza Burger',                 urdu:'پیزا برگر',           price:500,img:IMG.b_pizzabgr,e:'🍕'},
+    {id:'b-shami',    name:'Shami Burger',                 urdu:'شامی برگر',           price:150,img:IMG.shami,e:'🍔'},
+    {id:'b-chicken',  name:'Chicken Burger',               urdu:'چکن برگر',            price:250,img:IMG.eggch,e:'🍔'},
+  ],
+  shawarma:[
+    {id:'sw-chkn',  name:'Chicken Shawarma',        urdu:'چکن شاورما',         price:200,img:IMG.shawarma,e:'🌯'},
+    {id:'sw-2chkn', name:'2 Chicken Shawarma (S)',  urdu:'۲ چکن شاورما',       price:300,img:IMG.openchkn,e:'🌯'},
+    {id:'sw-tsm',   name:'Turkish Small Shawarma',  urdu:'ترکش چھوٹا شاورما', price:250,img:IMG.shawarma,e:'🌯'},
+    {id:'sw-tlg',   name:'Turkish Large Shawarma',  urdu:'ترکش بڑا شاورما',   price:300,img:IMG.shawarma,e:'🌯'},
+    {id:'sw-plat',  name:'Plater Shawarma',         urdu:'پلیٹر شاورما',       price:450,img:IMG.sw_plat,e:'🌯'},
+  ],
+  wraps:[
+    {id:'w-spar', name:'Special Paratha', urdu:'سپیشل پراٹھا', price:350,img:IMG.spwrap,e:'🫓'},
+    {id:'w-chpar',name:'Chicken Paratha', urdu:'چکن پراٹھا',   price:250,img:IMG.chkparatha,e:'🫓'},
+    {id:'w-zpar', name:'Zinger Paratha',  urdu:'زنجر پراٹھا',  price:300,img:IMG.zwrap,e:'🫓'},
+    {id:'w-ppar', name:'Pizza Paratha',   urdu:'پیزا پراٹھا',  price:550,img:IMG.pizzaparatha,e:'🫓'},
+    {id:'w-swrap',name:'Special Wrap',    urdu:'سپیشل ریپ',    price:450,img:IMG.spwrap,e:'🌮'},
+    {id:'w-tort', name:'Tortilla Wrap',   urdu:'ٹارٹیلا ریپ',  price:350,img:IMG.turkwrap,e:'🌮'},
+    {id:'w-zwrap',name:'Zinger Wrap',     urdu:'زنجر ریپ',     price:350,img:IMG.zwrap,e:'🌮'},
+    {id:'w-grill',name:'Grill Wrap',      urdu:'گرل ریپ',      price:400,img:IMG.grillwrap,e:'🌮'},
+  ],
+  starters:[
+    {id:'st-frm',  name:'Fries (Small)',             urdu:'چھوٹی فرائز',    price:180,img:IMG.fries,e:'🍟'},
+    {id:'st-frl',  name:'Fries (Large)',             urdu:'بڑی فرائز',      price:250,img:IMG.fries,e:'🍟'},
+    {id:'st-lf',   name:'Loaded Fries with Cheese',  urdu:'لوڈڈ فرائز',     price:450,img:IMG.crispyloaded,e:'🧀'},
+    {id:'st-hw5',  name:'Hot Wings (5 Pcs)',          urdu:'ہاٹ ونگز ۵',     price:300,img:IMG.wings,e:'🍗'},
+    {id:'st-hw10', name:'Hot Wings (10 Pcs)',         urdu:'ہاٹ ونگز ۱۰',    price:550,img:IMG.wings,e:'🍗'},
+    {id:'st-bw8',  name:'Oven Baked Wings (8 Pcs)',   urdu:'اوون بیکڈ ونگز', price:450,img:IMG.wings,e:'🍗'},
+    {id:'st-hgw6', name:'Honey Glaze Wings (6 Pcs)',  urdu:'ہنی گلیز ونگز',  price:400,img:IMG.wings,e:'🍯'},
+    {id:'st-ng5',  name:'Nuggets (5 Pcs)',            urdu:'نگٹس ۵',          price:250,img:IMG.hotshots,e:'🍗'},
+    {id:'st-ng10', name:'Nuggets (10 Pcs)',           urdu:'نگٹس ۱۰',         price:400,img:IMG.nuggets,e:'🍗'},
+    {id:'st-chs',  name:'Cheese Sticks',              urdu:'چیز اسٹکس',      price:550,img:IMG.cheesestick,e:'🧀'},
+    {id:'st-pkp',  name:'Pocket Pizza',               urdu:'پاکٹ پیزا',      price:500,img:IMG.cheeseroll,e:'🍕'},
+    {id:'st-sms',  name:'Samosa',           urdu:'سموسہ',           price:50, img:'',  e:'🥟'},
+    {id:'st-kch',  name:'Kachori',          urdu:'کچوری',           price:110,img:'',  e:'🥙'},
+  ],
+  biryani:[
+    {id:'bry-h',name:'Chicken Biryani Half', urdu:'چکن بریانی آدھی', price:200,img:IMG.br,e:'🍛'},
+    {id:'bry-f',name:'Chicken Biryani Full', urdu:'چکن بریانی پوری', price:350,img:IMG.br,e:'🍛'},
+    {id:'bry-r',name:'Raita',               urdu:'رائتہ',            price:50, img:'',  e:'🥛'},
+    {id:'bry-s',name:'Salad',               urdu:'سلاد',             price:40, img:'',  e:'🥗'},
+  ],
+  sahi:[
+    {id:'s-mi',name:'Milano Chicken',   urdu:'میلانو چکن',   price:450,img:IMG.ch,e:'🍗'},
+    {id:'s-po',name:'Pollo Chicken',    urdu:'پولو چکن',     price:400,img:IMG.ch,e:'🍗'},
+    {id:'s-br',name:'Special Breast',   urdu:'سپیشل بریسٹ', price:300,img:IMG.ch,e:'🍗'},
+    {id:'s-st',name:'Stuff Chicken',    urdu:'اسٹف چکن',    price:550,img:IMG.ch,e:'🍗'},
+    {id:'s-ml',name:'Montan Lawa Cake', urdu:'مونٹن لاوا',  price:500,img:IMG.ck,e:'🎂'},
+    {id:'s-pc',name:'Chicken 1 Piece',  urdu:'چکن ۱ پیس',   price:240,img:IMG.ch,e:'🍗'},
+  ],
+  salads:[
+    {id:'sl-ru',name:'Russian Salad',  urdu:'روسی سلاد',     price:200,img:IMG.sl,e:'🥗'},
+    {id:'sl-sa',name:'Salanti Salad',  urdu:'سلانٹی سلاد',   price:200,img:IMG.sl,e:'🥗'},
+    {id:'sl-mc',name:'Macaroni Salad', urdu:'میکرونی سلاد',  price:200,img:IMG.sl,e:'🥗'},
+    {id:'sl-al',name:'Alfredo Pasta',  urdu:'الفریڈو پاستہ', price:350,img:IMG.pa,e:'🍝'},
+    {id:'sl-lz',name:'Lazania Pasta',  urdu:'لذانیہ پاستہ',  price:600,img:IMG.pa,e:'🍝'},
+    {id:'sl-cp',name:'Cheese Pasta',   urdu:'چیز پاستہ',     price:350,img:IMG.pa,e:'🧀'},
+  ],
+  shakes:[
+    {id:'sh-ch',name:'Chocolate Shake', urdu:'چاکلیٹ شیک',  price:650,img:IMG.sh,e:'🍫'},
+    {id:'sh-va',name:'Vanilla Shake',   urdu:'ونیلا شیک',    price:550,img:IMG.sh,e:'🍦'},
+    {id:'sh-or',name:'Oreo Shake',      urdu:'اوریو شیک',    price:700,img:IMG.sh,e:'🍪'},
+    {id:'sh-li',name:'Fresh Lime',      urdu:'تازہ لیموں',   price:200,img:'',    e:'🍋'},
+    {id:'sh-mm',name:'Mint Margarita',  urdu:'منٹ مارگریٹا', price:250,img:'',    e:'🌿'},
+  ],
+  icecream:[],
+};
+
+let cart=[], activeCat='deals', detailItem=null, detailQty=1, detailSzIdx=0, orderType='delivery';
+
+document.addEventListener('DOMContentLoaded',()=>{
+  try{const s=localStorage.getItem('spc3_cart');if(s)cart=JSON.parse(s);}catch(e){}
+  renderMenu(); refreshCartBar();
+  applyTimeGate();
+  // Re-check every minute so state updates automatically
+  setInterval(applyTimeGate, 60000);
+});
+
+function scrollToMenu(){document.getElementById('menuSection').scrollIntoView({behavior:'smooth',block:'start'});}
+
+function switchCat(cat){
+  activeCat=cat;
+  document.querySelectorAll('.cp').forEach(b=>b.classList.toggle('on',b.dataset.cat===cat));
+  renderMenu();
+}
+
+function renderMenu(){
+  const el=document.getElementById('menuContent');
+  const items=MENU[activeCat]||[];
+  if(activeCat==='icecream'){
+    el.innerHTML='<div class="coming-soon">🍦 Ice Creams — Coming Soon!<br><span style="font-size:13px;font-weight:600">جلد آ رہا ہے</span></div>';
+    return;
+  }
+  if(activeCat==='deals'){el.innerHTML='<div class="deals-grid">'+items.map(dealCard).join('')+'</div>';return;}
+  if(activeCat==='pizzas'){
+    const reg=items.filter(i=>!i.sp), sp=items.filter(i=>i.sp);
+    let h='';
+    if(reg.length){h+='<div class="info-banner ib-blue">🍕 Regular Pizza — Small: <b>Rs.500</b> | Medium: <b>Rs.899</b> | Large: <b>Rs.1,299</b> | XL: <b>Rs.1,650</b></div><div class="menu-grid">'+reg.map(menuCard).join('')+'</div>';}
+    if(sp.length){h+='<div class="info-banner ib-red" style="margin-top:14px">⭐ Special Pizza — Small: <b>Rs.800</b> | Medium: <b>Rs.1,100</b> | Large: <b>Rs.1,500</b> | XL: <b>Rs.1,800</b></div><div class="menu-grid">'+sp.map(menuCard).join('')+'</div>';}
+    el.innerHTML=h; return;
+  }
+  if(activeCat==='burgers'){el.innerHTML='<div class="menu-grid">'+items.map(menuCard).join('')+'</div>';return;}
+  el.innerHTML='<div class="list-grid">'+items.map(listCard).join('')+'</div>';
+}
+
+function dealCard(it){
+  var itHtml=it.items.replace(/\n/g,'<br>');
+  return '<div class="dc" onclick="openDetail(\''+it.id+'\',\'deals\')">'
+    +'<div class="dc-img"><img src="'+it.img+'" alt="'+it.name+'" onerror="iFail(this)"><div class="dc-ph">'+it.e+'</div><div class="dc-ribbon">DEAL</div></div>'
+    +'<div class="dc-body">'
+    +'<div><div class="dc-name">'+it.name+' <span style="font-size:10px;color:var(--sub)">'+it.urdu+'</span></div><div class="dc-items">'+itHtml+'</div></div>'
+    +'<div class="dc-row"><div class="dc-price">Rs.'+it.price+'</div><button class="dc-add" onclick="event.stopPropagation();addFlat(\''+it.id+'\',\'deals\')">+ کریں</button></div>'
+    +'</div></div>';
+}
+
+function menuCard(it){
+  var minP=it.sizes?Math.min.apply(null,it.sizes.map(function(s){return s.p;})):it.price;
+  var pStr=it.sizes?'from Rs.'+minP:'Rs.'+it.price;
+  return '<div class="mc" onclick="openDetail(\''+it.id+'\',\''+activeCat+'\')">'
+    +(it.sp?'<div class="mc-sp-badge">⭐ SPECIAL</div>':'')
+    +'<div class="mc-img"><img src="'+(it.img||'')+'" alt="'+it.name+'" onerror="iFail(this)"><div class="mc-ph">'+it.e+'</div></div>'
+    +'<div class="mc-body">'
+    +'<div class="mc-name">'+it.name+'</div>'
+    +'<div class="mc-urdu">'+it.urdu+'</div>'
+    +'<div class="mc-row"><div><div class="mc-price">'+pStr+'</div>'+(it.sizes?'<div class="mc-sizetag">سائز چنیں</div>':'')+'</div>'
+    +'<button class="mc-add" onclick="event.stopPropagation();quickAdd(\''+it.id+'\',\''+activeCat+'\')">+</button>'
+    +'</div></div></div>';
+}
+
+function listCard(it){
+  return '<div class="lc" onclick="openDetail(\''+it.id+'\',\''+activeCat+'\')">'
+    +'<div class="lc-img"><img src="'+(it.img||'')+'" alt="'+it.name+'" onerror="iFail(this)"><div class="lc-ph">'+it.e+'</div></div>'
+    +'<div class="lc-body">'
+    +'<div class="lc-name">'+it.name+'</div>'
+    +'<div class="lc-urdu">'+it.urdu+'</div>'
+    +'<div class="lc-row"><div class="lc-price">Rs.'+it.price+'</div>'
+    +'<button class="lc-add" onclick="event.stopPropagation();addFlat(\''+it.id+'\',\''+activeCat+'\')">+</button>'
+    +'</div></div></div>';
+}
+
+function iFail(el){el.style.display='none';var ph=el.nextElementSibling;if(ph)ph.style.display='flex';}
+
+function findItem(id,cat){
+  var cats=cat?[cat]:Object.keys(MENU);
+  for(var c=0;c<cats.length;c++){var f=(MENU[cats[c]]||[]).find(function(i){return i.id===id;});if(f)return Object.assign({},f,{_cat:cats[c]});}
+  return null;
+}
+
+function openDetail(id,cat){
+  detailItem=findItem(id,cat);
+  if(!detailItem)return;
+  detailQty=1; detailSzIdx=0;
+  document.getElementById('detailTitle').textContent=detailItem.name;
+  renderDetail();
+  document.getElementById('itemOverlay').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+
+function addFromDetail(){if(!checkTimeGate()){closeDetail();return;}var it=detailItem;var price=it.sizes?it.sizes[detailSzIdx].p:it.price;var sz=it.sizes?it.sizes[detailSzIdx].s:null;pushCart(Object.assign({},it,{selectedSize:sz,price:price,quantity:detailQty,cartId:Date.now()}));closeDetail();toast('✓ '+it.name+' added!','green');}
+
+function renderDetail(){
+  var it=detailItem;
+  var price=it.sizes?it.sizes[detailSzIdx].p:it.price;
+  var body=document.getElementById('detailBody');
+  var imgHtml=it.img?'<img src="'+it.img+'" alt="'+it.name+'" class="detail-img" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">':'';
+  var phHtml='<div style="display:'+(it.img?'none':'flex')+';font-size:70px;justify-content:center;margin-bottom:13px">'+it.e+'</div>';
+  var szHtml='';
+  if(it.sizes&&it.sizes.length){
+    szHtml='<div class="sz-label">سائز چنیں — Choose Size</div><div class="sz-grid">';
+    for(var i=0;i<it.sizes.length;i++){
+      szHtml+='<div class="dsz'+(i===detailSzIdx?' on':'')+'" onclick="selSz('+i+')"><div class="dsz-name">'+it.sizes[i].s+'</div><div class="dsz-price">Rs.'+it.sizes[i].p+'</div></div>';
+    }
+    szHtml+='</div>';
+  }
+  var itHtml=it.items?'<div style="background:var(--bluelight);border-radius:10px;padding:9px 11px;margin-bottom:13px;font-size:12px;font-weight:700;color:var(--blue);line-height:1.7">'+it.items.replace(/\n/g,'<br>')+'</div>':'';
+  body.innerHTML=imgHtml+phHtml
+    +'<div class="detail-name">'+it.name+'</div>'
+    +'<div class="detail-urdu">'+(it.urdu||'')+'</div>'
+    +'<div class="detail-price" id="dPrice">Rs.'+price+'</div>'
+    +itHtml+szHtml
+    +'<div class="qty-row"><div class="qty-lbl">تعداد — Qty</div><div class="qty-ctrl"><button class="qty-m" onclick="chgQty(-1)">−</button><div class="qty-num" id="dQty">'+detailQty+'</div><button class="qty-p" onclick="chgQty(1)">+</button></div></div>'
+    +'<button class="atc-btn" onclick="addFromDetail()">🛒 Cart میں ڈالیں (Rs.<span id="dTotal">'+(price*detailQty)+'</span>)</button>';
+}
+
+function selSz(i){detailSzIdx=i;document.querySelectorAll('.dsz').forEach(function(el,idx){el.classList.toggle('on',idx===i);});updDP();}
+function chgQty(d){detailQty=Math.max(1,detailQty+d);document.getElementById('dQty').textContent=detailQty;updDP();}
+function updDP(){var p=detailItem.sizes?detailItem.sizes[detailSzIdx].p:detailItem.price;document.getElementById('dPrice').textContent='Rs.'+p;document.getElementById('dTotal').textContent=p*detailQty;}
+function closeDetail(){document.getElementById('itemOverlay').classList.add('hidden');document.body.style.overflow='auto';detailItem=null;}
+
+function quickAdd(id,cat){if(!checkTimeGate())return;var it=findItem(id,cat);if(!it)return;if(it.sizes&&it.sizes.length>1){openDetail(id,cat);return;}addFlat(id,cat);}
+function addFlat(id,cat){if(!checkTimeGate())return;var it=findItem(id,cat);if(!it)return;var price=it.sizes?it.sizes[0].p:it.price;var sz=it.sizes?it.sizes[0].s:null;pushCart(Object.assign({},it,{selectedSize:sz,price:price,quantity:1,cartId:Date.now()}));toast('✓ '+it.name+' added!','green');}
+
+function pushCart(it){cart.push(it);saveCart();refreshCartBar();}
+function saveCart(){try{localStorage.setItem('spc3_cart',JSON.stringify(cart));}catch(e){}}
+function refreshCartBar(){
+  var n=cart.reduce(function(s,i){return s+i.quantity;},0);
+  var total=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+  var dTotal=discountedTotal(total);
+  var distKm=getEffectiveDistKm();
+  var fee=n>0?calcDeliveryFee(dTotal,distKm):0;
+  document.getElementById('cartBar').style.display=n>0?'block':'none';
+  document.getElementById('cartBadge').textContent=n;
+  document.getElementById('cartTotalDisplay').textContent='Rs.'+(dTotal+fee)+(isDiscountLive()?' (-5% Eid)':'');
+}
+function openCart(){renderCartSheet();document.getElementById('cartOverlay').classList.remove('hidden');document.body.style.overflow='hidden';}
+function closeCart(){document.getElementById('cartOverlay').classList.add('hidden');document.body.style.overflow='auto';}
+
+function renderCartSheet(){
+  var el=document.getElementById('cartBody');
+  if(!cart.length){
+    el.innerHTML='<div class="empty-cart"><div class="ec-icon">🛒</div><div class="ec-ttl">Cart خالی ہے</div><div class="ec-sub">Add something tasty! — کچھ آرڈر کریں</div><button class="ec-btn" onclick="closeCart()">Menu دیکھیں 🍕</button></div>';
+    return;
+  }
+  var sub=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+  var disc=isDiscountLive();
+  var discounted=discountedTotal(sub);
+  var discSaving=sub-discounted;
+  var distKm=getEffectiveDistKm();
+  var fee=calcDeliveryFee(discounted,distKm);
+  var grandTotal=discounted+fee;
+  var rows='';
+  cart.forEach(function(i){
+    rows+='<div class="ci"><div class="ci-emo">'+(i.e||'🍕')+'</div><div class="ci-body">'
+      +'<div class="ci-name">'+i.name+'</div>'
+      +(i.selectedSize?'<div class="ci-sz">'+i.selectedSize+'</div>':'')
+      +'<div class="ci-price">Rs.'+i.price+' each</div>'
+      +'<div class="ci-ctrl"><button class="ci-m" onclick="adjCart('+i.cartId+',-1)">−</button>'
+      +'<span class="ci-qty">'+i.quantity+'</span>'
+      +'<button class="ci-p" onclick="adjCart('+i.cartId+',1)">+</button>'
+      +'<button class="ci-del" onclick="adjCart('+i.cartId+',-999)">🗑️</button>'
+      +'</div></div></div>';
+  });
+  var discRow=disc?'<div class="tr" style="color:var(--green)"><span>🎉 5% Eid Discount</span><span style="font-weight:800">− Rs.'+discSaving+'</span></div>':'';
+  var feeColor=fee===0?'var(--green)':'var(--red)';
+  var feeLabel=fee===0?'FREE 🎉':'Rs.'+fee;
+  var distKm=getEffectiveDistKm();
+  var feeNote=distKm===null?' <small style="color:var(--sub);font-weight:600">(detect location at checkout)</small>':'';
+  var discBanner=disc?'<div style="background:linear-gradient(90deg,#14532d,#166534);border-radius:10px;padding:9px 12px;text-align:center;font-family:\'Baloo 2\',sans-serif;font-weight:800;font-size:13px;color:#bbf7d0;margin-bottom:10px">🎉 5% Eid Discount Applied! آپ کی بچت: Rs.'+discSaving+'</div>':'';
+  el.innerHTML='<div>'+rows
+    +'<div class="tbox">'
+    +'<div class="tr"><span>Subtotal</span><span style="color:var(--txt);font-weight:800">Rs.'+sub+'</span></div>'
+    +discRow
+    +'<div class="tr"><span>🚚 Delivery Fee</span><span style="color:'+feeColor+';font-weight:800">'+feeLabel+feeNote+'</span></div>'
+    +'<div class="tr total"><span>Total</span><span>Rs.'+grandTotal+'</span></div>'
+    +'</div>'
+    +discBanner
+    +'<button class="co-btn" onclick="openCheckout()">✅ Order دیں — Checkout</button>'
+    +'<button class="cl-btn" onclick="if(confirm(\'Cart clear کریں؟\')){cart=[];saveCart();refreshCartBar();closeCart()}">🗑️ Cart Clear کریں</button>'
+    +'</div>';
+}
+
+function adjCart(id,d){var i=cart.find(function(c){return c.cartId===id;});if(!i)return;i.quantity+=d;if(i.quantity<=0)cart=cart.filter(function(c){return c.cartId!==id;});saveCart();refreshCartBar();renderCartSheet();}
+
+function openCheckout(){
+  if(!checkTimeGate()) return;
+  var lateNight = isLateNight();
+  // During late night window: force takeaway — delivery NOT available
+  orderType = lateNight ? 'takeaway' : 'delivery';
+  var disc=isDiscountLive();
+  var sub=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+  var discounted=discountedTotal(sub);
+  var discSaving=sub-discounted;
+  var distKm=getEffectiveDistKm();
+  // No delivery fee during late night (takeaway only)
+  var fee = lateNight ? 0 : calcDeliveryFee(discounted,distKm);
+  var surcharge = lateNight ? LATE_NIGHT_SURCHARGE : 0;
+  var grandTotal = discounted + fee + surcharge;
+  var discBanner=disc?'<div style="background:linear-gradient(90deg,#14532d,#166534);border-radius:10px;padding:9px 12px;margin-bottom:12px;font-family:\'Baloo 2\',sans-serif;font-weight:800;font-size:13px;color:#bbf7d0;text-align:center">🎉 5% Eid Discount Applied! آپ بچا رہے ہیں Rs.'+discSaving+'</div>':'';
+  var lnBanner = lateNight
+    ? '<div style="background:linear-gradient(135deg,#7c2d12,#92400e);border:2px solid #f97316;border-radius:12px;padding:12px 14px;margin-bottom:13px">'
+      +'<div style="font-family:\'Baloo 2\',sans-serif;font-size:13.5px;font-weight:800;color:#fed7aa;margin-bottom:5px">🌙 Late Night Order — 2:00–2:30 AM</div>'
+      +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:7px">'
+      +'<span style="background:rgba(249,115,22,.25);border:1.5px solid #f97316;border-radius:7px;padding:4px 10px;font-family:\'Baloo 2\',sans-serif;font-size:12px;font-weight:800;color:#fed7aa">⚡ +Rs.'+LATE_NIGHT_SURCHARGE+' Late Night Fee</span>'
+      +'<span style="background:rgba(239,68,68,.2);border:1.5px solid #ef4444;border-radius:7px;padding:4px 10px;font-family:\'Baloo 2\',sans-serif;font-size:12px;font-weight:800;color:#fca5a5">🛵 Takeaway Only — No Delivery</span>'
+      +'</div>'
+      +'<div style="background:rgba(0,0,0,.35);border-radius:8px;padding:7px 10px;font-size:11px;font-weight:700;color:#fbbf24;line-height:1.5">'
+      +'🚫 PTCL / Phone orders NOT accepted. App orders only.<br>'
+      +'اس وقت صرف App آرڈر قبول ہوگا — PTCL یا فون پر نہیں لیا جائے گا۔'
+      +'</div>'
+      +'</div>'
+    : '';
+
+  // Build order-type selector — during late night only Takeaway is shown
+  var otGrid = lateNight
+    ? '<div style="background:rgba(249,115,22,.1);border:1.5px solid #f97316;border-radius:10px;padding:10px 12px;margin-bottom:14px;font-family:\'Baloo 2\',sans-serif;font-size:12.5px;font-weight:800;color:#f97316">🛵 Takeaway / Pickup Only during Late Night Window<br><span style="font-size:11px;font-weight:600;color:#aaa">Home Delivery not available 2:00–2:30 AM</span></div>'
+    : '<div class="ot-grid" style="grid-template-columns:1fr 1fr">'
+      +'<div class="ot-opt" data-v="dine" onclick="selOT(\'dine\')"><div class="ot-emo">🍽️</div><div class="ot-lbl">Dine In</div><div class="ot-urdu">اندر بیٹھیں</div></div>'
+      +'<div class="ot-opt on" data-v="delivery" onclick="selOT(\'delivery\')"><div class="ot-emo">🏠</div><div class="ot-lbl">Delivery</div><div class="ot-urdu">گھر پہنچائیں</div></div>'
+      +'</div>';
+
+  // Delivery detector block — only relevant when delivery is selected
+  var delDetectBlock = lateNight ? '' :
+      '<div class="del-box" id="deliveryFeeBox" style="display:block">'
+    +'<div class="del-box-title">📍 Delivery Fee Calculator — ڈلیوری فیس</div>'
+    +'<button class="detect-btn" id="detectBtn" onclick="detectLocation()">📡 Detect My Location خودکار پتہ لگائیں</button>'
+    +'<div class="del-result" id="delResult"></div>'
+    +'<div class="del-manual" id="delManual">'
+    +'<div class="del-manual-label" id="delErr">Location denied. Select zone manually:</div>'
+    +'<div class="del-toggle">'
+    +'<div class="dtog" data-zone="inside" onclick="selectManualZone(\'inside\')">📍 Inside 3km<br><small>اندر ۳ کلومیٹر</small></div>'
+    +'<div class="dtog" data-zone="outside" onclick="selectManualZone(\'outside\')">🗺️ Outside 3km<br><small>باہر ۳ کلومیٹر</small></div>'
+    +'</div>'
+    +'</div>'
+    +'</div>';
+
+  // Delivery / address section — hidden during late night (takeaway)
+  var addressSection = lateNight ? '' :
+      '<div id="dineSection" style="display:none"><label class="fl">🪑 Table Number — میز نمبر *</label><input id="tableNo" class="fi" type="number" placeholder="میز نمبر لکھیں..."></div>'
+    +'<div id="deliverySection" style="display:block"><label class="fl">📍 Delivery Address — پتہ *</label><textarea id="custAddr" class="fi" rows="2" placeholder="گھر / محلے کا پتہ لکھیں..."></textarea></div>'
+    +delDetectBlock;
+
+  document.getElementById('cartBody').innerHTML='<div>'
+    +'<div style="font-family:\'Baloo 2\',sans-serif;font-size:16px;font-weight:800;margin-bottom:13px">📋 Order Details — آرڈر کی تفصیل</div>'
+    +discBanner
+    +lnBanner
+    +'<div style="font-family:\'Baloo 2\',sans-serif;font-size:12.5px;font-weight:800;color:var(--sub);margin-bottom:8px">آرڈر کا طریقہ — Order Type</div>'
+    +otGrid
+    +addressSection
+    +'<label class="fl">👤 آپ کا نام — Your Name *</label>'
+    +'<input id="custName" class="fi" type="text" placeholder="اپنا نام لکھیں...">'
+    +'<label class="fl">📱 موبائل نمبر — Phone *</label>'
+    +'<input id="custPhone" class="fi" type="tel" placeholder="03XX-XXXXXXX">'
+    +'<label class="fl">📝 Special Instructions (اختیاری)</label>'
+    +'<textarea id="custNote" class="fi" rows="2" placeholder="کوئی خاص بات یا فرمائش؟"></textarea>'
+    +'<div style="background:var(--bluelight);border:2px solid var(--border);border-radius:12px;padding:11px 13px;margin-bottom:12px">'
+    +'<div style="font-family:\'Baloo 2\',sans-serif;font-size:12.5px;font-weight:800;color:var(--blue);margin-bottom:7px">🫙 Add Extra Sauce / Topping Cheese — اضافی ساس یا چیز</div>'
+    +'<div style="display:flex;gap:6px;flex-wrap:wrap">'
+    +'<span class="sc">Bar.B.Q <b>Rs.100</b></span><span class="sc">Garlic Mayo <b>Rs.80</b></span><span class="sc">Hot &amp; Spicy <b>Rs.90</b></span><span class="sc">Tingly <b>Rs.100</b></span><span class="sc">Cocktail <b>Rs.100</b></span>'
+    +'<span class="sc">Cheese (S) <b>Rs.100</b></span><span class="sc">Cheese (M) <b>Rs.150</b></span><span class="sc">Cheese (L) <b>Rs.200</b></span><span class="sc">Cheese (XL) <b>Rs.250</b></span>'
+    +'</div>'
+    +'<div style="font-size:11px;color:var(--sub);font-weight:600;margin-top:6px">⬆️ اوپر Special Instructions میں ساس یا چیز لکھیں</div>'
+    +'</div>'
+    +'<div style="background:var(--bluelight);border-radius:10px;padding:10px 12px;margin-bottom:14px">'
+    +(lateNight?''
+      :'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'
+      +'<span style="font-family:\'Baloo 2\',sans-serif;font-size:13px;font-weight:800;color:var(--blue)">🚚 Delivery Fee</span>'
+      +'<span style="font-family:\'Baloo 2\',sans-serif;font-size:14px;font-weight:800;color:'+(fee===0?'var(--green)':'var(--red)')+'">'+( orderType==='delivery' ? (fee===0?'FREE 🎉':'Rs.'+fee) : 'N/A' )+'</span>'
+      +'</div>')
+    +(lateNight
+      ?'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'
+      +'<span style="font-family:\'Baloo 2\',sans-serif;font-size:13px;font-weight:800;color:#f97316">🌙 Late Night Fee</span>'
+      +'<span style="font-family:\'Baloo 2\',sans-serif;font-size:14px;font-weight:800;color:#f97316">+Rs.'+LATE_NIGHT_SURCHARGE+'</span>'
+      +'</div>'
+      :'')
+    +'<div style="display:flex;justify-content:space-between;align-items:center">'
+    +'<span style="font-family:\'Baloo 2\',sans-serif;font-size:14px;font-weight:800;color:var(--blue)">💵 Total to Pay</span>'
+    +'<span style="font-family:\'Baloo 2\',sans-serif;font-size:18px;font-weight:800;color:var(--red)">Rs.'+grandTotal+(disc?' <span style=\"font-size:11px;background:var(--green);color:#fff;border-radius:5px;padding:2px 6px\">-5% Eid</span>':'')+'</span>'
+    +'</div>'
+    +'</div>'
+    +'<button class="swa" onclick="sendOrder()"><span style="font-size:19px">💬</span> WhatsApp پر آرڈر بھیجیں</button>'
+    +'<button class="sback" onclick="renderCartSheet()">← واپس جائیں</button>'
+    +'</div>';
+}
+
+function selOT(v){
+  orderType=v;
+  document.querySelectorAll('.ot-opt').forEach(function(el){el.classList.toggle('on',el.dataset.v===v);});
+  var ds=document.getElementById('dineSection');
+  var dl=document.getElementById('deliverySection');
+  var dfb=document.getElementById('deliveryFeeBox');
+  // Show/hide section fields
+  if(ds)ds.style.display=v==='dine'?'block':'none';
+  if(dl)dl.style.display=v==='delivery'?'block':'none';
+  // FIXED: always toggle fee box — only show for delivery
+  if(dfb)dfb.style.display=v==='delivery'?'block':'none';
+  // If switching away from delivery, no need to refresh
+  if(v!=='delivery') return;
+  // If location already detected or manual zone set, refresh result
+  if(detectedDistKm!==null || manualZone!==null){
+    var sub=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+    var discounted=discountedTotal(sub);
+    var distKm=getEffectiveDistKm();
+    var fee=calcDeliveryFee(discounted,distKm);
+    if(detectedDistKm!==null) showDelResult(detectedDistKm.toFixed(1),fee,false);
+    else showDelResult(null,fee,true);
+  }
+}
+
+// ── SUPABASE CONFIG (same as POS) ──
+var SB_URL='https://pqrwjswpxssjfxnzrpfj.supabase.co';
+var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxcndqc3dweHNzamZ4bnpycGZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NTQwMDMsImV4cCI6MjA4OTQzMDAwM30.a4L0JD3gWd76CW89OSa5-t2U55Cjq5I5UAr6W7GWXOQ';
+
+async function sendOrder(){
+  var name=document.getElementById('custName').value.trim();
+  var phone=document.getElementById('custPhone').value.trim();
+  var addr=(document.getElementById('custAddr')||{value:''}).value.trim();
+  var table=(document.getElementById('tableNo')||{value:''}).value.trim();
+  var note=document.getElementById('custNote').value.trim();
+  if(!name||!phone){toast('نام اور فون نمبر لازمی ہے!','red');return;}
+  if(orderType==='delivery'&&!addr){toast('پتہ لکھنا ضروری ہے!','red');return;}
+  if(orderType==='dine'&&!table){toast('میز نمبر لکھیں!','red');return;}
+
+  var lateNight=isLateNight();
+  var sub=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
+  var discounted=discountedTotal(sub);
+  var discSaving=sub-discounted;
+  var disc=isDiscountLive();
+  var distKm=getEffectiveDistKm();
+  var fee=orderType==='delivery'?calcDeliveryFee(discounted,distKm):0;
+  var surcharge=lateNight?LATE_NIGHT_SURCHARGE:0;
+  var finalTotal=discounted+fee+surcharge;
+  var typeLabel=orderType==='delivery'?'🏠 Delivery':orderType==='dine'?'🍽️ Dine In':'🛵 Takeaway / Pickup';
+
+  // Build WhatsApp message (saved for optional use later)
+  var feeMsg=orderType==='delivery'?(fee===0?'FREE 🎉':'Rs.'+fee+' ('+((detectedDistKm!==null)?detectedDistKm.toFixed(1)+'km away':(manualZone==='outside'?'Outside 3km':'Inside 3km'))+')'):'N/A';
+  var waMsg='🍕 *NEW ORDER — SAHI PIZZA CABIN POINT*\n\n';
+  waMsg+='👤 *Name:* '+name+'\n📱 *Phone:* '+phone+'\n📦 *Type:* '+typeLabel+'\n';
+  if(lateNight)waMsg+='🌙 *Late Night Window Order (App Only)*\n';
+  if(orderType==='dine'&&table)waMsg+='🪑 *Table:* '+table+'\n';
+  if(orderType==='delivery'&&addr)waMsg+='📍 *Address:* '+addr+'\n';
+  waMsg+='\n🛒 *ORDER ITEMS:*\n━━━━━━━━━━━━━━\n';
+  cart.forEach(function(i){waMsg+='\n'+i.quantity+'x *'+i.name+'*'+(i.selectedSize?' ('+i.selectedSize+')':'')+'\n   Rs.'+i.price+' × '+i.quantity+' = Rs.'+(i.price*i.quantity)+'\n';});
+  waMsg+='\n━━━━━━━━━━━━━━\n';
+  waMsg+='\n💰 Subtotal: Rs.'+sub;
+  if(disc)waMsg+='\n🎉 5% Eid Discount: - Rs.'+discSaving;
+  if(orderType==='delivery')waMsg+='\n🚚 Delivery Fee: '+feeMsg;
+  if(lateNight)waMsg+='\n🌙 Late Night Fee: +Rs.'+surcharge;
+  waMsg+='\n💵 *TOTAL: Rs.'+finalTotal+'*';
+  if(note)waMsg+='\n\n📝 *Note:* '+note;
+  waMsg+='\n\n📍 Near Zabi Ullah Sahi Filter Jesarwala\n📞 052-6300085 / 0305-4266621';
+
+  // Build items array for Supabase
+  var sbItems=cart.map(function(i){return{name:i.name+(i.selectedSize?' ('+i.selectedSize+')':''),qty:i.quantity,price:i.price};});
+
+  // Disable button to prevent double submit
+  var btn=document.querySelector('.swa');
+  if(btn){btn.disabled=true;btn.textContent='⏳ آرڈر بھیج رہے ہیں...';}
+
+  var orderId=null;
+  try{
+    var res=await fetch(SB_URL+'/rest/v1/orders',{
+      method:'POST',
+      headers:{
+        'apikey':SB_KEY,
+        'Authorization':'Bearer '+SB_KEY,
+        'Content-Type':'application/json',
+        'Prefer':'return=representation'
+      },
+      body:JSON.stringify({
+        customer_name:name,
+        customer_phone:phone,
+        order_type:orderType,
+        table_no:table||null,
+        address:addr||null,
+        items:sbItems,
+        subtotal:sub,
+        delivery_fee:fee,
+        discount:discSaving,
+        total:finalTotal,
+        note:note||null,
+        status:'new'
+      })
+    });
+    var data=await res.json();
+    if(data&&data[0]&&data[0].id) orderId=data[0].id;
+  }catch(e){
+    // Supabase fail — still let WhatsApp work
+    console.error('Supabase error:',e);
+  }
+
+  // Clear cart
+  cart=[];saveCart();refreshCartBar();closeCart();
+
+  // Show confirmation screen
+  showOrderConfirmation(orderId, finalTotal, typeLabel, waMsg);
+}
+
+function showOrderConfirmation(orderId, total, typeLabel, waMsg){
+  // Remove any existing confirmation
+  var old=document.getElementById('orderConfirmOverlay');
+  if(old)old.remove();
+
+  var overlay=document.createElement('div');
+  overlay.id='orderConfirmOverlay';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:flex;align-items:flex-end;justify-content:center;animation:fadeInOv .25s ease';
+
+  var orderLabel=orderId?'Order #'+orderId:'آرڈر';
+
+  overlay.innerHTML=
+    '<style>'
+    +'@keyframes fadeInOv{from{opacity:0}to{opacity:1}}'
+    +'@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}'
+    +'.oc-sheet{background:#fff;border-radius:24px 24px 0 0;padding:28px 20px 36px;width:100%;max-width:580px;animation:slideUp .3s ease;text-align:center}'
+    +'.oc-tick{font-size:64px;margin-bottom:8px;line-height:1}'
+    +'.oc-title{font-family:\'Baloo 2\',sans-serif;font-size:22px;font-weight:800;color:#16a34a;margin-bottom:4px}'
+    +'.oc-num{font-family:\'Baloo 2\',sans-serif;font-size:28px;font-weight:800;color:#1565C0;margin-bottom:4px}'
+    +'.oc-sub{font-size:13px;color:#777;font-weight:700;margin-bottom:6px}'
+    +'.oc-total{font-family:\'Baloo 2\',sans-serif;font-size:18px;font-weight:800;color:#E8131B;background:#FFF5F5;border-radius:12px;padding:10px 16px;margin:12px 0 18px;display:inline-block}'
+    +'.oc-wa{width:100%;background:#25D366;color:#fff;border:none;border-radius:16px;padding:15px;font-family:\'Nunito\',sans-serif;font-weight:800;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px}'
+    +'.oc-skip{width:100%;background:#f1f5f9;color:#64748b;border:none;border-radius:16px;padding:13px;font-family:\'Nunito\',sans-serif;font-weight:800;font-size:14px;cursor:pointer}'
+    +'</style>'
+    +'<div class="oc-sheet">'
+    +'<div class="oc-tick">✅</div>'
+    +'<div class="oc-title">آرڈر مل گیا!</div>'
+    +(orderId?'<div class="oc-num">#'+orderId+'</div>':'')
+    +'<div class="oc-sub">'+typeLabel+' · آپ کا آرڈر kitchen میں چلا گیا</div>'
+    +'<div class="oc-total">💵 Total: Rs.'+total+'</div>'
+    +'<button class="oc-wa" onclick="openWA()">'
+    +'<span style="font-size:20px">💬</span> WhatsApp پر بھی بھیجیں (اختیاری)'
+    +'</button>'
+    +'<button class="oc-skip" onclick="document.getElementById(\'orderConfirmOverlay\').remove()">بس ٹھیک ہے، واپس جائیں</button>'
+    +'</div>';
+
+  // Store waMsg for the button
+  window._pendingWaMsg=waMsg;
+  document.body.appendChild(overlay);
+}
+
+function openWA(){
+  window.open('https://wa.me/923054266621?text='+encodeURIComponent(window._pendingWaMsg||''),'_blank');
+  var ov=document.getElementById('orderConfirmOverlay');
+  if(ov)ov.remove();
+}
+
+
+function toast(msg,type){var el=document.createElement('div');el.className='toast '+(type||'');el.textContent=msg;document.body.appendChild(el);setTimeout(function(){el.remove();},2600);}
+</script>
+</body>
+</html>
+
