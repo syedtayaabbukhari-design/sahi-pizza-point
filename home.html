@@ -99,9 +99,9 @@ img{display:block}
 .nd-banner-inner{padding:15px 15px 13px;position:relative;z-index:1}
 .nd-banner-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
 .nd-banner-title{font-family:'Baloo 2',sans-serif;font-size:17px;font-weight:800;color:#e9d5ff;line-height:1.2}
-.nd-banner-time{border-radius:8px;padding:4px 9px;font-family:'Baloo 2',sans-serif;font-size:10.5px;font-weight:800;display:flex;align-items:center;gap:4px;flex-shrink:0;border:1.5px solid}
+.nd-banner-time{border-radius:8px;padding:4px 9px;font-family:'Baloo 2',sans-serif;font-size:10.5px;font-weight:800;display:flex;align-items:center;gap:4px;flex-shrink:0;border:1.5px solid #7c3aed}
 .nd-banner-subtitle{font-size:11px;color:#a78bfa;font-weight:700;margin-bottom:11px}
-.nd-deal-card{flex-shrink:0;width:160px;border:1.5px solid;border-radius:14px;padding:12px 11px;transition:border-color .15s}
+.nd-deal-card{flex-shrink:0;width:160px;border:1.5px solid rgba(124,58,237,.35);border-radius:14px;padding:12px 11px;transition:border-color .15s}
 .nd-deal-emo{font-size:28px;margin-bottom:6px;line-height:1}
 .nd-deal-name{font-family:'Baloo 2',sans-serif;font-size:12px;font-weight:800;color:#e9d5ff;line-height:1.3;margin-bottom:4px}
 .nd-deal-items{font-size:10px;color:#a78bfa;font-weight:700;line-height:1.5;margin-bottom:8px}
@@ -117,9 +117,9 @@ img{display:block}
 .sd-banner-inner{padding:15px 15px 13px;position:relative;z-index:1}
 .sd-banner-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
 .sd-banner-title{font-family:'Baloo 2',sans-serif;font-size:17px;font-weight:800;color:#e0f2fe;line-height:1.2}
-.sd-banner-time{border-radius:8px;padding:4px 9px;font-family:'Baloo 2',sans-serif;font-size:10.5px;font-weight:800;display:flex;align-items:center;gap:4px;flex-shrink:0;border:1.5px solid}
+.sd-banner-time{border-radius:8px;padding:4px 9px;font-family:'Baloo 2',sans-serif;font-size:10.5px;font-weight:800;display:flex;align-items:center;gap:4px;flex-shrink:0;border:1.5px solid #38bdf8}
 .sd-banner-sub{font-size:11px;color:#7dd3fc;font-weight:700;margin-bottom:11px}
-.sd-deal-card{flex-shrink:0;width:175px;border:1.5px solid;border-radius:14px;padding:12px 11px}
+.sd-deal-card{flex-shrink:0;width:175px;border:1.5px solid rgba(56,189,248,.35);border-radius:14px;padding:12px 11px}
 .sd-deal-emo{font-size:28px;margin-bottom:6px;line-height:1}
 .sd-deal-name{font-family:'Baloo 2',sans-serif;font-size:12px;font-weight:800;color:#e0f2fe;line-height:1.3;margin-bottom:4px}
 .sd-deal-items{font-size:10px;color:#7dd3fc;font-weight:700;line-height:1.45;margin-bottom:8px}
@@ -342,13 +342,17 @@ function getStoreStatus(){
   var mins=h*60+m;
   if(mins>=2*60&&mins<HARD_CLOSE)return 'late_night';
   if(mins<2*60){var dow=now.getDay();var openToday=isEidMode()?OPEN_MIN_EID:OPEN_MIN_NORMAL[dow];if(mins<openToday)return 'closed';}
-  if(mins>=HARD_CLOSE&&mins<OPEN_MIN_NORMAL[now.getDay()])return 'closed';
+  if(mins>=HARD_CLOSE&&mins<(isEidMode()?OPEN_MIN_EID:OPEN_MIN_NORMAL[now.getDay()]))return 'closed';
   return 'open';
 }
 
 function getNextOpenText(){
   var now=new Date(),dow=now.getDay(),mins=now.getHours()*60+now.getMinutes();
-  var targetDow=(mins<HARD_CLOSE)?dow:(dow+1)%7;
+  // Store is closed either pre-opening (any hour) or post-hard-close (2:30AM+).
+  // In both cases the next opening is today (same dow). We only need tomorrow
+  // if we've already passed today's opening time — which means the store is open,
+  // so this function would not be used for a "closed" message.
+  var targetDow=dow;
   var openM=isEidMode()?OPEN_MIN_EID:OPEN_MIN_NORMAL[targetDow];
   var h=Math.floor(openM/60),suffix=h>=12?'PM':'AM',h12=h>12?h-12:(h===0?12:h);
   var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -397,17 +401,17 @@ function applyTimeGate(){
 
 // ══ DEAL DATA ══
 const NIGHT_DEALS=[
-  {name:'Night Hungry Meal',items:'1× Zinger Burger\n1× Chicken Shawarma\n1× Medium Loaded Fries',price:950,originalPrice:1100,e:'🌙'},
-  {name:'Ziggy Night Meal',  items:'2× Shami Burger\n1× Medium Loaded Fries',price:780,originalPrice:860,e:'🌙'},
-  {name:'Chickshaw Night Meal',items:'2× Chicken Shawarma\n1× Medium Loaded Fries',price:880,originalPrice:940,e:'🌙'},
+  {id:'nd-hungry',   name:'Night Hungry Meal',    items:'1× Zinger Burger\n1× Chicken Shawarma\n1× Medium Loaded Fries',price:950,originalPrice:1100,e:'🌙'},
+  {id:'nd-ziggy',    name:'Ziggy Night Meal',      items:'2× Shami Burger\n1× Medium Loaded Fries',price:780,originalPrice:860,e:'🌙'},
+  {id:'nd-chickshaw',name:'Chickshaw Night Meal',  items:'2× Chicken Shawarma\n1× Medium Loaded Fries',price:880,originalPrice:940,e:'🌙'},
 ];
 const MEGA_DEALS=[
-  {name:'Mega Shawarma Deal',items:'10× Chicken Shawarma\n+ 1 FREE Shawarma\n= 11 Total!',price:2200,originalPrice:2420,e:'🌯'},
-  {name:'Mega Shami Deal',   items:'8× Shami Burger\n+ 1 FREE Shami Burger\n= 9 Total!',price:1450,originalPrice:1620,e:'🍔'},
+  {id:'ms-shawarma10',name:'Mega Shawarma Deal',items:'10× Chicken Shawarma\n+ 1 FREE Shawarma\n= 11 Total!',price:2200,originalPrice:2420,e:'🌯'},
+  {id:'ms-shami8',    name:'Mega Shami Deal',   items:'8× Shami Burger\n+ 1 FREE Shami Burger\n= 9 Total!',price:1450,originalPrice:1620,e:'🍔'},
 ];
 const STUDENT_DEALS=[
-  {name:'Student Combo 1',items:'1× Chicken Shawarma\n1× Shami Burger',price:360,originalPrice:400,e:'🎓'},
-  {name:'Student Combo 2',items:'1× Zinger Burger\n1× Chicken Shawarma',price:550,originalPrice:600,e:'🎓'},
+  {id:'sd-combo1',name:'Student Combo 1',items:'1× Chicken Shawarma\n1× Shami Burger',price:360,originalPrice:400,e:'🎓'},
+  {id:'sd-combo2',name:'Student Combo 2',items:'1× Zinger Burger\n1× Chicken Shawarma',price:550,originalPrice:600,e:'🎓'},
 ];
 
 function isNightActive(){var h=new Date().getHours();return h>=22||h<3;}
@@ -446,7 +450,7 @@ function renderBanners(){
         +'<div class="ms-deal-desc">'+d.items.replace(/\n/g,'<br>')+'</div>'
         +'<div><span class="ms-deal-price">Rs.'+d.price+'</span><span class="ms-deal-original">Rs.'+d.originalPrice+'</span></div>'
         +'<div style="font-size:9.5px;color:#4ade80;font-weight:800;margin:4px 0">💚 Save Rs.'+save+'</div>'
-        +'<a href="menu.html#deals" class="ms-order-btn">🛒 آرڈر کریں</a>'
+        +'<a href="menu.html?additem='+d.id+'#deals" class="ms-order-btn">🛒 آرڈر کریں</a>'
         +'</div>';
     }).join('');
   }
@@ -465,7 +469,7 @@ function renderBanners(){
         +'<div><span class="nd-deal-price">Rs.'+d.price+'</span><span class="nd-deal-original">Rs.'+d.originalPrice+'</span></div>'
         +'<div class="nd-deal-save">Save Rs.'+save+'</div>'
         +(nightActive
-          ?'<a href="menu.html#deals" class="nd-unlock-btn">🛒 آرڈر کریں</a>'
+          ?'<a href="menu.html?additem='+d.id+'#deals" class="nd-unlock-btn">🛒 آرڈر کریں</a>'
           :'<div class="nd-lock-badge">🔒 10 PM پر unlock</div>')
         +'</div>';
     }).join('');
@@ -494,7 +498,7 @@ function renderBanners(){
         +'<div><span class="sd-deal-price">Rs.'+d.price+'</span><span class="sd-deal-original">Rs.'+d.originalPrice+'</span></div>'
         +'<div style="font-size:9.5px;color:#4ade80;font-weight:800;margin:4px 0">Save Rs.'+save+'</div>'
         +(studentActive
-          ?'<a href="menu.html#deals" class="sd-unlock-btn">🛒 آرڈر کریں</a>'
+          ?'<a href="menu.html?additem='+d.id+'#deals" class="sd-unlock-btn">🛒 آرڈر کریں</a>'
           :'<div class="sd-lock-badge">🔒 کل صبح دستیاب</div>')
         +'</div>';
     }).join('');
