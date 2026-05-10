@@ -209,6 +209,8 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);min-h
 <div class="stats no-print" id="statsBar">
   <div class="stat stat-new"><div class="stat-val" id="s-new">0</div><div class="stat-lbl">🔴 Pending</div></div>
   <div class="stat stat-sales"><div class="stat-val" id="s-sales">0</div><div class="stat-lbl">💰 Today Sales (Rs.)</div></div>
+  <div class="stat"><div class="stat-val" id="s-conv" style="color:#a78bfa">0</div><div class="stat-lbl">⚡ Conv. Fees (Rs.)</div></div>
+  <div class="stat"><div class="stat-val" id="s-orders" style="color:#38bdf8">0</div><div class="stat-lbl">📦 Total Orders</div></div>
 </div>
 
 <!-- TABS -->
@@ -310,6 +312,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);min-h
   <div class="sales-grid" id="salesGrid">
     <div class="sales-card"><div class="sc-lbl">Total Sales Today</div><div class="sc-val yellow" id="ss-total">Rs. 0</div></div>
     <div class="sales-card"><div class="sc-lbl">Orders Completed</div><div class="sc-val green" id="ss-done">0</div></div>
+    <div class="sales-card"><div class="sc-lbl">⚡ Convenience Fees (Your Cut)</div><div class="sc-val" style="color:#a78bfa" id="ss-conv">Rs. 0</div></div>
     <div class="sales-card"><div class="sc-lbl">Dine In Orders</div><div class="sc-val blue" id="ss-dine">0</div></div>
     <div class="sales-card"><div class="sc-lbl">Delivery Orders</div><div class="sc-val red" id="ss-del">0</div></div>
   </div>
@@ -317,7 +320,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);min-h
     <div style="padding:12px 14px;border-bottom:1.5px solid var(--border);font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:800">Recent Orders</div>
     <div style="overflow-x:auto">
       <table class="orders-table" id="salesTable">
-        <thead><tr><th>#</th><th>Customer</th><th>Type</th><th>Items</th><th>Total</th><th>Status</th><th>Time</th><th></th></tr></thead>
+        <thead><tr><th>#</th><th>Customer</th><th>Phone</th><th>Type</th><th>Items</th><th>Total</th><th>⚡ Conv.</th><th>Status</th><th>Time</th><th></th></tr></thead>
         <tbody id="salesBody"></tbody>
       </table>
     </div>
@@ -442,9 +445,12 @@ async function loadOrders(){
 function renderStats(){
   const newC = allOrders.filter(o=>o.status==='new').length;
   const totalSales = allOrders.filter(o=>o.status==='done').reduce((s,o)=>s+o.total,0);
+  const totalConv = allOrders.reduce((s,o)=>s+(o.convenience_fee||0),0);
   
   document.getElementById('s-new').textContent = newC;
   document.getElementById('s-sales').textContent = totalSales.toLocaleString();
+  document.getElementById('s-conv').textContent = totalConv.toLocaleString();
+  document.getElementById('s-orders').textContent = allOrders.length;
   document.getElementById('badge-new').textContent = newC;
 }
 
@@ -491,6 +497,10 @@ function orderCard(o){
   const tableHtml = o.order_type==='dine'&&o.table_no
     ? '<div style="font-size:11px;color:#a78bfa;font-weight:700;margin-top:2px">🪑 Table #'+o.table_no+'</div>' : '';
   
+  const convFee = o.convenience_fee || 0;
+  const convHtml = convFee > 0
+    ? '<div style="font-size:11px;color:#a78bfa;font-weight:700;margin-top:2px">⚡ Conv. Fee: Rs.'+convFee+'</div>' : '';
+
   const badgeClass = o.status==='new' ? 'badge-new' : 'badge-done';
   const badgeText = o.status==='new' ? '🔴 PENDING' : '✅ DONE';
   
@@ -502,7 +512,7 @@ function orderCard(o){
     +'<div class="oc-meta">'
     +'<div class="oc-customer">'+o.customer_name+' · '+o.customer_phone+'</div>'
     +'<div class="oc-type"><span class="oc-type-tag '+typeClass+'">'+typeLabel+'</span></div>'
-    +addrHtml+tableHtml
+    +addrHtml+tableHtml+convHtml
     +'<div class="oc-time">⏰ '+timeAgo+'</div>'
     +'</div>'
     +'<div class="oc-items">'+itemsHtml+'</div>'
@@ -577,6 +587,7 @@ function printReceipt(id){
     +'<div>Subtotal<span style="float:right">Rs.'+o.subtotal+'</span></div>'
     +(o.discount>0?'<div>Discount<span style="float:right">- Rs.'+o.discount+'</span></div>':'')
     +(o.delivery_fee>0?'<div>Delivery Fee<span style="float:right">Rs.'+o.delivery_fee+'</span></div>':'')
+    +(o.convenience_fee>0?'<div>Conv. Fee<span style="float:right">Rs.'+o.convenience_fee+'</span></div>':'')
     +'<div class="receipt-line"></div>'
     +'<div><b>TOTAL<span style="float:right">Rs.'+o.total+'</span></b></div>'
     +(o.note?'<div class="receipt-line"></div><div>Note: '+o.note+'</div>':'')
@@ -597,10 +608,12 @@ function renderSales(){
   const dine = allOrders.filter(o=>o.order_type==='dine').length;
   const del = allOrders.filter(o=>o.order_type==='delivery').length;
   
+  const totalConvFees = allOrders.reduce((s,o)=>s+(o.convenience_fee||0),0);
   document.getElementById('ss-total').textContent = 'Rs. '+total.toLocaleString();
   document.getElementById('ss-done').textContent = done.length;
   document.getElementById('ss-dine').textContent = dine;
   document.getElementById('ss-del').textContent = del;
+  if(document.getElementById('ss-conv')) document.getElementById('ss-conv').textContent = 'Rs. '+totalConvFees.toLocaleString();
   
   const tbody = document.getElementById('salesBody');
   if(!allOrders.length){tbody.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--sub);padding:20px">No orders today yet</td></tr>';return;}
@@ -611,9 +624,11 @@ function renderSales(){
     return '<tr>'
       +'<td style="font-family:\'Baloo 2\',sans-serif;font-weight:800">#'+o.id+'</td>'
       +'<td>'+o.customer_name+'</td>'
+      +'<td style="color:#94a3b8">'+o.customer_phone+'</td>'
       +'<td>'+(o.order_type==='delivery'?'🏠':o.order_type==='dine'?'🍽️':'🚶')+'</td>'
       +'<td>'+items.map(i=>i.qty+'x '+i.name).join(', ')+'</td>'
       +'<td style="font-family:\'Baloo 2\',sans-serif;color:var(--yellow)">Rs.'+o.total+'</td>'
+      +'<td style="font-family:\'Baloo 2\',sans-serif;color:#a78bfa">Rs.'+(o.convenience_fee||0)+'</td>'
       +'<td style="color:'+statusColor+';font-weight:800">'+o.status.toUpperCase()+'</td>'
       +'<td>'+new Date(o.created_at).toLocaleTimeString('en-PK',{hour:'2-digit',minute:'2-digit',hour12:true})+'</td>'
       +'<td><button onclick="cancelOrder('+o.id+')" style="background:transparent;border:1.5px solid #f87171;color:#f87171;border-radius:7px;padding:4px 9px;font-size:11px;font-weight:800;cursor:pointer">🗑️</button></td>'
@@ -851,6 +866,7 @@ async function placeManualOrder(){
         items: manualItems,
         subtotal: total,
         delivery_fee: 0,
+        convenience_fee: 0,
         discount: 0,
         total: total,
         note: note,
