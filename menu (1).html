@@ -478,6 +478,55 @@ img{display:block}
   </div>
 </div>
 
+<!-- HOMEPAGE: DEAL BANNERS -->
+<div id="homeDealBanners">
+
+  <!-- MEGA SAVERS -->
+  <div class="deals-section-label" style="color:#d97706">🔥 Mega Savers — ہمیشہ دستیاب</div>
+  <div class="ms-banner" onclick="openCat('deals')">
+    <div class="ms-banner-inner">
+      <div class="ms-banner-title">🔥 Mega Saver Deals</div>
+      <div class="ms-banner-sub">ہمیشہ دستیاب · Always Available · بڑا آرڈر، بڑی بچت!</div>
+      <div class="nd-deals-scroll" id="msDealsScroll"></div>
+    </div>
+  </div>
+
+  <!-- NIGHT DEALS -->
+  <div class="deals-section-label" style="color:#7c3aed">🌙 Night Deals — رات کی ڈیلز</div>
+  <div class="nd-banner" onclick="openCat('deals')">
+    <div class="nd-banner-stars"></div>
+    <div class="nd-banner-inner">
+      <div class="nd-banner-top">
+        <div>
+          <div class="nd-banner-title">🌙 Night Deals</div>
+          <div class="nd-banner-subtitle">رات ۱۰ بجے سے ۳ بجے تک — صرف رات کو دستیاب</div>
+        </div>
+        <div class="nd-banner-time" id="ndBannerTimeBadge">🔒 10 PM – 3 AM</div>
+      </div>
+      <div class="nd-deals-scroll" id="ndDealsScroll"></div>
+      <div class="nd-countdown" id="ndCountdown"></div>
+    </div>
+  </div>
+
+  <!-- STUDENT DEALS -->
+  <div class="deals-section-label" style="color:#0369a1">🎓 Student Deals — طالب علم ڈیلز</div>
+  <div class="sd-banner" onclick="openCat('deals')">
+    <div class="sd-banner-inner">
+      <div class="sd-banner-top">
+        <div>
+          <div class="sd-banner-title">🎓 Student Deals</div>
+          <div class="sd-banner-sub">Opening تک شام ۵ بجے — Students کے لیے خاص</div>
+        </div>
+        <div class="sd-banner-time" id="sdBannerTimeBadge">🕐 Till 5 PM</div>
+      </div>
+      <div class="nd-deals-scroll" id="sdDealsScroll"></div>
+      <div class="sd-countdown" id="sdCountdown"></div>
+    </div>
+  </div>
+
+  <div class="deals-view-all" onclick="openCat('deals')">🔥 سب Deals دیکھیں →</div>
+</div>
+
 <!-- HOMEPAGE: CATEGORY CARDS -->
 <div id="homePage" class="wrap">
   <div class="home-head">
@@ -686,15 +735,14 @@ function isClosed()    { return getStoreStatus() === 'closed'; }
 function getNextOpenText() {
   var now  = new Date();
   var dow  = now.getDay();
-  var mins = now.getHours() * 60 + now.getMinutes();
-  var targetDow = (mins < HARD_CLOSE) ? dow : (dow + 1) % 7;
+  // Always show today's opening time — store can only be closed before opening
+  // or after hard-close (2:30AM), both of which open again later the same day.
+  var targetDow = dow;
   var openM;
   if (isEidMode()) {
     openM = OPEN_MIN_EID;
   } else {
-    // Check if tomorrow is still within Eid (edge case: last Eid night)
-    var tomorrow = new Date(now); tomorrow.setDate(tomorrow.getDate() + 1); tomorrow.setHours(0,0,0,0);
-    openM = (tomorrow >= EID_START && tomorrow < EID_END) ? OPEN_MIN_EID : OPEN_MIN_NORMAL[targetDow];
+    openM = OPEN_MIN_NORMAL[targetDow];
   }
   var h = Math.floor(openM / 60);
   var suffix = h >= 12 ? 'PM' : 'AM';
@@ -1150,13 +1198,37 @@ document.addEventListener('DOMContentLoaded',()=>{
   populateCatCounts();
   refreshCartBar();
   applyTimeGate();
+  renderDealBanners();
   setInterval(applyTimeGate, 60000);
+  setInterval(renderDealBanners, 30000);
+  // Handle ?additem=DEAL_ID from home.html deal buttons
+  var params=new URLSearchParams(window.location.search);
+  var addId=params.get('additem');
+  if(addId){
+    // Clean URL without reloading
+    history.replaceState(null,'',window.location.pathname+(window.location.hash||''));
+    // Wait a tick so page is fully rendered, then add item and open cart
+    setTimeout(function(){
+      if(!checkTimeGate())return;
+      var deal=MENU.deals.find(function(d){return d.id===addId;});
+      if(deal){
+        if(deal.dealType==='night'&&!isNightDealActive()){toast('🔒 Night Deals رات 10 بجے unlock ہوں گے!','red');return;}
+        if(deal.dealType==='student'&&!isStudentDealActive()){toast('🔒 Student Deals شام 5 بجے تک دستیاب ہیں!','red');return;}
+        var existing=cart.find(function(i){return i.id===deal.id;});
+        if(existing){existing.quantity++;}
+        else{cart.push({id:deal.id,name:deal.name,price:deal.price,quantity:1,e:deal.e,cartId:Date.now()});}
+        saveCart();refreshCartBar();
+        toast('✅ '+deal.name+' cart میں شامل!','green');
+        openCart();
+      }
+    },300);
+  }
   // Open a specific category if URL hash is present
   var hash=window.location.hash.replace('#','');
   if(hash&&MENU[hash]){openCat(hash);}
 });
 
-function scrollToMenu(){goHome();document.getElementById('homePage').scrollIntoView({behavior:'smooth',block:'start'});}
+function scrollToMenu(){goHome();setTimeout(function(){var cg=document.getElementById('catGrid');if(cg)cg.scrollIntoView({behavior:'smooth',block:'start'});},80);}
 
 // ── Render homepage deal banners ──
 function renderDealBanners(){
@@ -1246,7 +1318,7 @@ function addDealToCart(dealId){
   if(deal.dealType==='student'&&!isStudentDealActive()){toast('🔒 Student Deals شام 5 بجے تک دستیاب ہیں!','red');return;}
   var existing=cart.find(function(i){return i.id===dealId;});
   if(existing){existing.quantity++;}
-  else{cart.push({id:deal.id,name:deal.name,price:deal.price,quantity:1,e:deal.e});}
+  else{cart.push({id:deal.id,name:deal.name,price:deal.price,quantity:1,e:deal.e,cartId:Date.now()});}
   saveCart();refreshCartBar();
   toast('✅ '+deal.name+' cart میں شامل!','green');
 }
@@ -1265,7 +1337,10 @@ const CAT_LABELS={
 
 function openCat(cat){
   activeCat=cat;
-  document.getElementById('homePage').style.display='none';
+  var hp=document.getElementById('homePage');
+  var hdb=document.getElementById('homeDealBanners');
+  if(hp)hp.style.display='none';
+  if(hdb)hdb.style.display='none';
   document.getElementById('menuSection').style.display='block';
   document.getElementById('menuTopTitle').textContent=CAT_LABELS[cat]||cat;
   renderMenu();
@@ -1274,7 +1349,10 @@ function openCat(cat){
 
 function goHome(){
   document.getElementById('menuSection').style.display='none';
-  document.getElementById('homePage').style.display='block';
+  var hp=document.getElementById('homePage');
+  var hdb=document.getElementById('homeDealBanners');
+  if(hp)hp.style.display='block';
+  if(hdb)hdb.style.display='block';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -1467,10 +1545,11 @@ function refreshCartBar(){
   var total=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
   var dTotal=discountedTotal(total);
   var distKm=getEffectiveDistKm();
-  var fee=n>0?calcDeliveryFee(dTotal,distKm):0;
+  var lnSurcharge=n>0&&isLateNight()?LATE_NIGHT_SURCHARGE:0;
+  var fee=n>0&&!isLateNight()?calcDeliveryFee(dTotal,distKm):0;
   document.getElementById('cartBar').style.display=n>0?'block':'none';
   document.getElementById('cartBadge').textContent=n;
-  document.getElementById('cartTotalDisplay').textContent='Rs.'+(dTotal+fee)+(isDiscountLive()?' (-5% Eid)':'');
+  document.getElementById('cartTotalDisplay').textContent='Rs.'+(dTotal+fee+lnSurcharge)+(isDiscountLive()?' (-5% Eid)':'');
 }
 function openCart(){renderCartSheet();document.getElementById('cartOverlay').classList.remove('hidden');document.body.style.overflow='hidden';}
 function closeCart(){document.getElementById('cartOverlay').classList.add('hidden');document.body.style.overflow='auto';}
@@ -1486,8 +1565,10 @@ function renderCartSheet(){
   var discounted=discountedTotal(sub);
   var discSaving=sub-discounted;
   var distKm=getEffectiveDistKm();
-  var fee=calcDeliveryFee(discounted,distKm);
-  var grandTotal=discounted+fee;
+  var lateNightCart=isLateNight();
+  var fee=lateNightCart?0:calcDeliveryFee(discounted,distKm);
+  var surcharge=lateNightCart?LATE_NIGHT_SURCHARGE:0;
+  var grandTotal=discounted+fee+surcharge;
   var rows='';
   cart.forEach(function(i){
     rows+='<div class="ci"><div class="ci-emo">'+(i.e||'🍕')+'</div><div class="ci-body">'
@@ -1502,15 +1583,17 @@ function renderCartSheet(){
   });
   var discRow=disc?'<div class="tr" style="color:var(--green)"><span>🎉 5% Eid Discount</span><span style="font-weight:800">− Rs.'+discSaving+'</span></div>':'';
   var feeColor=fee===0?'var(--green)':'var(--red)';
-  var feeLabel=fee===0?'FREE 🎉':'Rs.'+fee;
-  var distKm=getEffectiveDistKm();
-  var feeNote=distKm===null?' <small style="color:var(--sub);font-weight:600">(detect location at checkout)</small>':'';
+  var feeLabel=lateNightCart?'N/A (Takeaway Only)':(fee===0?'FREE 🎉':'Rs.'+fee);
+  var feeNote=(!lateNightCart&&distKm===null)?' <small style="color:var(--sub);font-weight:600">(detect location at checkout)</small>':'';
+  var lnRow=lateNightCart?'<div class="tr" style="color:#f97316"><span>🌙 Late Night Fee</span><span style="font-weight:800">+Rs.'+surcharge+'</span></div>':'';
+  var feeRowColor=lateNightCart?'var(--sub)':feeColor;
   var discBanner=disc?'<div style="background:linear-gradient(90deg,#14532d,#166534);border-radius:10px;padding:9px 12px;text-align:center;font-family:\'Baloo 2\',sans-serif;font-weight:800;font-size:13px;color:#bbf7d0;margin-bottom:10px">🎉 5% Eid Discount Applied! آپ کی بچت: Rs.'+discSaving+'</div>':'';
   el.innerHTML='<div>'+rows
     +'<div class="tbox">'
     +'<div class="tr"><span>Subtotal</span><span style="color:var(--txt);font-weight:800">Rs.'+sub+'</span></div>'
     +discRow
-    +'<div class="tr"><span>🚚 Delivery Fee</span><span style="color:'+feeColor+';font-weight:800">'+feeLabel+feeNote+'</span></div>'
+    +'<div class="tr"><span>🚚 Delivery Fee</span><span style="color:'+feeRowColor+';font-weight:800">'+feeLabel+feeNote+'</span></div>'
+    +lnRow
     +'<div class="tr total"><span>Total</span><span>Rs.'+grandTotal+'</span></div>'
     +'</div>'
     +discBanner
@@ -1524,8 +1607,8 @@ function adjCart(id,d){var i=cart.find(function(c){return c.cartId===id;});if(!i
 function openCheckout(){
   if(!checkTimeGate()) return;
   var lateNight = isLateNight();
-  // During late night window: force takeaway — delivery NOT available
-  orderType = lateNight ? 'takeaway' : 'delivery';
+  // During late night: force takeaway. Otherwise keep whatever user last selected.
+  if (lateNight) orderType = 'takeaway';
   var disc=isDiscountLive();
   var sub=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
   var discounted=discountedTotal(sub);
