@@ -1869,7 +1869,7 @@ function sendOrder(){
       'apikey':SB_KEY,
       'Authorization':'Bearer '+SB_KEY,
       'Content-Type':'application/json',
-      'Prefer':'return=representation'
+      'Prefer':'return=minimal'
     },
     body:JSON.stringify({
       customer_name:name,
