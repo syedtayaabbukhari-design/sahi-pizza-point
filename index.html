@@ -1862,7 +1862,22 @@ function sendOrder(){
   // 3. Clear cart and close sheet
   cart=[];saveCart();refreshCartBar();closeCart();
 
-  // 4. Save to Supabase silently in background
+  // 4. Save to Supabase in background with visible error logging
+  var orderPayload={
+    customer_name:name,
+    customer_phone:phone,
+    order_type:orderType==='takeaway'?'pickup':orderType,
+    table_no:table||null,
+    address:addr||null,
+    items:sbItemsSnap,
+    subtotal:sub,
+    delivery_fee:fee,
+    convenience_fee:convFeeSend,
+    discount:discSaving,
+    total:finalTotal,
+    note:note||null,
+    status:'new'
+  };
   fetch(SB_URL+'/rest/v1/orders',{
     method:'POST',
     headers:{
@@ -1871,22 +1886,10 @@ function sendOrder(){
       'Content-Type':'application/json',
       'Prefer':'return=minimal'
     },
-    body:JSON.stringify({
-      customer_name:name,
-      customer_phone:phone,
-      order_type:orderType,
-      table_no:table||null,
-      address:addr||null,
-      items:sbItemsSnap,
-      subtotal:sub,
-      delivery_fee:fee,
-      convenience_fee:convFeeSend,
-      discount:discSaving,
-      total:finalTotal,
-      note:note||null,
-      status:'new'
-    })
-  }).catch(function(e){console.error('Supabase error:',e);});
+    body:JSON.stringify(orderPayload)
+  }).then(function(r){
+    if(!r.ok){r.text().then(function(t){console.error('Supabase insert failed:',r.status,t);});}
+  }).catch(function(e){console.error('Supabase fetch error:',e);});
 }
 
 
