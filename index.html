@@ -1804,9 +1804,8 @@ function selOT(v){
   refreshCartBar();
 }
 
-// ── SUPABASE CONFIG (same as POS) ──
-var SB_URL='https://pqrwjswpxssjfxnzrpfj.supabase.co';
-var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxcndqc3dweHNzamZ4bnpycGZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NTQwMDMsImV4cCI6MjA4OTQzMDAwM30.a4L0JD3gWd76CW89OSa5-t2U55Cjq5I5UAr6W7GWXOQ';
+// ── GOOGLE APPS SCRIPT CONFIG ──
+var GAS_URL='https://script.google.com/macros/s/AKfycbwYgLHco2Xj9iMUV7c4NEtZAuLTWiPza1q4BCI0WmYRhmHSbpI3HR52Euh-1EaD9mgr5w/exec';
 
 function sendOrder(){
   var name=document.getElementById('custName').value.trim();
@@ -1862,7 +1861,7 @@ function sendOrder(){
   // 3. Clear cart and close sheet
   cart=[];saveCart();refreshCartBar();closeCart();
 
-  // 4. Save to Supabase in background with visible error logging
+  // 4. Save to Google Apps Script in background
   var orderPayload={
     customer_name:name,
     customer_phone:phone,
@@ -1878,18 +1877,13 @@ function sendOrder(){
     note:note||null,
     status:'new'
   };
-  fetch(SB_URL+'/rest/v1/orders',{
+  fetch(GAS_URL,{
     method:'POST',
-    headers:{
-      'apikey':SB_KEY,
-      'Authorization':'Bearer '+SB_KEY,
-      'Content-Type':'application/json',
-      'Prefer':'return=minimal'
-    },
+    headers:{'Content-Type':'application/json'},
     body:JSON.stringify(orderPayload)
   }).then(function(r){
-    if(!r.ok){r.text().then(function(t){console.error('Supabase insert failed:',r.status,t);});}
-  }).catch(function(e){console.error('Supabase fetch error:',e);});
+    if(!r.ok){r.text().then(function(t){console.error('GAS insert failed:',r.status,t);});}
+  }).catch(function(e){console.error('GAS fetch error:',e);});
 }
 
 
