@@ -1877,12 +1877,12 @@ function sendOrder(){
     note:note||null,
     status:'new'
   };
+  // Use no-cors + text/plain — required for Apps Script from browser
   fetch(GAS_URL,{
     method:'POST',
-    headers:{'Content-Type':'application/json'},
+    mode:'no-cors',
+    headers:{'Content-Type':'text/plain'},
     body:JSON.stringify(orderPayload)
-  }).then(function(r){
-    if(!r.ok){r.text().then(function(t){console.error('GAS insert failed:',r.status,t);});}
   }).catch(function(e){console.error('GAS fetch error:',e);});
 }
 
