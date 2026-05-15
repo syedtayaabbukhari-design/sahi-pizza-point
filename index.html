@@ -1654,15 +1654,9 @@ function refreshCartBar(){
   var n=cart.reduce(function(s,i){return s+i.quantity;},0);
   var total=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);
   var dTotal=discountedTotal(total);
-  var distKm=getEffectiveDistKm();
-  var lnSurcharge=n>0&&isLateNight()?LATE_NIGHT_SURCHARGE:0;
-  var delFee=n>0&&orderType==='delivery'&&!isLateNight()?calcDeliveryFee(dTotal,distKm):0;
-  var convFee=n>0?calcConvenienceFee(dTotal):0;
-  var grandEst=dTotal+delFee+lnSurcharge+convFee;
   document.getElementById('cartBar').style.display=n>0?'block':'none';
   document.getElementById('cartBadge').textContent=n;
-  document.getElementById('cartTotalDisplay').textContent='Rs.'+grandEst+(isDiscountLive()?' (-5% Eid)':'');
-  // Update header cart count
+  document.getElementById('cartTotalDisplay').textContent='Rs.'+dTotal+(isDiscountLive()?' (-5% Eid)':'');
   var hcc=document.getElementById('hdrCartCount');
   if(hcc){hcc.textContent=n;hcc.style.display=n>0?'inline-flex':'none';}
 }
@@ -1698,22 +1692,14 @@ function renderCartSheet(){
       +'</div></div></div>';
   });
   var discRow=disc?'<div class="tr" style="color:var(--green)"><span>🎉 5% Eid Discount</span><span style="font-weight:800">− Rs.'+discSaving+'</span></div>':'';
-  var feeColor=fee===0?'var(--green)':'var(--red)';
-  var feeNote=(!lateNightCart&&orderType==='delivery'&&distKm===null)?' <small style="color:var(--sub);font-weight:600">(detect location at checkout)</small>':'';
-  var lnRow=lateNightCart?'<div class="tr" style="color:#f97316"><span>🌙 Late Night Fee</span><span style="font-weight:800">+Rs.'+surcharge+'</span></div>':'';
-  var feeRow=(!lateNightCart&&orderType==='delivery')
-    ?'<div class="tr"><span>🚚 Delivery Fee</span><span style="color:'+feeColor+';font-weight:800">'+(fee===0?'FREE 🎉':'Rs.'+fee)+feeNote+'</span></div>'
-    :'';
   var discBanner=disc?'<div style="background:linear-gradient(90deg,#14532d,#166534);border-radius:10px;padding:9px 12px;text-align:center;font-family:\'Baloo 2\',sans-serif;font-weight:800;font-size:13px;color:#bbf7d0;margin-bottom:10px">🎉 5% Eid Discount Applied! آپ کی بچت: Rs.'+discSaving+'</div>':'';
   el.innerHTML='<div>'+rows
     +'<div class="tbox">'
     +'<div class="tr"><span>Subtotal</span><span style="color:var(--txt);font-weight:800">Rs.'+sub+'</span></div>'
     +discRow
-    +feeRow
-    +lnRow
-    +'<div class="tr" style="color:#7c3aed"><span>⚡ Convenience Fee</span><span style="font-weight:800">+Rs.'+convFeeCart+'</span></div>'
-    +'<div class="tr total"><span>Total</span><span>Rs.'+grandTotal+'</span></div>'
+    +'<div class="tr total"><span>Total</span><span>Rs.'+discounted+'</span></div>'
     +'</div>'
+    +'<div style="font-size:11px;color:var(--sub);font-weight:700;text-align:center;margin-bottom:10px;opacity:.8">⚡ Delivery fee & convenience fee added at checkout</div>'
     +discBanner
     +'<button class="co-btn" onclick="openCheckout()">✅ Order دیں — Checkout</button>'
     +'<button class="cl-btn" onclick="if(confirm(\'Cart clear کریں؟\')){cart=[];saveCart();refreshCartBar();closeCart()}">🗑️ Cart Clear کریں</button>'
