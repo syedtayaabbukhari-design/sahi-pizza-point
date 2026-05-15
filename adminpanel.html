@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orders Admin Dashboard</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#E8131B;--blue:#1565C0;--green:#16a34a;
+  --bg:#F0F4FF;--card:#fff;--border:#D6E4FF;
+  --txt:#1a1a1a;--sub:#666;
+}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+
+
+
+#dashboard{display:block}
+.topbar{background:linear-gradient(135deg,#c0000a,#1565C0);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 3px 18px rgba(0,0,0,.25)}
+.topbar-title{font-size:17px;font-weight:800}
+.topbar-sub{font-size:11px;opacity:.8;margin-top:2px}
+.logout-btn{background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);color:#fff;padding:7px 14px;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer}
+
+.main{max-width:1100px;margin:0 auto;padding:20px 16px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:24px}
+.stat-card{background:var(--card);border-radius:16px;padding:18px 16px;box-shadow:0 2px 12px rgba(21,101,192,.08);border:1.5px solid var(--border)}
+.stat-icon{font-size:26px;margin-bottom:6px}
+.stat-val{font-size:24px;font-weight:800;color:var(--blue);line-height:1}
+.stat-lbl{font-size:12px;color:var(--sub);font-weight:700;margin-top:4px}
+
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
+.ctrl-select{padding:9px 13px;border:2px solid var(--border);border-radius:10px;font-size:13px;font-family:inherit;outline:none;background:var(--card);cursor:pointer}
+.ctrl-select:focus{border-color:var(--blue)}
+.export-btn{padding:9px 18px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;margin-left:auto}
+.refresh-btn{padding:9px 14px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer}
+
+.section-title{font-size:15px;font-weight:800;color:var(--blue);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--border)}
+
+.fees-table-wrap{background:var(--card);border-radius:16px;box-shadow:0 2px 12px rgba(21,101,192,.08);border:1.5px solid var(--border);overflow:hidden;margin-bottom:24px}
+.fees-table{width:100%;border-collapse:collapse}
+.fees-table th{background:#EBF3FF;padding:11px 14px;text-align:left;font-size:12px;font-weight:800;color:var(--blue);text-transform:uppercase}
+.fees-table td{padding:11px 14px;font-size:13px;border-top:1px solid var(--border)}
+.fees-table tr:hover td{background:#f7faff}
+.fee-amt{font-weight:800;color:var(--green)}
+.total-row td{background:#f0fdf4;font-weight:800;color:var(--green)}
+
+.orders-wrap{background:var(--card);border-radius:16px;box-shadow:0 2px 12px rgba(21,101,192,.08);border:1.5px solid var(--border);overflow:auto;margin-bottom:24px}
+.orders-table{width:100%;border-collapse:collapse;min-width:780px}
+.orders-table th{background:#EBF3FF;padding:10px 13px;text-align:left;font-size:11.5px;font-weight:800;color:var(--blue);text-transform:uppercase;white-space:nowrap}
+.orders-table td{padding:10px 13px;font-size:12.5px;border-top:1px solid var(--border);vertical-align:top}
+.orders-table tr:hover td{background:#f7faff}
+.items-cell{max-width:220px;color:var(--sub);font-size:11.5px;line-height:1.6}
+.order-type-badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:800}
+.ot-delivery{background:#dbeafe;color:#1e40af}
+.ot-dine{background:#fce7f3;color:#9d174d}
+.ot-pickup{background:#fef3c7;color:#78350f}
+
+.loading{text-align:center;padding:48px;color:var(--sub);font-size:14px;font-weight:700}
+.spinner{display:inline-block;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{text-align:center;padding:48px;color:var(--sub)}
+.empty-icon{font-size:48px;margin-bottom:12px}
+.live-dot{display:inline-block;width:8px;height:8px;background:#4ade80;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+@media(max-width:600px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .export-btn{margin-left:0;width:100%}
+}
+</style>
+</head>
+<body>
+
+
+
+<div id="dashboard">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title"><span class="live-dot"></span>Orders Dashboard</div>
+      <div class="topbar-sub" id="lastRefresh">Connecting...</div>
+    </div>
+
+  </div>
+  <div class="main">
+    <div class="stats">
+      <div class="stat-card"><div class="stat-icon">📦</div><div class="stat-val" id="statTotal">—</div><div class="stat-lbl">Total Orders</div></div>
+      <div class="stat-card"><div class="stat-icon">📅</div><div class="stat-val" id="statToday">—</div><div class="stat-lbl">Today</div></div>
+      <div class="stat-card"><div class="stat-icon">📆</div><div class="stat-val" id="statWeek">—</div><div class="stat-lbl">This Week</div></div>
+      <div class="stat-card"><div class="stat-icon">⚡</div><div class="stat-val" id="statFees">—</div><div class="stat-lbl">Fees This Week</div></div>
+      <div class="stat-card"><div class="stat-icon">🏪</div><div class="stat-val" id="statRestaurants">—</div><div class="stat-lbl">Restaurants</div></div>
+    </div>
+
+    <div class="section-title">⚡ Convenience Fees This Week — Collect These</div>
+    <div class="fees-table-wrap">
+      <table class="fees-table">
+        <thead><tr><th>Restaurant</th><th>Orders This Week</th><th>Fees Owed (Rs.)</th><th>All Time Orders</th><th>All Time Fees</th></tr></thead>
+        <tbody id="feesBody"><tr><td colspan="5"><div class="loading"><div class="spinner"></div><br>Loading...</div></td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="section-title">📋 All Orders</div>
+    <div class="controls">
+      <select class="ctrl-select" id="filterRestaurant" onchange="renderOrders()"><option value="">All Restaurants</option></select>
+      <select class="ctrl-select" id="filterType" onchange="renderOrders()">
+        <option value="">All Types</option>
+        <option value="delivery">Delivery</option>
+        <option value="dine">Dine In</option>
+        <option value="pickup">Pickup</option>
+      </select>
+      <select class="ctrl-select" id="filterPeriod" onchange="renderOrders()">
+        <option value="all">All Time</option>
+        <option value="today">Today</option>
+        <option value="week" selected>This Week</option>
+        <option value="month">This Month</option>
+      </select>
+      <button class="refresh-btn" onclick="loadOrders()">🔄 Refresh</button>
+      <button class="export-btn" onclick="exportCSV()">⬇️ Export CSV</button>
+    </div>
+
+    <div class="orders-wrap">
+      <table class="orders-table">
+        <thead>
+          <tr><th>#</th><th>Time</th><th>Restaurant</th><th>Customer</th><th>Phone</th><th>Type</th><th>Items</th><th>Subtotal</th><th>Conv.Fee</th><th>Total</th><th>Note</th></tr>
+        </thead>
+        <tbody id="ordersBody">
+          <tr><td colspan="11"><div class="loading"><div class="spinner"></div><br>Loading orders...</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp }     from 'https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js';
+import { getFirestore,
+         collection, getDocs,
+         query, orderBy }    from 'https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey:            'AIzaSyBuBo3UvwWSu1vJZSDZE3LNh0Q4NJ6OnqY',
+  authDomain:        'restaurant-orders-ac79a.firebaseapp.com',
+  projectId:         'restaurant-orders-ac79a',
+  storageBucket:     'restaurant-orders-ac79a.firebasestorage.app',
+  messagingSenderId: '993282508803',
+  appId:             '1:993282508803:web:d0af382d00edc9ab78e636'
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+let allOrders = [];
+
+// Auto-load on open
+window.addEventListener('load', () => loadOrders());
+
+// ── LOAD FROM FIRESTORE ──────────────────────────
+window.loadOrders = async function() {
+  loading(true);
+  try {
+    allOrders = [];
+    const snap = await getDocs(query(collection(db,'orders'), orderBy('timestamp','desc')));
+    snap.forEach(doc => {
+      const d = doc.data();
+      allOrders.push({
+        id:              doc.id,
+        restaurant_id:   d.restaurant_id   || '',
+        restaurant_name: d.restaurant_name || 'Unknown',
+        customer_name:   d.customer_name   || '',
+        customer_phone:  d.customer_phone  || '',
+        order_type:      d.order_type      || '',
+        table_no:        d.table_no        || '',
+        address:         d.address         || '',
+        items:           d.items           || '',
+        subtotal:        Number(d.subtotal)        || 0,
+        delivery_fee:    Number(d.delivery_fee)    || 0,
+        convenience_fee: Number(d.convenience_fee) || 0,
+        discount:        Number(d.discount)        || 0,
+        total:           Number(d.total)           || 0,
+        note:            d.note           || '',
+        timestamp:       d.timestamp      || '',
+        synced_offline:  d.synced_offline || false,
+      });
+    });
+    updateStats(); updateFeesTable(); populateFilters(); renderOrders();
+    document.getElementById('lastRefresh').textContent =
+      'Last refreshed: ' + new Date().toLocaleTimeString('en-PK',{timeZone:'Asia/Karachi'});
+  } catch(e) {
+    document.getElementById('ordersBody').innerHTML =
+      `<tr><td colspan="11"><div class="empty"><div class="empty-icon">⚠️</div>
+      Error: ${e.message}<br><small>Check Firebase rules are published</small></div></td></tr>`;
+  }
+  loading(false);
+};
+
+function loading(on) {
+  if (!on) return;
+  document.getElementById('ordersBody').innerHTML =
+    '<tr><td colspan="11"><div class="loading"><div class="spinner"></div><br>Loading...</div></td></tr>';
+  document.getElementById('feesBody').innerHTML =
+    '<tr><td colspan="5"><div class="loading"><div class="spinner"></div><br>Loading...</div></td></tr>';
+}
+
+// ── DATE HELPERS ─────────────────────────────────
+function parseTS(ts) { try { const d=new Date(ts); if(!isNaN(d)) return d; } catch(e){} return new Date(0); }
+function startOfDay()  { const d=new Date(); d.setHours(0,0,0,0); return d; }
+function startOfWeek() { const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()-(d.getDay()===0?6:d.getDay()-1)); return d; }
+function startOfMonth(){ const d=new Date(); d.setHours(0,0,0,0); d.setDate(1); return d; }
+function inPeriod(o) {
+  const p=document.getElementById('filterPeriod').value; if(p==='all') return true;
+  const t=parseTS(o.timestamp);
+  if(p==='today') return t>=startOfDay();
+  if(p==='week')  return t>=startOfWeek();
+  if(p==='month') return t>=startOfMonth();
+  return true;
+}
+
+// ── STATS ────────────────────────────────────────
+function updateStats() {
+  const today = allOrders.filter(o=>parseTS(o.timestamp)>=startOfDay());
+  const week  = allOrders.filter(o=>parseTS(o.timestamp)>=startOfWeek());
+  document.getElementById('statTotal').textContent       = allOrders.length;
+  document.getElementById('statToday').textContent       = today.length;
+  document.getElementById('statWeek').textContent        = week.length;
+  document.getElementById('statFees').textContent        = 'Rs.'+week.reduce((s,o)=>s+o.convenience_fee,0);
+  document.getElementById('statRestaurants').textContent = new Set(allOrders.map(o=>o.restaurant_id)).size;
+}
+
+// ── FEES TABLE ───────────────────────────────────
+function updateFeesTable() {
+  const week=allOrders.filter(o=>parseTS(o.timestamp)>=startOfWeek());
+  const map={};
+  allOrders.forEach(o=>{
+    if(!map[o.restaurant_id]) map[o.restaurant_id]={name:o.restaurant_name,wO:0,wF:0,tO:0,tF:0};
+    map[o.restaurant_id].tO++; map[o.restaurant_id].tF+=o.convenience_fee;
+  });
+  week.forEach(o=>{ if(map[o.restaurant_id]){map[o.restaurant_id].wO++;map[o.restaurant_id].wF+=o.convenience_fee;} });
+  const rows=Object.values(map).sort((a,b)=>b.wF-a.wF);
+  const twF=rows.reduce((s,r)=>s+r.wF,0), twO=rows.reduce((s,r)=>s+r.wO,0);
+  document.getElementById('feesBody').innerHTML = rows.map(r=>
+    `<tr><td><strong>${r.name}</strong></td><td>${r.wO}</td><td class="fee-amt">Rs.${r.wF}</td><td>${r.tO}</td><td style="color:var(--blue);font-weight:700">Rs.${r.tF}</td></tr>`
+  ).join('') + `<tr class="total-row"><td>TOTAL</td><td>${twO}</td><td>Rs.${twF}</td><td>${allOrders.length}</td><td>Rs.${allOrders.reduce((s,o)=>s+o.convenience_fee,0)}</td></tr>`
+  || '<tr><td colspan="5"><div class="empty">No orders yet</div></td></tr>';
+}
+
+// ── POPULATE FILTERS ─────────────────────────────
+function populateFilters() {
+  const sel=document.getElementById('filterRestaurant'), cur=sel.value;
+  sel.innerHTML='<option value="">All Restaurants</option>'+
+    [...new Set(allOrders.map(o=>o.restaurant_id+'|'+o.restaurant_name))].map(r=>{
+      const p=r.split('|'); return `<option value="${p[0]}">${p[1]}</option>`;
+    }).join('');
+  sel.value=cur;
+}
+
+// ── ORDERS TABLE ─────────────────────────────────
+window.renderOrders = function() {
+  const rf=document.getElementById('filterRestaurant').value;
+  const tf=document.getElementById('filterType').value;
+  const filtered=allOrders.filter(o=>{
+    if(rf&&o.restaurant_id!==rf) return false;
+    if(tf&&o.order_type!==tf) return false;
+    return inPeriod(o);
+  });
+  if(!filtered.length){
+    document.getElementById('ordersBody').innerHTML='<tr><td colspan="11"><div class="empty"><div class="empty-icon">📭</div>No orders found</div></td></tr>';
+    return;
+  }
+  document.getElementById('ordersBody').innerHTML=filtered.map((o,i)=>{
+    const badge=o.order_type==='delivery'
+      ?'<span class="order-type-badge ot-delivery">🏠 Delivery</span>'
+      :o.order_type==='dine'
+        ?'<span class="order-type-badge ot-dine">🍽️ Dine In</span>'
+        :'<span class="order-type-badge ot-pickup">🛵 Pickup</span>';
+    const loc=o.order_type==='delivery'?(o.address||'—'):(o.table_no?'Table: '+o.table_no:'—');
+    const offBadge=o.synced_offline?'<span style="font-size:10px;background:#fef3c7;color:#92400e;padding:1px 5px;border-radius:4px;margin-left:4px">📴offline</span>':'';
+    return `<tr>
+      <td style="color:var(--sub);font-size:11px">${filtered.length-i}</td>
+      <td style="white-space:nowrap;font-size:11px">${o.timestamp||'—'}</td>
+      <td style="font-weight:700;font-size:12px">${o.restaurant_name}</td>
+      <td><strong>${o.customer_name}</strong>${offBadge}<br><span style="font-size:11px;color:var(--sub)">${loc}</span></td>
+      <td>${o.customer_phone}</td>
+      <td>${badge}</td>
+      <td class="items-cell">${(o.items||'—').replace(/\|/g,'<br>')}</td>
+      <td>Rs.${o.subtotal}</td>
+      <td style="color:#7c3aed;font-weight:800">Rs.${o.convenience_fee}</td>
+      <td style="font-weight:800;color:var(--blue)">Rs.${o.total}</td>
+      <td style="color:var(--sub);font-size:11px">${o.note||'—'}</td>
+    </tr>`;
+  }).join('');
+};
+
+// ── EXPORT CSV ───────────────────────────────────
+window.exportCSV = function() {
+  const rf=document.getElementById('filterRestaurant').value;
+  const tf=document.getElementById('filterType').value;
+  const filtered=allOrders.filter(o=>{
+    if(rf&&o.restaurant_id!==rf) return false;
+    if(tf&&o.order_type!==tf) return false;
+    return inPeriod(o);
+  });
+  const headers=['Timestamp','Restaurant','Customer','Phone','Type','Address/Table','Items','Subtotal','Delivery Fee','Conv Fee','Discount','Total','Note','Offline'];
+  const rows=filtered.map(o=>[
+    o.timestamp,o.restaurant_name,o.customer_name,o.customer_phone,
+    o.order_type,o.order_type==='delivery'?o.address:(o.table_no?'Table '+o.table_no:''),
+    '"'+o.items.replace(/"/g,'""')+'"',
+    o.subtotal,o.delivery_fee,o.convenience_fee,o.discount,o.total,
+    '"'+(o.note||'').replace(/"/g,'""')+'"',
+    o.synced_offline?'Yes':'No'
+  ].join(','));
+  const blob=new Blob([[headers.join(','),...rows].join('\n')],{type:'text/csv'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='orders-'+document.getElementById('filterPeriod').value+'-'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+};
+</script>
+</body>
+</html>
