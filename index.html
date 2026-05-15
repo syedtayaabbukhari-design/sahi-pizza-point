@@ -16,7 +16,39 @@
   --txt:#1a1a1a;--sub:#777;--light:#EBF3FF;
   --radius:18px;--shadow:0 4px 20px rgba(21,101,192,.10);
 }
-html{scroll-behavior:smooth}
+/* ── SEARCH ── */
+.search-btn{background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.3);color:#fff;border-radius:20px;padding:8px 12px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .15s;white-space:nowrap}
+.search-btn:active{transform:scale(.93);background:rgba(255,255,255,.28)}
+.search-sheet{background:#fff;border-radius:22px 22px 0 0;width:100%;max-width:580px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
+.search-hdr{padding:12px 16px;border-bottom:2px solid var(--border);flex-shrink:0}
+.search-input-row{display:flex;align-items:center;gap:9px}
+.search-input{flex:1;border:2.5px solid var(--border);border-radius:12px;padding:11px 13px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;outline:none;color:var(--txt);background:#fff;transition:border-color .18s}
+.search-input:focus{border-color:var(--blue)}
+.search-clear{background:var(--bluelight);border:2px solid var(--border);border-radius:9px;padding:10px 12px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:12px;color:var(--sub);cursor:pointer;white-space:nowrap}
+.search-body{overflow-y:auto;flex:1;padding:10px 16px 28px}
+.search-cat-label{font-family:'Baloo 2',sans-serif;font-size:11px;font-weight:800;color:var(--sub);letter-spacing:.08em;text-transform:uppercase;margin:13px 0 7px;padding-left:2px}
+.search-result-item{display:flex;align-items:center;gap:11px;padding:10px 11px;border-radius:12px;border:2px solid var(--border);background:#fff;cursor:pointer;margin-bottom:7px;transition:border-color .15s,box-shadow .15s}
+.search-result-item:hover{border-color:rgba(21,101,192,.3);box-shadow:0 3px 12px rgba(21,101,192,.12)}
+.search-result-item:active{transform:scale(.98)}
+.sri-thumb{width:52px;height:52px;border-radius:9px;object-fit:cover;background:var(--bluelight);flex-shrink:0}
+.sri-thumb-ph{width:52px;height:52px;border-radius:9px;background:var(--bluelight);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.sri-body{flex:1;min-width:0}
+.sri-name{font-family:'Baloo 2',sans-serif;font-size:13.5px;font-weight:800;color:var(--txt);line-height:1.2}
+.sri-urdu{font-size:10px;color:var(--sub);direction:rtl;margin-top:1px}
+.sri-meta{display:flex;align-items:center;gap:6px;margin-top:4px}
+.sri-price{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;color:var(--red)}
+.sri-cat{font-size:9.5px;font-weight:800;background:var(--bluelight);color:var(--blue);border-radius:5px;padding:2px 7px}
+.sri-add{width:32px;height:32px;border-radius:50%;background:var(--blue);border:none;cursor:pointer;color:#fff;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .12s}
+.sri-add:active{transform:scale(.82)}
+.search-empty{text-align:center;padding:38px 16px;color:var(--sub)}
+.search-empty-icon{font-size:52px;margin-bottom:9px}
+.search-empty-ttl{font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:800;margin-bottom:4px}
+.search-empty-sub{font-size:12px;font-weight:600}
+.search-hint{text-align:center;padding:30px 16px;color:var(--sub)}
+.search-hint-icon{font-size:44px;margin-bottom:8px}
+.search-hint-ttl{font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:800;margin-bottom:4px}
+.search-hint-sub{font-size:12px;font-weight:600;line-height:1.6}
+
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;padding-bottom:82px}
 img{display:block}
 /* HEADER */
@@ -396,6 +428,7 @@ img{display:block}
       <div class="logo-tag">Near Zabi Ullah Sahi Filter, Jesarwala</div>
       <div class="logo-slogan">Taste jo Dil Jeet le ✨</div>
     </div>
+      <button class="search-btn" onclick="openSearch()" aria-label="Search menu">🔍 Search</button>
     <button class="hbtn" onclick="if(typeof openCart==='function'&&cart&&cart.length>0)openCart();else{var cb=document.getElementById('cartBar');if(cb)cb.scrollIntoView({behavior:'smooth'});}" style="background:var(--yellow);color:#1a1a1a;border:none;position:relative" id="hdrCartBtn">🛒 Cart <span id="hdrCartCount" style="background:#E8131B;color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;display:inline-flex;align-items:center;justify-content:center;margin-left:2px">0</span></button>
   </div>
 </header>
@@ -649,6 +682,26 @@ img{display:block}
   </div>
 </div>
 
+<!-- SEARCH OVERLAY -->
+<div class="overlay hidden" id="searchOverlay">
+  <div class="search-sheet">
+    <div class="sheet-handle"></div>
+    <div class="search-hdr">
+      <div class="search-input-row">
+        <input class="search-input" id="searchInput" type="search" placeholder="🔍 Item تلاش کریں — Search menu..." autocomplete="off" oninput="runSearch(this.value)">
+        <button class="search-clear" onclick="closeSearch()">✕ بند</button>
+      </div>
+    </div>
+    <div class="search-body" id="searchBody">
+      <div class="search-hint">
+        <div class="search-hint-icon">🍕</div>
+        <div class="search-hint-ttl">کیا ڈھونڈ رہے ہیں؟</div>
+        <div class="search-hint-sub">Pizza، Burger، Shawarma یا کوئی بھی item<br>لکھیں اور نتائج دیکھیں</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- CART OVERLAY -->
 <div class="overlay hidden" id="cartOverlay">
   <div class="sheet">
@@ -818,13 +871,13 @@ function applyTimeGate() {
 
   if (status === 'late_night') {
     if (overlay) overlay.style.display = 'none';
-    lnBanner.style.display = 'block';
+    if (lnBanner) lnBanner.style.display = 'block';
     if (badge)     { badge.style.background = 'rgba(249,115,22,.22)'; badge.style.borderColor = 'rgba(249,115,22,.38)'; }
     if (badgeText)   badgeText.textContent = '🌙 LATE NIGHT · Takeaway Only · Closes 3:30 AM';
     if (dot)         dot.style.background = '#f97316';
   } else {
     if (overlay) overlay.style.display = 'none';
-    lnBanner.style.display = 'none';
+    if (lnBanner) lnBanner.style.display = 'none';
     if (badge)     { badge.style.background = 'rgba(255,255,255,.14)'; badge.style.borderColor = 'rgba(255,255,255,.22)'; }
     if (badgeText)   badgeText.textContent = eid ? '🌙 Eid Mubarak · Open Now · 5% App Discount' : 'OPEN NOW · Order Now';
     if (dot)         dot.style.background = '#4ade80';
@@ -849,8 +902,7 @@ function discountedTotal(sub) {
 }
 // ══════════════════════════════════════════
 // CONVENIENCE FEE — Applied to ALL orders
-//  sub < Rs.500  →  Rs.30
-//  sub ≥ Rs.500  →  Rs.50
+//  Flat Rs.20 per order (regardless of subtotal)
 // ══════════════════════════════════════════
 function calcConvenienceFee(sub) {
   return 20;
@@ -1069,7 +1121,15 @@ const IMG={
 
 // ══ TIME-LOCKED DEAL HELPERS ══
 function isNightDealActive(){var h=new Date().getHours();return h>=22||h<3;}
-function isStudentDealActive(){var h=new Date().getHours(),m=new Date().getMinutes();var mins=h*60+m;return mins<17*60;}
+function isStudentDealActive(){
+  var h=new Date().getHours(),m=new Date().getMinutes();
+  var mins=h*60+m;
+  // Only active from opening time until 5 PM
+  // Also active in the 00:00-03:30 early-morning window (still counts as previous day's session)
+  if(mins < 3*60+30) return false; // 00:00–03:30 is late night / hard close, not student deal time
+  var openMin=getTodayOpenMin();
+  return mins>=openMin && mins<17*60;
+}
 
 function nightCountdownText(){
   var now=new Date(),h=now.getHours(),m=now.getMinutes();
@@ -1149,7 +1209,7 @@ const MENU={
     {id:'b-shami', name:'Shami Burger',              urdu:'شامی برگر',          price:150,img:IMG.shami,e:'🍔'},
     {id:'b-eggsh', name:'Egg Shami Burger',          urdu:'انڈہ شامی برگر',     price:180,img:IMG.shami,e:'🍔'},
     {id:'b-dbleg', name:'Double Egg Burger',         urdu:'ڈبل انڈہ برگر',      price:220,img:IMG.eggch,e:'🍔'},
-    {id:'b-chkn',  name:'Chicken Burger',            urdu:'چکن برگر',           price:300,img:IMG.eggch,e:'🍔'},
+    {id:'b-chkn',  name:'Chicken Burger',            urdu:'چکن برگر',           price:300,img:IMG.b_chicken,e:'🍔'},
   ],
   shawarma:[
     {id:'sw-chkn',  name:'Chicken Shawarma',         urdu:'چکن شاورما',         price:220,img:IMG.shawarma,e:'🌯'},
@@ -1203,7 +1263,6 @@ const MENU={
     {id:'sh-or',name:'Oreo Shake',             urdu:'اوریو شیک',        price:700,img:IMG.sh,e:'🍪'},
     {id:'sh-li',name:'Fresh Lime',             urdu:'تازہ لیموں',       price:200,img:'',    e:'🍋'},
     {id:'sh-mm',name:'Mint Margarita',         urdu:'منٹ مارگریٹا',     price:250,img:'',    e:'🌿'},
-    {id:'sh-chs',name:'Special Cheese Sticks', urdu:'چیز اسٹکس',        price:700,img:IMG.cheesestick,e:'🧀'},
     {id:'dr-250',name:'Cold Drink 250ml',       urdu:'کولڈ ڈرنک ۲۵۰ ملی',price:70, img:'',    e:'🥤'},
     {id:'dr-345',name:'Cold Drink 345ml',       urdu:'کولڈ ڈرنک ۳۴۵ ملی',price:80, img:'',    e:'🥤'},
     {id:'dr-500',name:'Cold Drink 500ml',       urdu:'کولڈ ڈرنک ۵۰۰ ملی',price:120,img:'',    e:'🥤'},
@@ -1693,7 +1752,9 @@ function openCheckout(){
       +'</div>'
     : '';
 
-  // Build order-type selector — during late night only Takeaway is shown
+  // Reset orderType to delivery by default each time checkout opens (unless late night)
+  if (!lateNight) orderType = 'delivery';
+
   var otGrid = lateNight
     ? '<div style="background:rgba(249,115,22,.1);border:1.5px solid #f97316;border-radius:10px;padding:10px 12px;margin-bottom:14px;font-family:\'Baloo 2\',sans-serif;font-size:12.5px;font-weight:800;color:#f97316">🛵 Takeaway / Pickup Only during Late Night Window<br><span style="font-size:11px;font-weight:600;color:#aaa">Home Delivery not available 3:00–3:30 AM</span></div>'
     : '<div class="ot-grid">'
@@ -1792,6 +1853,83 @@ function selOT(v){
     else showDelResult(null,fee,true);
   }
   refreshCartBar();
+}
+
+// ══════════════════════════════════════════
+// SEARCH
+// ══════════════════════════════════════════
+function openSearch(){
+  document.getElementById('searchOverlay').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+  setTimeout(function(){var inp=document.getElementById('searchInput');if(inp)inp.focus();},120);
+}
+function closeSearch(){
+  document.getElementById('searchOverlay').classList.add('hidden');
+  document.body.style.overflow='auto';
+  var inp=document.getElementById('searchInput');if(inp)inp.value='';
+  var body=document.getElementById('searchBody');
+  if(body)body.innerHTML='<div class="search-hint"><div class="search-hint-icon">🍕</div><div class="search-hint-ttl">کیا ڈھونڈ رہے ہیں؟</div><div class="search-hint-sub">Pizza، Burger، Shawarma یا کوئی بھی item<br>لکھیں اور نتائج دیکھیں</div></div>';
+}
+function runSearch(q){
+  var body=document.getElementById('searchBody');
+  if(!body)return;
+  q=q.trim().toLowerCase();
+  if(!q){
+    body.innerHTML='<div class="search-hint"><div class="search-hint-icon">🍕</div><div class="search-hint-ttl">کیا ڈھونڈ رہے ہیں؟</div><div class="search-hint-sub">Pizza، Burger، Shawarma یا کوئی بھی item<br>لکھیں اور نتائج دیکھیں</div></div>';
+    return;
+  }
+  // Collect matches across all categories
+  var grouped={};
+  Object.keys(MENU).forEach(function(cat){
+    var matches=(MENU[cat]||[]).filter(function(it){
+      return it.name.toLowerCase().includes(q)||
+             (it.urdu&&it.urdu.includes(q))||
+             (it.items&&it.items.toLowerCase().includes(q));
+    });
+    if(matches.length)grouped[cat]=matches;
+  });
+  var total=Object.values(grouped).reduce(function(s,a){return s+a.length;},0);
+  if(!total){
+    body.innerHTML='<div class="search-empty"><div class="search-empty-icon">🤷</div><div class="search-empty-ttl">کوئی نتیجہ نہیں</div><div class="search-empty-sub">"'+q+'" سے ملتا جلتا کچھ نہیں ملا<br>دوسرا لفظ آزمائیں</div></div>';
+    return;
+  }
+  var html='';
+  Object.keys(grouped).forEach(function(cat){
+    var catLabel=(CAT_LABELS[cat]||cat).replace(/[🔥🍟🍔🌯🫓🍕⭐🥗🥤]/u,'').trim();
+    html+='<div class="search-cat-label">'+catLabel+'</div>';
+    grouped[cat].forEach(function(it){
+      var price=it.sizes?'از Rs.'+Math.min.apply(null,it.sizes.map(function(s){return s.p;})):'Rs.'+it.price;
+      var hasSizes=it.sizes&&it.sizes.length>1;
+      html+='<div class="search-result-item" onclick="srClick(\''+it.id+'\',\''+cat+'\')">'
+        +(it.img?'<img class="sri-thumb" src="'+it.img+'" alt="'+it.name+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+                +'<div class="sri-thumb-ph" style="display:none">'+it.e+'</div>'
+               :'<div class="sri-thumb-ph">'+it.e+'</div>')
+        +'<div class="sri-body">'
+        +'<div class="sri-name">'+it.name+'</div>'
+        +'<div class="sri-urdu">'+(it.urdu||'')+'</div>'
+        +'<div class="sri-meta"><span class="sri-price">'+price+'</span><span class="sri-cat">'+catLabel+'</span></div>'
+        +'</div>'
+        +'<button class="sri-add" onclick="event.stopPropagation();srQuickAdd(\''+it.id+'\',\''+cat+'\')" title="Add to cart">+</button>'
+        +'</div>';
+    });
+  });
+  body.innerHTML=html;
+}
+function srClick(id,cat){
+  closeSearch();
+  setTimeout(function(){openDetail(id,cat);},120);
+}
+function srQuickAdd(id,cat){
+  if(!checkTimeGate())return;
+  var it=findItem(id,cat);
+  if(!it)return;
+  if(it.dealType==='night'&&!isNightDealActive()){toast('🔒 Night Deals رات 10 بجے unlock ہوں گے!','red');return;}
+  if(it.dealType==='student'&&!isStudentDealActive()){toast('🔒 Student Deals شام 5 بجے تک دستیاب ہیں!','red');return;}
+  if(it.sizes&&it.sizes.length>1){closeSearch();setTimeout(function(){openDetail(id,cat);},120);return;}
+  var price=it.sizes?it.sizes[0].p:it.price;
+  var sz=it.sizes?it.sizes[0].s:null;
+  pushCart(Object.assign({},it,{selectedSize:sz,price:price,quantity:1,cartId:Date.now()}));
+  toast('✓ '+it.name+' added!','green');
 }
 
 // ══════════════════════════════════════════
