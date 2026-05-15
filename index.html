@@ -400,16 +400,7 @@ img{display:block}
   </div>
 </header>
 
-<!-- CLOSED NOTICE BANNER (shown when store is closed — non-blocking) -->
-<div id="closedOverlay" class="closed-banner" style="display:none">
-  <div class="cb-inner">
-    <div class="cb-title">🔴 Orders Currently Closed — ابھی آرڈر بند ہیں</div>
-    <div class="cb-time" id="closedNextOpen">Opens soon</div>
-    <div class="cb-time" id="closedHoursLine" style="font-size:11px;margin-top:3px">🕐 Mon–Fri: 12:00 PM – 3:00 AM</div>
-    <div class="cb-browse">👀 Menu browse کریں — آرڈر opening time پر دیں</div>
-    <div class="cb-urdu">رات ۳:۳۰ کے بعد آرڈر قبول نہیں — مینو دیکھتے رہیں!</div>
-  </div>
-</div>
+<!-- closedOverlay removed — orders always open -->
 
 <!-- HERO -->
 <section class="hero">
@@ -825,21 +816,14 @@ function applyTimeGate() {
   // Show/hide Eid banner (only when open & in Eid mode)
   if (eidBanner) eidBanner.style.display = (eid && status === 'open') ? 'block' : 'none';
 
-  if (status === 'closed') {
-    overlay.style.display = 'block';   // slim banner, not full-screen
-    lnBanner.style.display = 'none';
-    updateClosedOverlay();
-    if (badge)     { badge.style.background = 'rgba(239,68,68,.22)'; badge.style.borderColor = 'rgba(239,68,68,.38)'; }
-    if (badgeText)   badgeText.textContent = 'CLOSED · Orders Open ' + getNextOpenText();
-    if (dot)         dot.style.background = '#ef4444';
-  } else if (status === 'late_night') {
-    overlay.style.display = 'none';
+  if (status === 'late_night') {
+    if (overlay) overlay.style.display = 'none';
     lnBanner.style.display = 'block';
     if (badge)     { badge.style.background = 'rgba(249,115,22,.22)'; badge.style.borderColor = 'rgba(249,115,22,.38)'; }
     if (badgeText)   badgeText.textContent = '🌙 LATE NIGHT · Takeaway Only · Closes 3:30 AM';
     if (dot)         dot.style.background = '#f97316';
   } else {
-    overlay.style.display = 'none';
+    if (overlay) overlay.style.display = 'none';
     lnBanner.style.display = 'none';
     if (badge)     { badge.style.background = 'rgba(255,255,255,.14)'; badge.style.borderColor = 'rgba(255,255,255,.22)'; }
     if (badgeText)   badgeText.textContent = eid ? '🌙 Eid Mubarak · Open Now · 5% App Discount' : 'OPEN NOW · Order Now';
@@ -847,12 +831,8 @@ function applyTimeGate() {
   }
 }
 
-/** Gate for cart/checkout — blocks if closed */
+/** Gate for cart/checkout — always open (time gate removed) */
 function checkTimeGate() {
-  if (isClosed()) {
-    toast('🌙 We are closed. Opens at ' + getNextOpenText(), 'red');
-    return false;
-  }
   return true;
 }
 
