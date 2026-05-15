@@ -208,7 +208,7 @@ function parseTS(ts) {
     if (!isNaN(d)) return d;
     const m = ts.match(/(\d+)\/(\d+)\/(\d+),?\s+(\d+):(\d+):(\d+)\s*(AM|PM)?/i);
     if (m) {
-      let [,mo,day,yr,hr,min,sec,ampm] = m;
+      let [,day,mo,yr,hr,min,sec,ampm] = m;  // DD/MM/YYYY format
       hr = parseInt(hr);
       if (ampm && ampm.toUpperCase()==="PM" && hr!==12) hr+=12;
       if (ampm && ampm.toUpperCase()==="AM" && hr===12) hr=0;
