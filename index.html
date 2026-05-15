@@ -1804,8 +1804,13 @@ function selOT(v){
   refreshCartBar();
 }
 
-// ── GOOGLE APPS SCRIPT CONFIG ──
-var GAS_URL='https://script.google.com/macros/s/AKfycbxL1F206HFUYyijTBGvBvcAAVsam9vQFEzgEAmJvJLXmirwrZLPyQqEwe-YXJgbKrvp/exec';
+// ══════════════════════════════════════════
+// FIREBASE CONFIG — restaurant-orders-ac79a
+// ══════════════════════════════════════════
+var RESTAURANT_ID   = 'sahi-pizza-cabin-point';
+var RESTAURANT_NAME = 'Sahi Pizza Cabin Point';
+
+var FIREBASE_URL = 'https://firestore.googleapis.com/v1/projects/restaurant-orders-ac79a/databases/(default)/documents/orders';
 
 function sendOrder(){
   var name=document.getElementById('custName').value.trim();
@@ -1829,7 +1834,6 @@ function sendOrder(){
   var finalTotal=discounted+fee+surcharge+convFeeSend;
   var typeLabel=orderType==='delivery'?'🏠 Delivery':orderType==='dine'?'🍽️ Dine In':'🛵 Takeaway / Pickup';
 
-  // Build WhatsApp message (saved for optional use later)
   var feeMsg=orderType==='delivery'?(fee===0?'FREE 🎉':'Rs.'+fee+' ('+((detectedDistKm!==null)?detectedDistKm.toFixed(1)+'km away':(manualZone==='outside'?'Outside 3km':'Inside 3km'))+')'):'N/A';
   var waMsg='🍕 *NEW ORDER — SAHI PIZZA CABIN POINT*\n\n';
   waMsg+='👤 *Name:* '+name+'\n📱 *Phone:* '+phone+'\n📦 *Type:* '+typeLabel+'\n';
@@ -1852,38 +1856,62 @@ function sendOrder(){
   var btn=document.querySelector('.swa');
   if(btn){btn.disabled=true;btn.innerHTML='<span style="font-size:19px">⏳</span> بھیج رہے ہیں...';}
 
-  // 1. Open WhatsApp immediately — same user gesture, won't be blocked
+  // 1. Open WhatsApp immediately
   window.open('https://wa.me/923054266621?text='+encodeURIComponent(waMsg),'_blank');
 
-  // 2. Snapshot cart before clearing
-  var sbItemsSnap=cart.map(function(i){return{name:i.name+(i.selectedSize?' ('+i.selectedSize+')':''),qty:i.quantity,price:i.price};});
+  // 2. Snapshot cart items before clearing
+  var itemsSnap=cart.map(function(i){
+    return {name:i.name+(i.selectedSize?' ('+i.selectedSize+')':''),qty:i.quantity,price:i.price};
+  });
 
-  // 3. Clear cart and close sheet
+  // 3. Clear cart immediately (WhatsApp already opened)
   cart=[];saveCart();refreshCartBar();closeCart();
 
-  // 4. Save to Google Apps Script in background
-  var orderPayload={
-    customer_name:name,
-    customer_phone:phone,
-    order_type:orderType==='takeaway'?'pickup':orderType,
-    table_no:table||null,
-    address:addr||null,
-    items:sbItemsSnap,
-    subtotal:sub,
-    delivery_fee:fee,
-    convenience_fee:convFeeSend,
-    discount:discSaving,
-    total:finalTotal,
-    note:note||null,
-    status:'new'
+  // 4. Save to Firebase Firestore (REST API — no SDK needed)
+  var now=new Date();
+  var firestoreDoc={
+    fields:{
+      restaurant_id:   {stringValue: RESTAURANT_ID},
+      restaurant_name: {stringValue: RESTAURANT_NAME},
+      customer_name:   {stringValue: name},
+      customer_phone:  {stringValue: phone},
+      order_type:      {stringValue: orderType==='takeaway'?'pickup':orderType},
+      table_no:        {stringValue: table||''},
+      address:         {stringValue: addr||''},
+      items:           {stringValue: itemsSnap.map(function(i){return i.qty+'x '+i.name+' @ Rs.'+i.price;}).join(' | ')},
+      subtotal:        {integerValue: sub},
+      delivery_fee:    {integerValue: fee},
+      late_night_fee:  {integerValue: surcharge},
+      convenience_fee: {integerValue: convFeeSend},
+      discount:        {integerValue: discSaving},
+      total:           {integerValue: finalTotal},
+      note:            {stringValue: note||''},
+      status:          {stringValue: 'new'},
+      timestamp:       {stringValue: now.toLocaleString('en-PK',{timeZone:'Asia/Karachi'})}
+    }
   };
-  // Use no-cors + text/plain — required for Apps Script from browser
-  fetch(GAS_URL,{
-    method:'POST',
-    mode:'no-cors',
-    headers:{'Content-Type':'text/plain'},
-    body:JSON.stringify(orderPayload)
-  }).catch(function(e){console.error('GAS fetch error:',e);});
+
+  fetch(FIREBASE_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(firestoreDoc)
+  })
+  .then(function(r){
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    console.log('✅ Order saved to Firebase');
+  })
+  .catch(function(e){
+    // WhatsApp already sent — order is NOT lost. Log for debugging.
+    console.error('Firebase save failed:', e);
+    // Retry once after 5 seconds
+    setTimeout(function(){
+      fetch(FIREBASE_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(firestoreDoc)
+      }).catch(function(e2){console.error('Firebase retry failed:',e2);});
+    }, 5000);
+  });
 }
 
 
