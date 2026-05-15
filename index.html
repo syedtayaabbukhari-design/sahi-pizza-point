@@ -603,8 +603,8 @@ img{display:block}
     </div>
     <div class="cat-card" onclick="openCat('shakes')">
       <div class="cat-card-emo">🥤</div>
-      <div class="cat-card-name">Shakes</div>
-      <div class="cat-card-urdu">شیکس</div>
+      <div class="cat-card-name">Shakes & Drinks</div>
+      <div class="cat-card-urdu">شیکس اور ڈرنکس</div>
       <div class="cat-card-count" id="cc-shakes"></div>
     </div>
   </div>
@@ -853,7 +853,7 @@ function discountedTotal(sub) {
 //  sub ≥ Rs.500  →  Rs.50
 // ══════════════════════════════════════════
 function calcConvenienceFee(sub) {
-  return sub < 500 ? 30 : 50;
+  return 20;
 }
 
 
@@ -1137,7 +1137,7 @@ const MENU={
     {id:'st-ng5',  name:'Crispy Nuggets (5 Pcs)',   urdu:'کرسپی نگٹس ۵',    price:300, img:IMG.hotshots,e:'🍗'},
     {id:'st-ng10', name:'Crispy Nuggets (10 Pcs)',  urdu:'کرسپی نگٹس ۱۰',   price:600, img:IMG.nuggets,e:'🍗'},
     {id:'st-pop',  name:'Popcorn Chicken (10 Pcs)', urdu:'پاپ کارن چکن ۱۰',  price:400, img:IMG.hotshots,e:'🍿'},
-    {id:'st-chs',  name:'Special Cheese Sticks',    urdu:'چیز اسٹکس',       price:1700,img:IMG.cheesestick,e:'🧀'},
+    {id:'st-chs',  name:'Special Cheese Sticks',    urdu:'چیز اسٹکس',       price:700, img:IMG.cheesestick,e:'🧀'},
   ],
   burgers:[
     {id:'b-sahi',  name:'Special Sahi Burger',      urdu:'سپیشل ساحی برگر',  price:580,img:IMG.b_pizzabgr,e:'🍔'},
@@ -1197,12 +1197,22 @@ const MENU={
     {id:'sl-lz',name:'Lasania Pasta',     urdu:'لذانیہ پاستہ',    price:700,img:IMG.pa,e:'🍝'},
   ],
   shakes:[
-    {id:'sh-va',name:'Vanilla Shake',    urdu:'ونیلا شیک',    price:550,img:IMG.sh,e:'🍦'},
-    {id:'sh-ch',name:'Chocolate Shake',  urdu:'چاکلیٹ شیک',   price:650,img:IMG.sh,e:'🍫'},
-    {id:'sh-bb',name:'Blueberry Shake',  urdu:'بلیو بیری شیک',price:650,img:IMG.sh,e:'🫐'},
-    {id:'sh-or',name:'Oreo Shake',       urdu:'اوریو شیک',    price:700,img:IMG.sh,e:'🍪'},
-    {id:'sh-li',name:'Fresh Lime',       urdu:'تازہ لیموں',   price:200,img:'',    e:'🍋'},
-    {id:'sh-mm',name:'Mint Margarita',   urdu:'منٹ مارگریٹا', price:250,img:'',    e:'🌿'},
+    {id:'sh-va',name:'Vanilla Shake',         urdu:'ونیلا شیک',        price:550,img:IMG.sh,e:'🍦'},
+    {id:'sh-ch',name:'Chocolate Shake',        urdu:'چاکلیٹ شیک',       price:650,img:IMG.sh,e:'🍫'},
+    {id:'sh-bb',name:'Blueberry Shake',        urdu:'بلیو بیری شیک',    price:650,img:IMG.sh,e:'🫐'},
+    {id:'sh-or',name:'Oreo Shake',             urdu:'اوریو شیک',        price:700,img:IMG.sh,e:'🍪'},
+    {id:'sh-li',name:'Fresh Lime',             urdu:'تازہ لیموں',       price:200,img:'',    e:'🍋'},
+    {id:'sh-mm',name:'Mint Margarita',         urdu:'منٹ مارگریٹا',     price:250,img:'',    e:'🌿'},
+    {id:'sh-chs',name:'Special Cheese Sticks', urdu:'چیز اسٹکس',        price:700,img:IMG.cheesestick,e:'🧀'},
+    {id:'dr-250',name:'Cold Drink 250ml',       urdu:'کولڈ ڈرنک ۲۵۰ ملی',price:70, img:'',    e:'🥤'},
+    {id:'dr-345',name:'Cold Drink 345ml',       urdu:'کولڈ ڈرنک ۳۴۵ ملی',price:80, img:'',    e:'🥤'},
+    {id:'dr-500',name:'Cold Drink 500ml',       urdu:'کولڈ ڈرنک ۵۰۰ ملی',price:120,img:'',    e:'🥤'},
+    {id:'dr-1l', name:'Cold Drink 1 Litre',     urdu:'کولڈ ڈرنک ۱ لیٹر', price:170,img:'',    e:'🥤'},
+    {id:'dr-15l',name:'Cold Drink 1.5 Litre',   urdu:'کولڈ ڈرنک ۱.۵ لیٹر',price:220,img:'',   e:'🥤'},
+    {id:'dr-2l', name:'Cold Drink 2 Litre',     urdu:'کولڈ ڈرنک ۲ لیٹر', price:240,img:'',    e:'🥤'},
+    {id:'dr-tin',name:'Tin Pack Cold Drink',    urdu:'ٹن پیک کولڈ ڈرنک',  price:160,img:'',    e:'🥫'},
+    {id:'dr-ws', name:'Water Small',            urdu:'پانی چھوٹا',        price:50, img:'',    e:'💧'},
+    {id:'dr-wl', name:'Water Large',            urdu:'پانی بڑا',          price:100,img:'',    e:'💧'},
   ],
 };
 
@@ -1363,7 +1373,7 @@ const CAT_LABELS={
   pizzas:'🍕 Pizza — پیزا',
   sahi:'⭐ Sahi Special — ساحی سپیشل',
   salads:'🥗 Salads & Pasta — سلاد',
-  shakes:'🥤 Shakes — شیکس',
+  shakes:'🥤 Shakes & Drinks — شیکس اور ڈرنکس',
 };
 
 function openCat(cat){
