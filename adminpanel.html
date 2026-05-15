@@ -201,7 +201,22 @@ function loading(on) {
 }
 
 // ── DATE HELPERS ─────────────────────────────────
-function parseTS(ts) { try { const d=new Date(ts); if(!isNaN(d)) return d; } catch(e){} return new Date(0); }
+function parseTS(ts) {
+  if (!ts) return new Date(0);
+  try {
+    const d = new Date(ts);
+    if (!isNaN(d)) return d;
+    const m = ts.match(/(\d+)\/(\d+)\/(\d+),?\s+(\d+):(\d+):(\d+)\s*(AM|PM)?/i);
+    if (m) {
+      let [,mo,day,yr,hr,min,sec,ampm] = m;
+      hr = parseInt(hr);
+      if (ampm && ampm.toUpperCase()==="PM" && hr!==12) hr+=12;
+      if (ampm && ampm.toUpperCase()==="AM" && hr===12) hr=0;
+      return new Date(yr, mo-1, day, hr, min, sec);
+    }
+  } catch(e) {}
+  return new Date(0);
+}
 function startOfDay()  { const d=new Date(); d.setHours(0,0,0,0); return d; }
 function startOfWeek() { const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()-(d.getDay()===0?6:d.getDay()-1)); return d; }
 function startOfMonth(){ const d=new Date(); d.setHours(0,0,0,0); d.setDate(1); return d; }
